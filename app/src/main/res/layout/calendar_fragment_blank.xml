@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/grey_300"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/no_event"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:id="@+id/empty_view"
+        android:layout_below="@+id/no_event"
+        android:layout_height="4dp"/>
+
+    <ExpandableListView
+        android:layout_below="@+id/empty_view"
+        android:id="@+id/expandableList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:childDivider="@android:color/transparent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+    </ExpandableListView>
+
+
+</RelativeLayout>
