@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class PointsStandingActivity extends AppCompatActivity {
+public class Activity_PointsStanding extends AppCompatActivity {
     List<ParseObject> resultsList;
     int initialListLength;
     int deflength;
@@ -82,7 +82,7 @@ public class PointsStandingActivity extends AppCompatActivity {
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setOffscreenPageLimit(tabTitles.size());
         PagerAdapter pagerAdapter =
-                new PagerAdapter(getSupportFragmentManager(), PointsStandingActivity.this, tabTitles);
+                new PagerAdapter(getSupportFragmentManager(), Activity_PointsStanding.this, tabTitles);
         viewPager.setAdapter(pagerAdapter);
 
         // Give the TabLayout the ViewPager
@@ -124,7 +124,7 @@ public class PointsStandingActivity extends AppCompatActivity {
                     PointsStandingAdapter adapter = new PointsStandingAdapter(data);
                     recyclerView.setAdapter(adapter);*/
                 } else {
-                    Toast.makeText(PointsStandingActivity.this, "Nothing To See yet", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Activity_PointsStanding.this, "Nothing To See yet", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -225,7 +225,7 @@ public class PointsStandingActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             Bundle args = new Bundle();
-            PointsStandingResFragment bf = new PointsStandingResFragment();
+            Fragment_PointsStanding bf = new Fragment_PointsStanding();
             //args.putStringArray("someArray", mArrayList.get(position));
             args.putString("tabtitle",tabTitles.get(position));
             bf.setArguments(args);
@@ -261,7 +261,7 @@ public class PointsStandingActivity extends AppCompatActivity {
         }
 
         public View getTabView(int position) {
-            View tab = LayoutInflater.from(PointsStandingActivity.this).inflate(R.layout.custom_tab, null);
+            View tab = LayoutInflater.from(Activity_PointsStanding.this).inflate(R.layout.custom_tab, null);
             TextView tv = (TextView) tab.findViewById(R.id.custom_text);
             tv.setText(tabTitles.get(position));
             return tab;

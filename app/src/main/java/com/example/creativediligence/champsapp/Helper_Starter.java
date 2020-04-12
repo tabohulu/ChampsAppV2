@@ -37,7 +37,7 @@ final static String TAG="Starter";
     );
 
     //============================
-    ParseObject object = new ParseObject("ExampleObject");
+    /*ParseObject object = new ParseObject("ExampleObject");
     object.put("myNumber", "123");
     object.put("myString", "rob");
 
@@ -50,7 +50,7 @@ final static String TAG="Starter";
           Log.i("Parse Result", "Failed" + ex.toString());
         }
       }
-    });
+    });*/
 
 /*    final ParseQuery<ParseObject> coach = ParseQuery.getQuery("Coaches");
 

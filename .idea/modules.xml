@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ChampsApp.iml" filepath="$PROJECT_DIR$/ChampsApp.iml" group="ChampsApp" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="ChampsApp/app" />
+      <module fileurl="file://$PROJECT_DIR$/ChampsAppV2.iml" filepath="$PROJECT_DIR$/ChampsAppV2.iml" group="ChampsAppV2" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="ChampsAppV2/app" />
     </modules>
   </component>
 </project>

@@ -13,22 +13,22 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.List;
 
-public class BracketAdapter2 extends BaseExpandableListAdapter {
+public class AdapterExpandable_AthleteCoachDetails extends BaseExpandableListAdapter {
 
     private Context context;
     private List<String> expandableListTitle;
     private HashMap<String, List<String>> expandableListDetail;
     private int mActivityNumber;
 
-    public BracketAdapter2(Context context, List<String> expandableListTitle,
-                           HashMap<String, List<String>> expandableListDetail) {
+    public AdapterExpandable_AthleteCoachDetails(Context context, List<String> expandableListTitle,
+                                                 HashMap<String, List<String>> expandableListDetail) {
         this.context = context;
         this.expandableListTitle = expandableListTitle;
         this.expandableListDetail = expandableListDetail;
     }
 
-    public BracketAdapter2(Context context, List<String> expandableListTitle,
-                           HashMap<String, List<String>> expandableListDetail, int activityNumber) {
+    public AdapterExpandable_AthleteCoachDetails(Context context, List<String> expandableListTitle,
+                                                 HashMap<String, List<String>> expandableListDetail, int activityNumber) {
         this.context = context;
         this.expandableListTitle = expandableListTitle;
         this.expandableListDetail = expandableListDetail;
@@ -54,29 +54,27 @@ public class BracketAdapter2 extends BaseExpandableListAdapter {
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.athlete_within_brackets_layout, null);
+            convertView = layoutInflater.inflate(R.layout.teams_institution_listitems, null);
         }
         TextView expandedListTextView = (TextView) convertView
                 .findViewById(R.id.teams_institution_children);
-        LinearLayout mainLayout=convertView.findViewById(R.id.main_layout);
-        LinearLayout submainLayout=convertView.findViewById(R.id.sub_main_layout);
         expandedListTextView.setText(expandedListText);
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)submainLayout.getLayoutParams();
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)expandedListTextView.getLayoutParams();
         if (!isLastChild){
             params.setMargins(0, 0, 0, 0); //substitute parameters for left, top, right, bottom
-           //submainLayout.setLayoutParams(params);
+            expandedListTextView.setLayoutParams(params);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                submainLayout.setBackground(context.getResources().getDrawable(R.drawable.plain));
+                expandedListTextView.setBackground(context.getResources().getDrawable(R.drawable.plain));
             }else {
-                submainLayout.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.plain));
+                expandedListTextView.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.plain));
             }
         }else{
             params.setMargins(0, 0, 0, 32); //substitute parameters for left, top, right, bottom
-            //submainLayout.setLayoutParams(params);
+            expandedListTextView.setLayoutParams(params);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-               submainLayout.setBackground(context.getResources().getDrawable(R.drawable.bottom_corners));
+                expandedListTextView.setBackground(context.getResources().getDrawable(R.drawable.bottom_corners));
             }else {
-                submainLayout.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.bottom_corners));
+                expandedListTextView.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.bottom_corners));
             }
         }
 

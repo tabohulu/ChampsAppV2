@@ -1,6 +1,6 @@
 package com.example.creativediligence.champsapp;
 
-public class AthleteModel {
+public class Helper_AthleteCoachModel {
     String mName;
     int mAge;
     Double mPb;
@@ -8,7 +8,7 @@ public class AthleteModel {
 
 
 
-    public AthleteModel(String name, int age, Double pB){
+    public Helper_AthleteCoachModel(String name, int age, Double pB){
         mName=name;
         mAge=age;
         mPb=pB;
@@ -18,7 +18,7 @@ public class AthleteModel {
         return mInstitution;
     }
 
-    public AthleteModel(String name, int age, Double pB, String institution){
+    public Helper_AthleteCoachModel(String name, int age, Double pB, String institution){
         mName=name;
         mAge=age;
         mPb=pB;

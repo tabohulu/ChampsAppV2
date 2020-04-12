@@ -21,7 +21,7 @@ import java.util.Date;
 import java.util.Locale;
 
 
-public class CalendarActivity extends AppCompatActivity {
+public class Activity_Calendar extends AppCompatActivity {
     ArrayList<DateItems> tabTitles;
     ArrayList<String> parsedDates;
     Date firstDate;
@@ -118,7 +118,7 @@ public class CalendarActivity extends AppCompatActivity {
             }
         });
         PagerAdapter pagerAdapter =
-                new PagerAdapter(getSupportFragmentManager(), CalendarActivity.this, tabTitles, firstDate, lastDate,parsedDates);
+                new PagerAdapter(getSupportFragmentManager(), Activity_Calendar.this, tabTitles, firstDate, lastDate,parsedDates);
         viewPager.setAdapter(pagerAdapter);
 
         // Give the TabLayout the ViewPager
@@ -155,7 +155,7 @@ public class CalendarActivity extends AppCompatActivity {
 
 
         PagerAdapter pagerAdapter =
-                new PagerAdapter(getSupportFragmentManager(), CalendarActivity.this, tabTitles, firstDate, lastDate,parsedDates);
+                new PagerAdapter(getSupportFragmentManager(), Activity_Calendar.this, tabTitles, firstDate, lastDate,parsedDates);
         viewPager.setAdapter(pagerAdapter);
 
         // Give the TabLayout the ViewPager
@@ -301,7 +301,7 @@ public class CalendarActivity extends AppCompatActivity {
 
 
             Bundle args = new Bundle();
-            MyCalendarFragment bf = new MyCalendarFragment();
+            Fragment_MyCalendar bf = new Fragment_MyCalendar();
             args.putString("tabtitle", tabTitles.get(position).getMonth());
             args.putString("weekDay", tabTitles.get(position).getWeekDay());
             args.putString("monthDay", tabTitles.get(position).getMonthDay());
@@ -321,7 +321,7 @@ public class CalendarActivity extends AppCompatActivity {
         }
 
         public View getTabView(int position) {
-            View tab = LayoutInflater.from(CalendarActivity.this).inflate(R.layout.custom_tab2, null);
+            View tab = LayoutInflater.from(Activity_Calendar.this).inflate(R.layout.custom_tab2, null);
             TextView tv = (TextView) tab.findViewById(R.id.month_year);
             TextView tv1 = tab.findViewById(R.id.weekDay);
             TextView tv2 = tab.findViewById(R.id.monthDay);

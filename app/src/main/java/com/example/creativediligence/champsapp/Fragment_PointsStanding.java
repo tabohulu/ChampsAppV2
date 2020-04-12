@@ -17,7 +17,7 @@ import com.parse.ParseQuery;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PointsStandingResFragment extends Fragment {
+public class Fragment_PointsStanding extends Fragment {
     ArrayList<Helper_BasicDataModel> data;
     //String[] events;
     String tabtitle;
@@ -26,7 +26,7 @@ public class PointsStandingResFragment extends Fragment {
     ArrayList<String> listContents;
     RecyclerView recyclerView;
 
-    public PointsStandingResFragment() {
+    public Fragment_PointsStanding() {
         // Required empty public constructor
     }
 
@@ -86,7 +86,7 @@ public class PointsStandingResFragment extends Fragment {
                     recyclerView.setHasFixedSize(true);
                     recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));*/
 
-                    PointsStandingAdapter adapter = new PointsStandingAdapter(data);
+                    FragmentAdapter_PointsStanding adapter = new FragmentAdapter_PointsStanding(data);
                     recyclerView.setAdapter(adapter);
 
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());

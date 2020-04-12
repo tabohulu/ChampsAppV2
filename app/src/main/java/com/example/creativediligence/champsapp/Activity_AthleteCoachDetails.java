@@ -18,7 +18,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public class AthleteDetailsActivity extends AppCompatActivity {
+public class Activity_AthleteCoachDetails extends AppCompatActivity {
     String athleteName;
 
     Toolbar toolbar;
@@ -103,7 +103,7 @@ public class AthleteDetailsActivity extends AppCompatActivity {
 
 
                     }
-                    BracketAdapter expandableListAdapter = new BracketAdapter(AthleteDetailsActivity.this, hrInfoGroup, hrResourceDetails, 1);
+                    AdapterExpandable_AthleteCoachDetails expandableListAdapter = new AdapterExpandable_AthleteCoachDetails(Activity_AthleteCoachDetails.this, hrInfoGroup, hrResourceDetails, 1);
                     brackets.setAdapter(expandableListAdapter);
                 } else {
                     Log.d("Errors", e.getMessage());

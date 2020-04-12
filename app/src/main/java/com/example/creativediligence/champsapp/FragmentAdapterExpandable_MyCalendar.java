@@ -13,13 +13,13 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CalendarExpandableListAdapter extends BaseExpandableListAdapter {
+public class FragmentAdapterExpandable_MyCalendar extends BaseExpandableListAdapter {
 
     Context mContext;
     ArrayList<String> mSportsTypeTitles;
-    HashMap<String, ArrayList<CalendarEventsItem>> mEventsList;
+    HashMap<String, ArrayList<Helper_CalendarEventsItem>> mEventsList;
 
-    public CalendarExpandableListAdapter(Context context, ArrayList<String> sportsTypeTitles, HashMap<String, ArrayList<CalendarEventsItem>> eventsList){
+    public FragmentAdapterExpandable_MyCalendar(Context context, ArrayList<String> sportsTypeTitles, HashMap<String, ArrayList<Helper_CalendarEventsItem>> eventsList){
         mContext=context;
         mSportsTypeTitles=sportsTypeTitles;
         mEventsList=eventsList;
@@ -100,7 +100,7 @@ public class CalendarExpandableListAdapter extends BaseExpandableListAdapter {
             convertView = layoutInflater.inflate(R.layout.calendar_expandable_list_item_new, null);
         }
 
-        CalendarEventsItem calendarEventsItem= (CalendarEventsItem) getChild(listPosition,expListPosition);
+        Helper_CalendarEventsItem calendarEventsItem= (Helper_CalendarEventsItem) getChild(listPosition,expListPosition);
 
         TextView name= convertView.findViewById(R.id.sportEventName);
         name.setText(calendarEventsItem.getEventName());

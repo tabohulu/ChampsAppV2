@@ -15,19 +15,18 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.example.creativediligence.champsapp.AthleteDetailsActivity;
 
 import java.util.ArrayList;
 
-public class PeopleInfoRecyclerViewAdapter extends RecyclerView.Adapter<PeopleInfoRecyclerViewAdapter.MyViewHolder> {
-    public ArrayList<AthleteModel> mData;
+public class Adapter_AthleteCoachInfo extends RecyclerView.Adapter<Adapter_AthleteCoachInfo.MyViewHolder> {
+    public ArrayList<Helper_AthleteCoachModel> mData;
     public ArrayList<String> mURLData;
 
     public Context mContext;
     public int mId;
     public int mActivityNumber;
 
-    public PeopleInfoRecyclerViewAdapter(Context context, int resourceId, ArrayList<AthleteModel> data) {
+    public Adapter_AthleteCoachInfo(Context context, int resourceId, ArrayList<Helper_AthleteCoachModel> data) {
         mData = data;
         mContext = context;
         mId = resourceId;
@@ -35,7 +34,7 @@ public class PeopleInfoRecyclerViewAdapter extends RecyclerView.Adapter<PeopleIn
 
     }
 
-    public PeopleInfoRecyclerViewAdapter(Context context, int resourceId, ArrayList<AthleteModel> data, int activityNumber) {
+    public Adapter_AthleteCoachInfo(Context context, int resourceId, ArrayList<Helper_AthleteCoachModel> data, int activityNumber) {
         mData = data;
         mContext = context;
         mId = resourceId;
@@ -43,7 +42,7 @@ public class PeopleInfoRecyclerViewAdapter extends RecyclerView.Adapter<PeopleIn
 
     }
 
-    public PeopleInfoRecyclerViewAdapter(Context context, int resourceId, ArrayList<AthleteModel> data, String currentFragment, ArrayList<String> data2) {
+    public Adapter_AthleteCoachInfo(Context context, int resourceId, ArrayList<Helper_AthleteCoachModel> data, String currentFragment, ArrayList<String> data2) {
         mData = data;
         mContext = context;
         mId = resourceId;
@@ -53,7 +52,7 @@ public class PeopleInfoRecyclerViewAdapter extends RecyclerView.Adapter<PeopleIn
     }
 
     @Override
-    public PeopleInfoRecyclerViewAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int i) {
+    public Adapter_AthleteCoachInfo.MyViewHolder onCreateViewHolder(ViewGroup parent, int i) {
 
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(mId, parent, false);
@@ -64,7 +63,7 @@ public class PeopleInfoRecyclerViewAdapter extends RecyclerView.Adapter<PeopleIn
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PeopleInfoRecyclerViewAdapter.MyViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull Adapter_AthleteCoachInfo.MyViewHolder holder, final int position) {
     //Transform pic into one with round corner
         Glide.with(mContext)
                 .load(R.drawable.ic_thumb)
@@ -82,7 +81,7 @@ public class PeopleInfoRecyclerViewAdapter extends RecyclerView.Adapter<PeopleIn
         holder.moreInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, AthleteDetailsActivity.class);
+                Intent intent = new Intent(mContext, Activity_AthleteCoachDetails.class);
                 intent.putExtra("athleteName", name);
                 intent.putExtra("activityNumber", mActivityNumber);
                 mContext.startActivity(intent);

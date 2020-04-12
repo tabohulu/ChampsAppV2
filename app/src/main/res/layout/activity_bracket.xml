@@ -7,7 +7,7 @@
 
     android:background="#F3EFEF"
     android:orientation="vertical"
-    tools:context=".BracketActivity">
+    tools:context=".Activity_Bracket">
 
     <include layout="@layout/general_toolbar" />
     <View

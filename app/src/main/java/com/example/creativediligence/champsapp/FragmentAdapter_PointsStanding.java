@@ -10,12 +10,12 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class PointsStandingAdapter extends RecyclerView.Adapter<PointsStandingAdapter.PointsStandingViewHolder> {
+public class FragmentAdapter_PointsStanding extends RecyclerView.Adapter<FragmentAdapter_PointsStanding.PointsStandingViewHolder> {
 
     private ArrayList<Helper_BasicDataModel> mPointsData;
 
 
-    public PointsStandingAdapter(ArrayList<Helper_BasicDataModel> pointsData){
+    public FragmentAdapter_PointsStanding(ArrayList<Helper_BasicDataModel> pointsData){
         mPointsData=pointsData;
 
     }

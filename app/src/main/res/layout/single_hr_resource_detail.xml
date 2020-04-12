@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#F3EFEF"
     android:orientation="vertical"
-    tools:context=".AthleteDetailsActivity">
+    tools:context=".Activity_AthleteCoachDetails">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"

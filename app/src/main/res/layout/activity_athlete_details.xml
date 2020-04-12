@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#F3EFEF"
     android:orientation="vertical"
-    tools:context=".AthleteDetailsActivity">
+    tools:context=".Activity_AthleteCoachDetails">
     <include layout="@layout/general_toolbar"/>
     <include layout="@layout/single_hr_resource_big_card" />
 

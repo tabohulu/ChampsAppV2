@@ -2,7 +2,7 @@ package com.example.creativediligence.champsapp;
 
 import android.graphics.drawable.ColorDrawable;
 
-public class CalendarEventsItem {
+public class Helper_CalendarEventsItem {
 
     private String eventName;
     private String eventDate;
@@ -15,7 +15,7 @@ public class CalendarEventsItem {
         return eventVenue;
     }
 
-    public CalendarEventsItem(String mEventName, String mEventDate, String mEventPeriod, String mEventType, ColorDrawable mEventColor){
+    public Helper_CalendarEventsItem(String mEventName, String mEventDate, String mEventPeriod, String mEventType, ColorDrawable mEventColor){
         eventName=mEventName;
         eventDate=mEventDate;
         eventPeriod=mEventPeriod;
@@ -25,7 +25,7 @@ public class CalendarEventsItem {
 
     }
 
-    public CalendarEventsItem(String mEventName, String mEventDate, String mEventPeriod, String mEventType, String mEventVenue){
+    public Helper_CalendarEventsItem(String mEventName, String mEventDate, String mEventPeriod, String mEventType, String mEventVenue){
         eventName=mEventName;
         eventDate=mEventDate;
         eventPeriod=mEventPeriod;

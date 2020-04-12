@@ -13,22 +13,22 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.List;
 
-public class BracketAdapter extends BaseExpandableListAdapter {
+public class AdapterExpandable_Bracket extends BaseExpandableListAdapter {
 
     private Context context;
     private List<String> expandableListTitle;
     private HashMap<String, List<String>> expandableListDetail;
     private int mActivityNumber;
 
-    public BracketAdapter(Context context, List<String> expandableListTitle,
-                          HashMap<String, List<String>> expandableListDetail) {
+    public AdapterExpandable_Bracket(Context context, List<String> expandableListTitle,
+                                     HashMap<String, List<String>> expandableListDetail) {
         this.context = context;
         this.expandableListTitle = expandableListTitle;
         this.expandableListDetail = expandableListDetail;
     }
 
-    public BracketAdapter(Context context, List<String> expandableListTitle,
-                          HashMap<String, List<String>> expandableListDetail, int activityNumber) {
+    public AdapterExpandable_Bracket(Context context, List<String> expandableListTitle,
+                                     HashMap<String, List<String>> expandableListDetail, int activityNumber) {
         this.context = context;
         this.expandableListTitle = expandableListTitle;
         this.expandableListDetail = expandableListDetail;
@@ -54,27 +54,29 @@ public class BracketAdapter extends BaseExpandableListAdapter {
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.teams_institution_listitems, null);
+            convertView = layoutInflater.inflate(R.layout.athlete_within_brackets_layout, null);
         }
         TextView expandedListTextView = (TextView) convertView
                 .findViewById(R.id.teams_institution_children);
+        LinearLayout mainLayout=convertView.findViewById(R.id.main_layout);
+        LinearLayout submainLayout=convertView.findViewById(R.id.sub_main_layout);
         expandedListTextView.setText(expandedListText);
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)expandedListTextView.getLayoutParams();
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)submainLayout.getLayoutParams();
         if (!isLastChild){
             params.setMargins(0, 0, 0, 0); //substitute parameters for left, top, right, bottom
-            expandedListTextView.setLayoutParams(params);
+           //submainLayout.setLayoutParams(params);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                expandedListTextView.setBackground(context.getResources().getDrawable(R.drawable.plain));
+                submainLayout.setBackground(context.getResources().getDrawable(R.drawable.plain));
             }else {
-                expandedListTextView.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.plain));
+                submainLayout.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.plain));
             }
         }else{
             params.setMargins(0, 0, 0, 32); //substitute parameters for left, top, right, bottom
-            expandedListTextView.setLayoutParams(params);
+            //submainLayout.setLayoutParams(params);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                expandedListTextView.setBackground(context.getResources().getDrawable(R.drawable.bottom_corners));
+               submainLayout.setBackground(context.getResources().getDrawable(R.drawable.bottom_corners));
             }else {
-                expandedListTextView.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.bottom_corners));
+                submainLayout.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.bottom_corners));
             }
         }
 

@@ -141,7 +141,7 @@ public class Adapter_AllSportsCommon extends RecyclerView.Adapter<Adapter_AllSpo
 
                     case 0:
                         try {
-                            Intent pointsstandingIntent = new Intent(mContext, AthletesActivity.class);
+                            Intent pointsstandingIntent = new Intent(mContext, Activity_Athletes.class);
                             pointsstandingIntent.putExtra("isHomepage",false);
                             mContext.startActivity(pointsstandingIntent);
                             return;
@@ -155,7 +155,7 @@ public class Adapter_AllSportsCommon extends RecyclerView.Adapter<Adapter_AllSpo
 
 
                        try {
-                             Intent teamsIntent = new Intent(mContext, PointsStandingActivity.class);
+                             Intent teamsIntent = new Intent(mContext, Activity_PointsStanding.class);
                              //teamsIntent.putExtra("isHomepage",false);
                               mContext.startActivity(teamsIntent);
                             return;
@@ -178,7 +178,7 @@ public class Adapter_AllSportsCommon extends RecyclerView.Adapter<Adapter_AllSpo
 
                     case 0:
                         try {
-                            Intent coachIntent = new Intent(mContext, CoachesActivity.class);
+                            Intent coachIntent = new Intent(mContext, Activity_Coaches.class);
                             coachIntent.putExtra("isHomepage",false);
                             mContext.startActivity(coachIntent);
                             //new DialogCreator().DialogCreatorPointsStanding(mContext, mDataModel);
@@ -192,7 +192,7 @@ public class Adapter_AllSportsCommon extends RecyclerView.Adapter<Adapter_AllSpo
                     case 1:
 
                         try {
-                            Intent bracketIntent = new Intent(mContext, BracketActivity.class);
+                            Intent bracketIntent = new Intent(mContext, Activity_Bracket.class);
                             bracketIntent.putExtra("sportName",mSportsTitle);
                             bracketIntent.putExtra("activityName","Events");
                             bracketIntent.putExtra("isHomepage",false);

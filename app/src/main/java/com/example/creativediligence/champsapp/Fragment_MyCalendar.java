@@ -19,13 +19,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MyCalendarFragment extends Fragment {
+public class Fragment_MyCalendar extends Fragment {
     String tabtitle;
     String weekDay;
     String monthDay;
     String dateString;
 
-    public MyCalendarFragment() {
+    public Fragment_MyCalendar() {
 
     }
 
@@ -49,7 +49,7 @@ public class MyCalendarFragment extends Fragment {
         final TextView noData = rootView.findViewById(R.id.no_event);
         final ExpandableListView eventsExpandableListView = rootView.findViewById(R.id.expandableList);
         final ArrayList<String> sportsType = new ArrayList<>();
-        final HashMap<String, ArrayList<CalendarEventsItem>> eventDeets = new HashMap<>();
+        final HashMap<String, ArrayList<Helper_CalendarEventsItem>> eventDeets = new HashMap<>();
         // CalendarExpandableListAdapter adapter=new CalendarExpandableListAdapter(getContext(),)
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("MasterCalendar");
         query.whereEqualTo("eventDate", dateString.trim());
@@ -58,11 +58,11 @@ public class MyCalendarFragment extends Fragment {
             public void done(List<ParseObject> objects, ParseException e) {
                 if (e == null && objects.size() > 0) {
                     for (ParseObject ob : objects) {
-                        CalendarEventsItem ci = new CalendarEventsItem(ob.getString("eventName"),
+                        Helper_CalendarEventsItem ci = new Helper_CalendarEventsItem(ob.getString("eventName"),
                                 ob.getString("eventDate"),
                                 ob.getString("eventStart") + "-" + ob.getString("eventEnd"),
                                 ob.getString("eventType"), "Venue");
-                        ArrayList<CalendarEventsItem> list = new ArrayList<>();
+                        ArrayList<Helper_CalendarEventsItem> list = new ArrayList<>();
 
 
                         if (eventDeets.containsKey(ob.getString("eventType"))) {
@@ -75,7 +75,7 @@ public class MyCalendarFragment extends Fragment {
                         list.add(ci);
                         eventDeets.put(ob.getString("eventType"), list);
                     }
-                    CalendarExpandableListAdapter adapter=new CalendarExpandableListAdapter(getContext(),sportsType,eventDeets);
+                    FragmentAdapterExpandable_MyCalendar adapter=new FragmentAdapterExpandable_MyCalendar(getContext(),sportsType,eventDeets);
                     eventsExpandableListView.setAdapter(adapter);
 
                     noData.setText(objects.size() + " events on this day");

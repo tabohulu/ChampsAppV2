@@ -17,10 +17,10 @@ import com.parse.ParseQuery;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CoachesActivity extends AppCompatActivity {
+public class Activity_Coaches extends AppCompatActivity {
 
     static String TAG = "AthletesActivity";
-    ArrayList<AthleteModel> athletes;
+    ArrayList<Helper_AthleteCoachModel> athletes;
     Toolbar toolbar;
     boolean isHomepage;
 
@@ -34,7 +34,7 @@ public class CoachesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_athletes);
+        setContentView(R.layout.athletes_coaches_activity);
 isHomepage=getIntent().getBooleanExtra("isHomepage",false);
 
         toolbar = findViewById(R.id.atletes_toolbar);
@@ -56,8 +56,8 @@ isHomepage=getIntent().getBooleanExtra("isHomepage",false);
         GetAthleteData("Coaches", "name", "age", "wins");
     }
 
-    public ArrayList<AthleteModel> GetAthleteData(String className, final String nameKey, final String ageKey, final String pBKey) {
-        final ArrayList<AthleteModel> mAthlete = new ArrayList<>();
+    public ArrayList<Helper_AthleteCoachModel> GetAthleteData(String className, final String nameKey, final String ageKey, final String pBKey) {
+        final ArrayList<Helper_AthleteCoachModel> mAthlete = new ArrayList<>();
         final ArrayList<String> mAthleteNames = new ArrayList<>();
         ParseQuery<ParseObject> query = ParseQuery.getQuery(className);
         query.findInBackground(new FindCallback<ParseObject>() {
@@ -75,21 +75,21 @@ isHomepage=getIntent().getBooleanExtra("isHomepage",false);
                             String age = object.getString(ageKey);
                             Double pb = object.getDouble(pBKey);
                             Log.i(TAG, name + "/" + age + "/" + pb);
-                            mAthlete.add(new AthleteModel(name, Integer.parseInt(age), pb));
+                            mAthlete.add(new Helper_AthleteCoachModel(name, Integer.parseInt(age), pb));
                             mAthleteNames.add(name);
                         }
 
-                        PeopleInfoRecyclerViewAdapter adapter=new PeopleInfoRecyclerViewAdapter(CoachesActivity.this, R.layout.hr_resource_card_layout,mAthlete,2);
+                        Adapter_AthleteCoachInfo adapter=new Adapter_AthleteCoachInfo(Activity_Coaches.this, R.layout.hr_resource_card_layout,mAthlete,2);
                         RecyclerView rv=findViewById(R.id.athletes_rv);
                         rv.hasFixedSize();
                         rv.setAdapter(adapter);
-                        LinearLayoutManager llm = new LinearLayoutManager(CoachesActivity.this);
+                        LinearLayoutManager llm = new LinearLayoutManager(Activity_Coaches.this);
                         rv.setLayoutManager(llm);
 
 
                     }
                 } else {
-                    Toast.makeText(CoachesActivity.this, "Nothing to show", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Activity_Coaches.this, "Nothing to show", Toast.LENGTH_SHORT).show();
                     finish();
                     Log.e("ParseError", e.getMessage());
                 }

@@ -119,7 +119,7 @@ public class Adapter_Homepage extends RecyclerView.Adapter<Adapter_Homepage.MyVi
 
                     case 0:
                         try {
-                            Intent pointsstandingIntent = new Intent(mContext, AthletesActivity.class);
+                            Intent pointsstandingIntent = new Intent(mContext, Activity_Athletes.class);
                             pointsstandingIntent.putExtra("isHomepage",true);
                             mContext.startActivity(pointsstandingIntent);
                             return;
@@ -155,7 +155,7 @@ public class Adapter_Homepage extends RecyclerView.Adapter<Adapter_Homepage.MyVi
 
                     case 0:
                         try {
-                            Intent coachIntent = new Intent(mContext, CoachesActivity.class);
+                            Intent coachIntent = new Intent(mContext, Activity_Coaches.class);
                             coachIntent.putExtra("isHomepage",true);
                             mContext.startActivity(coachIntent);
                             //new DialogCreator().DialogCreatorPointsStanding(mContext, mDataModel);
@@ -167,7 +167,7 @@ public class Adapter_Homepage extends RecyclerView.Adapter<Adapter_Homepage.MyVi
                     case 1:
 
                         try {
-                            Intent calendarIntent = new Intent(mContext, CalendarActivity.class);
+                            Intent calendarIntent = new Intent(mContext, Activity_Calendar.class);
                             mContext.startActivity(calendarIntent);
                             return;
                         } catch (Exception e) {
@@ -177,7 +177,7 @@ public class Adapter_Homepage extends RecyclerView.Adapter<Adapter_Homepage.MyVi
                     case 2:
 
                         try {
-                            Intent bracketIntent = new Intent(mContext, BracketActivity.class);
+                            Intent bracketIntent = new Intent(mContext, Activity_Bracket.class);
                             bracketIntent.putExtra("isHomepage",true);
                             mContext.startActivity(bracketIntent);;
                             return;

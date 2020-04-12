@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class BracketActivity extends AppCompatActivity {
+public class Activity_Bracket extends AppCompatActivity {
     ExpandableListView brackets;
     List<String> bracketTitle;
     HashMap<String, List<String>> bracketDetail;
@@ -67,10 +67,10 @@ public class BracketActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                    Intent intent = new Intent(BracketActivity.this, Activity_Common_SportsEventOverview.class);
+                    Intent intent = new Intent(Activity_Bracket.this, Activity_Common_SportsEventOverview.class);
                     intent.putExtra("sportName", mSportsTitle);
                     intent.putExtra("activityName", "Events");
-                    BracketActivity.this.startActivity(intent);
+                    Activity_Bracket.this.startActivity(intent);
 
             }
         });
@@ -99,7 +99,7 @@ public class BracketActivity extends AppCompatActivity {
                         bracketTitle.add(string);
                         bracketDetail.put(string,str);
                     }
-                    BracketAdapter2 expandableListAdapter = new BracketAdapter2(BracketActivity.this, bracketTitle, bracketDetail);
+                    AdapterExpandable_Bracket expandableListAdapter = new AdapterExpandable_Bracket(Activity_Bracket.this, bracketTitle, bracketDetail);
                     brackets.setAdapter(expandableListAdapter);
                 }else{
                     TextView warning =findViewById(R.id.warning_TV);
