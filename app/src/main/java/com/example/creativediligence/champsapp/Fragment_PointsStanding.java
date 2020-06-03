@@ -1,5 +1,6 @@
 package com.example.creativediligence.champsapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
@@ -25,6 +27,7 @@ public class Fragment_PointsStanding extends Fragment {
     int initialListLength=5;
     ArrayList<String> listContents;
     RecyclerView recyclerView;
+    ImageView playButton;
 
     public Fragment_PointsStanding() {
         // Required empty public constructor
@@ -48,7 +51,16 @@ public class Fragment_PointsStanding extends Fragment {
         final View rootView = inflater.inflate(R.layout.points_standing_res_fragment, container, false);
 
 
-                        recyclerView = (RecyclerView) rootView.findViewById(R.id.points_standing_rv);
+                        playButton=rootView.findViewById(R.id.playButton);
+                        playButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent videoIntent =new Intent(getContext(),VideoHighlightsActivity.class);
+                                getContext().startActivity(videoIntent);
+                            }
+                        });
+
+                        recyclerView = rootView.findViewById(R.id.points_standing_rv);
                         recyclerView.setHasFixedSize(true);
                         GetPointsStandingData();
 

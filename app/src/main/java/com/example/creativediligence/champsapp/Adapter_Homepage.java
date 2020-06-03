@@ -179,7 +179,7 @@ public class Adapter_Homepage extends RecyclerView.Adapter<Adapter_Homepage.MyVi
                         try {
                             Intent bracketIntent = new Intent(mContext, Activity_Bracket.class);
                             bracketIntent.putExtra("isHomepage",true);
-                            mContext.startActivity(bracketIntent);;
+                            mContext.startActivity(bracketIntent);
                             return;
                         } catch (Exception e) {
                             Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_SHORT).show();

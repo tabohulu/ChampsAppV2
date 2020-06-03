@@ -20,10 +20,9 @@ public class Helper_MyData {
             R.drawable.ic_all_athlets,R.drawable.ic_athlet_coaches,
             R.drawable.ic_team,  R.drawable.ic_point_standing,R.drawable.ic_your_brackets};
 
-    static Integer[] homePageImages = {R.drawable.ic_all_events,
-            R.drawable.ic_all_athlets,R.drawable.ic_athlet_coaches,
-            R.drawable.ic_team,  R.drawable.ic_point_standing,
-            R.drawable.ic_your_brackets,R.drawable.bracketslogo,  R.drawable.coachicon,R.drawable.athletelogo};
+    static Integer[] homePageImages = {R.drawable.ic_all_sports, R.drawable.ic_all_athlets,R.drawable.ic_athlet_coaches,
+            R.drawable.ic_team,  R.drawable.ic_members_area,R.drawable.ic_calendar,
+            R.drawable.ic_articles,  R.drawable.ic_messages_hp,R.drawable.ic_your_brackets};
 
     static Integer[] allSportsImages = {R.drawable.ic_all_events,
             R.drawable.ic_all_athlets,R.drawable.ic_athlet_coaches,
@@ -37,5 +36,9 @@ public class Helper_MyData {
             "Boxing","Karate","Skateboarding","Cycling",
             "Bouldering","Rowing","Swimming","Canoeing"};
 
-    static String[] activityTitles={"All Sports","Events"};
+    static String[] activityTitles={"All Sports","Events","Athletes Profile"};
+
+    static String[] allTrackAndFieldEvents = {"100m","200m","400m","800m",
+            "1500m","4X100m","400m","High Jump",
+            "Long Jump","Triple Jump","Pole Vault","Shot Put"};
 }

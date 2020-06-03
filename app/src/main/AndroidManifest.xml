@@ -21,8 +21,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="HardcodedDebugMode">
-
-
+        <activity android:name=".Activity_AthleteProfile2"></activity>
+        <activity android:name=".Activity_GraphData" />
+        <activity android:name=".Activity_AthleteProfile" />
         <activity android:name=".Activity_Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,25 +31,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity_AllSports"/>
-        <activity android:name=".Activity_Common_AllSports"/>
-        <activity android:name=".Activity_Common_SportsEventOverview"/>
-        <activity android:name=".Activity_SubEvents"/>
-        <activity android:name=".Activity_TeamsInstitution"/>
-        <activity android:name=".Activity_Athletes"/>
-        <activity android:name=".Activity_AthleteCoachDetails"/>
-        <activity android:name=".Activity_PointsStanding"/>
-        <activity android:name=".Activity_Coaches"/>
-        <activity android:name=".Activity_Bracket"/>
-        <activity android:name=".Activity_Calendar"/>
-        <activity android:name=".Activity_Login"/>
+        <activity android:name=".Activity_AllSports" />
+        <activity android:name=".Activity_Common_AllSports" />
+        <activity android:name=".Activity_Common_SportsEventOverview" />
+        <activity android:name=".Activity_SubEvents" />
+        <activity android:name=".Activity_TeamsInstitution" />
+        <activity android:name=".Activity_Athletes" />
+        <activity android:name=".Activity_AthleteCoachDetails" />
+        <activity android:name=".Activity_PointsStanding" />
+        <activity android:name=".Activity_Coaches" />
+        <activity android:name=".Activity_Bracket" />
+        <activity android:name=".Activity_Calendar" />
+        <activity android:name=".Activity_Login" />
+        <activity android:name=".VideoHighlightsActivity" />
         <activity
             android:name=".Activity_HomePage"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:theme="@style/AppTheme" />
         <activity android:name=".Activity_Chat" />
-
     </application>
 
 </manifest>

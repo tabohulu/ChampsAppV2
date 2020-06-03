@@ -133,10 +133,7 @@ public class Activity_HomePage extends AppCompatActivity {
 
         int result = ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
-        if (result == PackageManager.PERMISSION_GRANTED)
-            return true;
-
-        return false;
+        return result == PackageManager.PERMISSION_GRANTED;
     }
 
     public void DownloadVids() {
@@ -187,7 +184,7 @@ public class Activity_HomePage extends AppCompatActivity {
 
     public void SetupVideo(String url) {
         Uri uri = Uri.parse(url);
-        VideoView vidView = (VideoView) findViewById(R.id.vid_view);
+        VideoView vidView = findViewById(R.id.vid_view);
         vidView.setVideoURI(uri);
         MediaController mediaController = new MediaController(this);
         vidView.setMediaController(mediaController);

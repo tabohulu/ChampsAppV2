@@ -38,7 +38,7 @@ public class Fragment_TeamsInstitutionsContent extends Fragment {
         final View rootView = inflater.inflate(R.layout.fragment_blank, container, false);
 
 
-        RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.rv_recycler_view);
+        RecyclerView rv = rootView.findViewById(R.id.rv_recycler_view);
         rv.setHasFixedSize(true);
 
         FragmentAdapter_TeamsInstitutions adapter = new FragmentAdapter_TeamsInstitutions(events, getContext(), listContents,tabtitle);

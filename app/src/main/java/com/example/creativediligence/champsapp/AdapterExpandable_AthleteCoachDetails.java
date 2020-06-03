@@ -56,7 +56,7 @@ public class AdapterExpandable_AthleteCoachDetails extends BaseExpandableListAda
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.teams_institution_listitems, null);
         }
-        TextView expandedListTextView = (TextView) convertView
+        TextView expandedListTextView = convertView
                 .findViewById(R.id.teams_institution_children);
         expandedListTextView.setText(expandedListText);
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)expandedListTextView.getLayoutParams();
@@ -113,7 +113,7 @@ public class AdapterExpandable_AthleteCoachDetails extends BaseExpandableListAda
             convertView = layoutInflater.inflate(R.layout.teams_institution_listgroup, null);
         }
 
-        TextView listTitleTextView = (TextView) convertView
+        TextView listTitleTextView = convertView
                 .findViewById(R.id.teams_institution_parent);
         listTitleTextView.setTypeface(null, Typeface.BOLD);
         listTitleTextView.setText(listTitle);

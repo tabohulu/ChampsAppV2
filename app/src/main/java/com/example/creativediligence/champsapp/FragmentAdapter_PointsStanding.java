@@ -1,6 +1,6 @@
 package com.example.creativediligence.champsapp;
 
-import android.support.annotation.NonNull;
+
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,16 +20,16 @@ public class FragmentAdapter_PointsStanding extends RecyclerView.Adapter<Fragmen
 
     }
 
-    @NonNull
+
     @Override
-    public PointsStandingViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public PointsStandingViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v= LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.custom_pointsstanding_layout,viewGroup,false);
         PointsStandingViewHolder vh=new PointsStandingViewHolder(v);
         return vh;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PointsStandingViewHolder pointsStandingViewHolder, int i) {
+    public void onBindViewHolder(PointsStandingViewHolder pointsStandingViewHolder, int i) {
         pointsStandingViewHolder.institutionName.setText(mPointsData.get(i).getTitle());
         pointsStandingViewHolder.institutionPosition.setText(String.valueOf(i+1));
         pointsStandingViewHolder.institutionPoints.setText(mPointsData.get(i).getAuthor());
@@ -51,7 +51,7 @@ Log.d("data size",""+mPointsData.size());
         public TextView institutionPoints;
 
 
-        public PointsStandingViewHolder(@NonNull View itemView) {
+        public PointsStandingViewHolder(View itemView) {
             super(itemView);
             institutionPosition = itemView.findViewById(R.id.position_tv);
             institutionName = itemView.findViewById(R.id.institution_name_tv);

@@ -16,7 +16,7 @@
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
         android:textColor="#25251B"
-        android:textSize="17dp" />
+        android:textSize="17sp" />
 
 
 

@@ -196,7 +196,7 @@ public class Adapter_AllSportsCommon extends RecyclerView.Adapter<Adapter_AllSpo
                             bracketIntent.putExtra("sportName",mSportsTitle);
                             bracketIntent.putExtra("activityName","Events");
                             bracketIntent.putExtra("isHomepage",false);
-                            mContext.startActivity(bracketIntent);;
+                            mContext.startActivity(bracketIntent);
                             return;
                         } catch (Exception e) {
                             Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_SHORT).show();

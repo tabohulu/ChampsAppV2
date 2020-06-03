@@ -48,7 +48,7 @@
                     android:fontFamily="@font/quicksand_bold"
                     android:text="High Jump"
                     android:textColor="@color/black"
-                    android:textSize="14dp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/athlete_personal_best"

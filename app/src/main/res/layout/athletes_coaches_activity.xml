@@ -3,27 +3,50 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Activity_Athletes">
 
+
   <android.support.v7.widget.Toolbar
       android:id="@+id/atletes_toolbar"
+      android:layout_weight="0.07"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_alignParentTop="true"
+      android:layout_height="0dp"
       android:background="@color/color_white"
-      android:elevation="6dp"
       android:minHeight="?attr/actionBarSize"
       android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
       app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
       />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+      android:layout_weight="0.83"
+        android:orientation="vertical"
+        android:id="@+id/rv_linLay"
+        android:layout_height="0dp">
   <android.support.v7.widget.RecyclerView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:id="@+id/athletes_rv">
+      android:id="@+id/athletes_rv"/>
 
-  </android.support.v7.widget.RecyclerView>
+      <ProgressBar
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="170dp"
+          android:id="@+id/getting_data"
+          android:theme="@style/ThemeOverlay.AppCompat.ActionBar"/>
+    </LinearLayout>
+
+  <Button
+      android:layout_width="match_parent"
+      android:layout_weight="0.1"
+      android:layout_height="0dp"
+      android:text="@string/create_new_athlete"
+      android:id="@+id/new_profile_button"
+      android:background="@color/color_white"/>
+
+
+
 
 </LinearLayout>

@@ -11,11 +11,16 @@ package com.example.creativediligence.champsapp;
 import android.app.Application;
 import android.util.Log;
 
+import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.parse.SaveCallback;
+
+import java.util.List;
 
 
 public class Helper_Starter extends Application {
@@ -37,6 +42,18 @@ final static String TAG="Starter";
     );
 
     //============================
+   /*ParseObject object = new ParseObject("InstitutionAthlete");
+    object.put("created_by", ParseUser.getCurrentUser().getUsername());
+    object.saveInBackground(new SaveCallback() {
+      @Override
+      public void done(ParseException ex) {
+        if (ex == null) {
+          Log.i("Parse Result", "Successful!");
+        } else {
+          Log.i("Parse Result", "Failed" + ex.toString());
+        }
+      }
+    });*/
     /*ParseObject object = new ParseObject("ExampleObject");
     object.put("myNumber", "123");
     object.put("myString", "rob");

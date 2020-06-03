@@ -56,7 +56,7 @@ public class AdapterExpandable_Bracket extends BaseExpandableListAdapter {
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.athlete_within_brackets_layout, null);
         }
-        TextView expandedListTextView = (TextView) convertView
+        TextView expandedListTextView = convertView
                 .findViewById(R.id.teams_institution_children);
         LinearLayout mainLayout=convertView.findViewById(R.id.main_layout);
         LinearLayout submainLayout=convertView.findViewById(R.id.sub_main_layout);
@@ -115,7 +115,7 @@ public class AdapterExpandable_Bracket extends BaseExpandableListAdapter {
             convertView = layoutInflater.inflate(R.layout.teams_institution_listgroup, null);
         }
 
-        TextView listTitleTextView = (TextView) convertView
+        TextView listTitleTextView = convertView
                 .findViewById(R.id.teams_institution_parent);
         listTitleTextView.setTypeface(null, Typeface.BOLD);
         listTitleTextView.setText(listTitle);

@@ -52,7 +52,7 @@
                         android:fontFamily="@font/quicksand_regular"
                         android:text="Name"
                         android:textColor="@color/caldroid_darker_gray"
-                        android:textSize="12dp"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -63,7 +63,7 @@
                         android:fontFamily="@font/quicksand_regular"
                         android:text="Established"
                         android:textColor="@color/caldroid_darker_gray"
-                        android:textSize="12dp"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -74,7 +74,7 @@
                         android:fontFamily="@font/quicksand_regular"
                         android:text="No. of Athletes"
                         android:textColor="@color/caldroid_darker_gray"
-                        android:textSize="12dp"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -85,7 +85,7 @@
                         android:fontFamily="@font/quicksand_regular"
                         android:text="Principal"
                         android:textColor="@color/caldroid_darker_gray"
-                        android:textSize="12dp"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -96,7 +96,7 @@
                         android:fontFamily="@font/quicksand_regular"
                         android:text="Head Coach"
                         android:textColor="@color/caldroid_darker_gray"
-                        android:textSize="12dp"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -107,7 +107,7 @@
                         android:fontFamily="@font/quicksand_regular"
                         android:text="Website"
                         android:textColor="@color/caldroid_darker_gray"
-                        android:textSize="12dp"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -118,7 +118,7 @@
                         android:fontFamily="@font/quicksand_regular"
                         android:text="Address"
                         android:textColor="@color/caldroid_darker_gray"
-                        android:textSize="12dp"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -140,7 +140,7 @@
                         android:singleLine="true"
                         android:text="Athletics Federation Of India"
                         android:textColor="@color/light_gray"
-                        android:textSize="12dp"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -153,7 +153,7 @@
                         android:singleLine="true"
                         android:text="1946"
                         android:textColor="@color/light_gray"
-                        android:textSize="12dp"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -165,7 +165,7 @@
                         android:singleLine="true"
                         android:text="250"
                         android:textColor="@color/light_gray"
-                        android:textSize="12dp"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -177,7 +177,7 @@
                         android:singleLine="true"
                         android:text="Adille Sumarlwalla"
                         android:textColor="@color/light_gray"
-                        android:textSize="12dp"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -189,7 +189,7 @@
                         android:singleLine="true"
                         android:text="Mr.C.K. Valson"
                         android:textColor="@color/light_gray"
-                        android:textSize="12dp"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -201,7 +201,7 @@
                         android:singleLine="true"
                         android:text="www.indianathletics.in"
                         android:textColor="@color/light_gray"
-                        android:textSize="12dp"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -213,7 +213,7 @@
                         android:singleLine="true"
                         android:text="New Delhi,India"
                         android:textColor="@color/light_gray"
-                        android:textSize="12dp"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>

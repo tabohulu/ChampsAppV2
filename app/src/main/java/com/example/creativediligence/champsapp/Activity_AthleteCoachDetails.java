@@ -25,6 +25,7 @@ public class Activity_AthleteCoachDetails extends AppCompatActivity {
     int activityNumber;
     List<String> hrInfoGroup = new ArrayList<>();
     String className;
+    String queryKey;
 
     TextView personNameTV;
     TextView personMoreInfoTV;
@@ -44,7 +45,7 @@ public class Activity_AthleteCoachDetails extends AppCompatActivity {
         setContentView(R.layout.activity_athlete_details);
         athleteName = getIntent().getStringExtra("athleteName");
         activityNumber = getIntent().getIntExtra("activityNumber", -1);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(athleteName);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -69,36 +70,46 @@ public class Activity_AthleteCoachDetails extends AppCompatActivity {
 
     }
 
-    public void GetAthletesData(int activityNumber) {
+    public void GetAthletesData(final int activityNumber) {
         final ExpandableListView brackets = findViewById(R.id.athlete_details_exp_lv);
 
         if (activityNumber == 1) {
-            hrInfoGroup = new ArrayList<String>(Arrays.asList("Biography", "History", "Events Participating", "Events Entering"));
-            className = "Athletes";
+            hrInfoGroup = new ArrayList<String>(Arrays.asList("Biography", "Stats", "Event","Position"));
+            className = "InstitutionAthlete";
+            queryKey="Name";
             personMoreInfoTV.setText(className.substring(0,className.length()-1));
         } else if (activityNumber == 2) {
             hrInfoGroup = new ArrayList<String>(Arrays.asList("Biography", "History", "Events Coaching", "Events Won"));
             className = "Coaches";
+            queryKey="name";
             personMoreInfoTV.setText(className.substring(0,className.length()-2));
         }
 
         final HashMap<String, List<String>> hrResourceDetails = new HashMap<>();
 
         ParseQuery<ParseObject> athlete = new ParseQuery<ParseObject>(className);
-        athlete.whereEqualTo("name", athleteName);
+        athlete.whereEqualTo(queryKey, athleteName);
         //athlete.setLimit(1);
         athlete.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
                 if (e == null && objects.size() > 0) {
                     for (ParseObject ob : objects) {
-                        hrResourceDetails.put(hrInfoGroup.get(0), new ArrayList<String>(Arrays.asList(ob.getString(hrInfoGroup.get(0).toLowerCase().trim()))));
-                        hrResourceDetails.put(hrInfoGroup.get(1), new ArrayList<String>(Arrays.asList(ob.getString(hrInfoGroup.get(1).toLowerCase().trim()))));
-                        hrResourceDetails.put(hrInfoGroup.get(2), (ob.<String>getList(hrInfoGroup.get(2).toLowerCase().trim().replace(" ", ""))));
-                        hrResourceDetails.put(hrInfoGroup.get(3), (ob.<String>getList(hrInfoGroup.get(3).toLowerCase().trim().replace(" ", ""))));
-                        personAgeContent.setText(String.valueOf(ob.getInt("age")));
-                        //personPBContent.setText(String.valueOf( ob.getDouble("pb")));
-
+                        if(activityNumber==2) {
+                            hrResourceDetails.put(hrInfoGroup.get(0), new ArrayList<String>(Arrays.asList(ob.getString(hrInfoGroup.get(0).toLowerCase().trim()))));
+                            hrResourceDetails.put(hrInfoGroup.get(1), new ArrayList<String>(Arrays.asList(ob.getString(hrInfoGroup.get(1).toLowerCase().trim()))));
+                            hrResourceDetails.put(hrInfoGroup.get(2), (ob.<String>getList(hrInfoGroup.get(2).toLowerCase().trim().replace(" ", ""))));
+                            hrResourceDetails.put(hrInfoGroup.get(3), (ob.<String>getList(hrInfoGroup.get(3).toLowerCase().trim().replace(" ", ""))));
+                            personAgeContent.setText(String.valueOf(ob.getInt("age")));
+                            //personPBContent.setText(String.valueOf( ob.getDouble("pb")));
+                        }else{
+                            hrResourceDetails.put(hrInfoGroup.get(0), new ArrayList<String>(Arrays.asList(ob.getString(hrInfoGroup.get(0)))));
+                            hrResourceDetails.put(hrInfoGroup.get(1), new ArrayList<String>(Arrays.asList(ob.getString(hrInfoGroup.get(1)))));
+                            String[] temp=ob.getString(hrInfoGroup.get(2)).split(",");
+                            hrResourceDetails.put(hrInfoGroup.get(2), new ArrayList<String>(Arrays.asList(temp)));
+                            hrResourceDetails.put(hrInfoGroup.get(3), new ArrayList<String>(Arrays.asList(ob.getString(hrInfoGroup.get(3)))));
+                            personAgeContent.setText(ob.getString("Age"));
+                        }
 
 
 

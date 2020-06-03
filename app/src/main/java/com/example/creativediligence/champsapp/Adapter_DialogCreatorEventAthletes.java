@@ -93,7 +93,7 @@ public class Adapter_DialogCreatorEventAthletes extends RecyclerView.Adapter<Ada
 
                 }if(r==0 &&holder.mOptions.getSelectedItemPosition()!=0){
                     mData[pos]=holder.mOptions.getSelectedItem().toString();
-                    Log.d("Data", String.valueOf(mData)+ "i: "+pos);
+                    Log.d("Data", mData + "i: "+pos);
                 }
             }
 

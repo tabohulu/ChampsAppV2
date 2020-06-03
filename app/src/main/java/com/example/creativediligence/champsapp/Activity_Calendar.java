@@ -39,7 +39,7 @@ public class Activity_Calendar extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Calendar");
         //new PreferenceMethods().setColorChosen(toolbar, EventsOverviewActivity.this);
         setSupportActionBar(toolbar);
@@ -62,7 +62,7 @@ public class Activity_Calendar extends AppCompatActivity {
         swipeCount = 0;
 
 
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager = findViewById(R.id.viewpager);
         viewPager.setOffscreenPageLimit(tabTitles.size());
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -122,7 +122,7 @@ public class Activity_Calendar extends AppCompatActivity {
         viewPager.setAdapter(pagerAdapter);
 
         // Give the TabLayout the ViewPager
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        TabLayout tabLayout = findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
         //new PreferenceMethods().setColorChosen(tabLayout, TestActivity.this);
 
@@ -159,7 +159,7 @@ public class Activity_Calendar extends AppCompatActivity {
         viewPager.setAdapter(pagerAdapter);
 
         // Give the TabLayout the ViewPager
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        TabLayout tabLayout = findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
 
         // Iterate over all tabs and set the custom view
@@ -322,7 +322,7 @@ public class Activity_Calendar extends AppCompatActivity {
 
         public View getTabView(int position) {
             View tab = LayoutInflater.from(Activity_Calendar.this).inflate(R.layout.custom_tab2, null);
-            TextView tv = (TextView) tab.findViewById(R.id.month_year);
+            TextView tv = tab.findViewById(R.id.month_year);
             TextView tv1 = tab.findViewById(R.id.weekDay);
             TextView tv2 = tab.findViewById(R.id.monthDay);
             tv.setText(tabTitles.get(position).getMonth());

@@ -42,7 +42,7 @@ public class Activity_Bracket extends AppCompatActivity {
 
         mSportsTitle=getIntent().getStringExtra("sportName");
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         if(isHomepage){
             toolbar.setTitle("Brackets");
         }else {

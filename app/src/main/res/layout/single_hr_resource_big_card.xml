@@ -64,7 +64,7 @@
                                 android:fontFamily="@font/quicksand_bold"
                                 android:text="Roman"
                                 android:textColor="@color/black"
-                                android:textSize="19dp" />
+                                android:textSize="19sp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -73,7 +73,7 @@
                                 android:layout_marginTop="5dp"
                                 android:fontFamily="@font/quicksand_regular"
                                 android:text="Boxing fighter"
-                                android:textSize="17dp"
+                                android:textSize="17sp"
                                 android:textStyle="bold" />
                         </LinearLayout>
                     </RelativeLayout>
@@ -101,7 +101,7 @@
                         android:text="Age"
                         android:id="@+id/person_age_heading"
                         android:textColor="@color/caldroid_darker_gray"
-                        android:textSize="17dp" />
+                        android:textSize="17sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -111,7 +111,7 @@
                         android:text="40"
                         android:id="@+id/person_age_content"
                         android:textColor="@color/grey_300"
-                        android:textSize="15dp"
+                        android:textSize="15sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -129,7 +129,7 @@
                         android:text="Games"
                         android:id="@+id/person_games_heading"
                         android:textColor="@color/caldroid_darker_gray"
-                        android:textSize="17dp" />
+                        android:textSize="17sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -139,7 +139,7 @@
                         android:text="18"
                         android:id="@+id/person_games_content"
                         android:textColor="@color/grey_300"
-                        android:textSize="15dp"
+                        android:textSize="15sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -157,7 +157,7 @@
                         android:id="@+id/person_PB_heading"
                         android:text="PB"
                         android:textColor="@color/caldroid_darker_gray"
-                        android:textSize="17dp" />
+                        android:textSize="17sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -166,7 +166,7 @@
                         android:fontFamily="@font/quicksand_regular"
                         android:text="28/24"
                         android:textColor="@color/grey_300"
-                        android:textSize="15dp"
+                        android:textSize="15sp"
                         android:id="@+id/person_PB_content"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -185,7 +185,7 @@
                         android:text="Goals"
                         android:id="@+id/person_goals_heading"
                         android:textColor="@color/caldroid_darker_gray"
-                        android:textSize="17dp" />
+                        android:textSize="17sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -195,7 +195,7 @@
                         android:fontFamily="@font/quicksand_regular"
                         android:text="8"
                         android:textColor="@color/grey_300"
-                        android:textSize="15dp"
+                        android:textSize="15sp"
                         android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>

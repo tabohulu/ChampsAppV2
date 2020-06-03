@@ -59,7 +59,7 @@ public class Activity_SubEvents extends AppCompatActivity {
     }
 
     public void SetupLayout() {
-        RecyclerView rv = (RecyclerView) findViewById(R.id.rv_recycler_view2);
+        RecyclerView rv = findViewById(R.id.rv_recycler_view2);
         rv.setHasFixedSize(true);
 
         Adapter_SubEvents adapter = new Adapter_SubEvents(Activity_SubEvents.this, subevents, eventname);

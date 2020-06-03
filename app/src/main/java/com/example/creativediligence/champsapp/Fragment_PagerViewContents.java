@@ -42,7 +42,7 @@ public class Fragment_PagerViewContents extends Fragment {
         final View rootView = inflater.inflate(R.layout.blank_fragment_page_adapter_contents, container, false);
 
 
-                        RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.rv_recycler_view);
+                        RecyclerView rv = rootView.findViewById(R.id.rv_recycler_view);
                         rv.setHasFixedSize(true);
 
                         FragmentAdapter_PagerViewContents adapter = new FragmentAdapter_PagerViewContents(events, getContext(), listContents,sportTitle);

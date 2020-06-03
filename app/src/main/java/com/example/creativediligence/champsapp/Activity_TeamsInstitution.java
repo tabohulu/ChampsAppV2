@@ -44,7 +44,7 @@ public class Activity_TeamsInstitution extends AppCompatActivity {
         setContentView(R.layout.activity_teams__institution_2);
         isHomepage=getIntent().getBooleanExtra("isHomepage",false);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         if(isHomepage) {
             toolbar.setTitle("Teams/Institutions");
         }else{
@@ -105,14 +105,14 @@ public class Activity_TeamsInstitution extends AppCompatActivity {
 
     public void Setuplayout() {
         // Get the ViewPager and set it's PagerAdapter so that it can display items
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager_ti);
+        ViewPager viewPager = findViewById(R.id.viewpager_ti);
         viewPager.setOffscreenPageLimit(tabTitles.size());
         PagerAdapter pagerAdapter =
                 new PagerAdapter(getSupportFragmentManager(), Activity_TeamsInstitution.this, tabTitles, institutionContents);
         viewPager.setAdapter(pagerAdapter);
 
         // Give the TabLayout the ViewPager
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout_ti);
+        TabLayout tabLayout = findViewById(R.id.tab_layout_ti);
         //new PreferenceMethods().setColorChosen(tabLayout,Teams_Institution_Activity2.this);
         tabLayout.setupWithViewPager(viewPager);
 
@@ -186,7 +186,7 @@ public class Activity_TeamsInstitution extends AppCompatActivity {
 
         public View getTabView(int position) {
             View tab = LayoutInflater.from(Activity_TeamsInstitution.this).inflate(R.layout.custom_tab, null);
-            TextView tv = (TextView) tab.findViewById(R.id.custom_text);
+            TextView tv = tab.findViewById(R.id.custom_text);
             tv.setText(tabTitles.get(position));
             return tab;
         }

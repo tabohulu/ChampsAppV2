@@ -58,7 +58,7 @@
                             android:text="Roman"
 
                             android:textColor="@color/black"
-                            android:textSize="16dp" />
+                            android:textSize="16sp" />
                         <TextView
                             android:id="@+id/tvEvent"
                             android:layout_width="wrap_content"
@@ -67,7 +67,7 @@
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/quicksand_regular"
                             android:text="position"
-                            android:textSize="10dp"
+                            android:textSize="10sp"
                             android:gravity="left"
                             android:textStyle="bold" />
 
@@ -139,7 +139,7 @@
                             android:text="Age"
                             android:id="@+id/person_age_heading"
                             android:textColor="@color/caldroid_darker_gray"
-                            android:textSize="13dp" />
+                            android:textSize="13sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -149,7 +149,7 @@
                             android:text="40"
                             android:id="@+id/person_age_content"
                             android:textColor="@color/grey_300"
-                            android:textSize="12dp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -168,7 +168,7 @@
                             android:text="Games"
                             android:id="@+id/person_games_heading"
                             android:textColor="@color/caldroid_darker_gray"
-                            android:textSize="13dp" />
+                            android:textSize="13sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -178,7 +178,7 @@
                             android:id="@+id/person_games_content"
                             android:text="18"
                             android:textColor="@color/grey_300"
-                            android:textSize="12dp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -197,7 +197,7 @@
                             android:fontFamily="@font/quicksand_bold"
                             android:text="PB"
                             android:textColor="@color/caldroid_darker_gray"
-                            android:textSize="13dp" />
+                            android:textSize="13sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -207,7 +207,7 @@
                             android:fontFamily="@font/quicksand_regular"
                             android:text="28/24"
                             android:textColor="@color/grey_300"
-                            android:textSize="12dp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -226,7 +226,7 @@
                             android:text="Goals"
                             android:id="@+id/person_goals_heading"
                             android:textColor="@color/caldroid_darker_gray"
-                            android:textSize="13dp" />
+                            android:textSize="13sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -236,7 +236,7 @@
                             android:fontFamily="@font/quicksand_regular"
                             android:text="8"
                             android:textColor="@color/grey_300"
-                            android:textSize="12dp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 

@@ -50,7 +50,7 @@ public class Activity_PointsStanding extends AppCompatActivity {
         deflength=initialListLength;
         button = findViewById(R.id.show_more_button);*/
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Track & Field Points Standing");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -79,14 +79,14 @@ public class Activity_PointsStanding extends AppCompatActivity {
 
     public void SetuplayoutMain() {
         // Get the ViewPager and set it's PagerAdapter so that it can display items
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        ViewPager viewPager = findViewById(R.id.viewpager);
         viewPager.setOffscreenPageLimit(tabTitles.size());
         PagerAdapter pagerAdapter =
                 new PagerAdapter(getSupportFragmentManager(), Activity_PointsStanding.this, tabTitles);
         viewPager.setAdapter(pagerAdapter);
 
         // Give the TabLayout the ViewPager
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        TabLayout tabLayout = findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
         //new PreferenceMethods().setColorChosen(tabLayout, EventsOverviewActivity.this);
 
@@ -262,7 +262,7 @@ public class Activity_PointsStanding extends AppCompatActivity {
 
         public View getTabView(int position) {
             View tab = LayoutInflater.from(Activity_PointsStanding.this).inflate(R.layout.custom_tab, null);
-            TextView tv = (TextView) tab.findViewById(R.id.custom_text);
+            TextView tv = tab.findViewById(R.id.custom_text);
             tv.setText(tabTitles.get(position));
             return tab;
         }

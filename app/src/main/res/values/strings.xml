@@ -8,6 +8,8 @@
 
 
     <!--profile layout for institutuons-->
+    <string name="create_new_athlete">Create New Athlete Profile</string>
+    <string name="add_new_event">Add New Event</string>
 
 
 </resources>
