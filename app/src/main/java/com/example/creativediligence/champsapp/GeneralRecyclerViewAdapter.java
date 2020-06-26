@@ -1,4 +1,4 @@
-package com.example.creativediligence.champsapp.Common;
+package com.example.creativediligence.champsapp;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.creativediligence.champsapp.R;
 import com.example.creativediligence.champsapp.ToInstitutionDetailsActivity;
 import com.parse.DeleteCallback;
 import com.parse.FindCallback;
@@ -42,7 +41,7 @@ public class GeneralRecyclerViewAdapter extends RecyclerView.Adapter<GeneralRecy
 
 
     }
-    public GeneralRecyclerViewAdapter(Context context, int resourceId, ArrayList<String> data, String currentFragment,ArrayList<String> data2) {
+    public GeneralRecyclerViewAdapter(Context context, int resourceId, ArrayList<String> data, String currentFragment, ArrayList<String> data2) {
         mData = data;
         mContext = context;
         mId = resourceId;
@@ -102,7 +101,7 @@ public class GeneralRecyclerViewAdapter extends RecyclerView.Adapter<GeneralRecy
                 LayoutInflater li = LayoutInflater.from(mContext);
                 final View textView = li.inflate(R.layout.delete_confirm_layout,null);
 
-                AlertDialog.Builder deleteConfirmDialog= new AlertDialog.Builder(mContext,R.style.MyDialogTheme);
+                AlertDialog.Builder deleteConfirmDialog= new AlertDialog.Builder(mContext, R.style.MyDialogTheme);
                 deleteConfirmDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

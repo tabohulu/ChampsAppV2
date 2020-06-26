@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.creativediligence.champsapp.MembersArea.Coaches.CoachesFragmentAdapterMain;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -19,7 +18,6 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class InstitutionsCoachesFragment extends Fragment {
@@ -60,7 +58,7 @@ public class InstitutionsCoachesFragment extends Fragment {
             newCoach.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    new DialogCreator().NewCoachDialog(getContext(), rv, infoTv, currentFragment);
+                    new Helper_DialogCreator().NewCoachDialog(getContext(), rv, infoTv, currentFragment);
                     //mData = new ArrayList<>();
                     //PopulateRecyclerView(rootView);
                 }

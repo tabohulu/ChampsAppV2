@@ -14,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class GroupFragmentAdapterMain extends RecyclerView.Adapter<GroupFragmentAdapterMain.MyViewHolder> {
     ArrayList<String> mData ;

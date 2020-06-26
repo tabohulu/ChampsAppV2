@@ -18,10 +18,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -57,7 +54,7 @@ public class GroupsFragment extends Fragment {
         newGroupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DialogCreator().NewGroupDialog(getContext());
+                new Helper_DialogCreator().NewGroupDialog(getContext());
                 mData = new ArrayList<>();
                 PopulateRecyclerView(rootView);
             }

@@ -1,4 +1,4 @@
-package com.example.creativediligence.champsapp.MembersArea.Coaches;
+package com.example.creativediligence.champsapp;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -15,8 +15,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.creativediligence.champsapp.GroupFragmentGroupContentActivity;
-import com.example.creativediligence.champsapp.R;
 import com.parse.DeleteCallback;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -33,7 +31,7 @@ public class CoachesFragmentAdapterMain extends RecyclerView.Adapter<CoachesFrag
     int mId;
     String mCurrentFragment;
 
-    public CoachesFragmentAdapterMain(Context context, int resourceId, ArrayList<String> data,String currentFragment) {
+    public CoachesFragmentAdapterMain(Context context, int resourceId, ArrayList<String> data, String currentFragment) {
         mData = data;
         mContext = context;
         mId = resourceId;
@@ -79,7 +77,7 @@ public class CoachesFragmentAdapterMain extends RecyclerView.Adapter<CoachesFrag
                 LayoutInflater li = LayoutInflater.from(mContext);
                 final View textView = li.inflate(R.layout.delete_confirm_layout,null);
 
-                AlertDialog.Builder deleteConfirmDialog= new AlertDialog.Builder(mContext,R.style.MyDialogTheme);
+                AlertDialog.Builder deleteConfirmDialog= new AlertDialog.Builder(mContext, R.style.MyDialogTheme);
                 deleteConfirmDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

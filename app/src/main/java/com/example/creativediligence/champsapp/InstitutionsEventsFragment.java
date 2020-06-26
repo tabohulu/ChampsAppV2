@@ -12,8 +12,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.creativediligence.champsapp.MembersArea.Coaches.CoachesFragmentAdapterMain;
-import com.example.creativediligence.champsapp.MembersArea.Events.EventsFragmentAdapterMain;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -64,7 +62,7 @@ public class InstitutionsEventsFragment extends Fragment {
         newEventButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DialogCreator().NewEventDialog(getContext(),rv,noDataTextView);
+                new Helper_DialogCreator().NewEventDialog(getContext(),rv,noDataTextView);
             }
         });
 

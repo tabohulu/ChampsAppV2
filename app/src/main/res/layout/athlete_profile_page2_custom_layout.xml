@@ -11,15 +11,24 @@
         <TextView
             android:id="@+id/athlete_personal_best"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_height="40dp"
+            android:layout_weight="0.45"
+            android:gravity="center_vertical"
             android:text="PB" />
 
         <TextView
             android:id="@+id/athlete_seasons_best"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:gravity="center_vertical"
+            android:layout_weight="0.45" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.1"
+            android:src="@drawable/ic_arr_up"
+            android:id="@+id/collapse_times_image"/>
 
 
     </LinearLayout>
@@ -46,7 +55,7 @@
 
     <com.jjoe64.graphview.GraphView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="300dp"
         android:id="@+id/graph" />
 
     <View

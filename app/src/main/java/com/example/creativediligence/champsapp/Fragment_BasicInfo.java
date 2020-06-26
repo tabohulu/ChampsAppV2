@@ -133,8 +133,6 @@ public class Fragment_BasicInfo extends Fragment {
 
                             if(editText.getSelectedItemPosition()!=0) {
                                 eventsList.add(editText.getSelectedItem().toString());
-
-                                //Toast.makeText(Activity_AthleteProfile.this, "EventsListSize:=>" + eventsList.size(), Toast.LENGTH_SHORT).show();
                                 Adapter_ProfileEvents ap = new Adapter_ProfileEvents(eventsList, getContext(),profileEditState);
                                 eventsRecyclerView.setAdapter(ap);
                                 //todo Refresh Fragment_Stats
@@ -298,6 +296,9 @@ public class Fragment_BasicInfo extends Fragment {
             public void done(ParseException e) {
                 if (e == null) {
                     Toast.makeText(getContext(), "New Profile Created", Toast.LENGTH_SHORT).show();
+                    if(getContext() instanceof Activity_AthleteProfile2){
+                        ((Activity_AthleteProfile2)getContext()).UpdatePage2();
+                    }
                 } else {
                     Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -354,6 +355,9 @@ public class Fragment_BasicInfo extends Fragment {
                             public void done(ParseException e) {
                                 if (e == null) {
                                     Toast.makeText(getContext(), "Update Complete", Toast.LENGTH_SHORT).show();
+                                    if(getContext() instanceof Activity_AthleteProfile2){
+                                        ((Activity_AthleteProfile2)getContext()).UpdatePage2();
+                                    }
                                 }
                             }
                         });
@@ -405,7 +409,11 @@ public class Fragment_BasicInfo extends Fragment {
                             String ageString=obj.getString("Age").trim();
                             dobEditText.setText(obj.getString("DOB") + " (" + ageString + ")");
                             biographyEditText.setText(obj.getString("Biography"));
-                            eventsList= new ArrayList<>(Arrays.asList(obj.getString("Event").trim().split(",")));
+                            String temp=obj.getString("Event");
+                            if(!temp.trim().equals("")){
+                                eventsList= new ArrayList<>(Arrays.asList(temp.split(",")));
+                            }
+
                             if(eventsList.size()>0) {
                                 Adapter_ProfileEvents ap = new Adapter_ProfileEvents(eventsList, getContext(), profileEditState);
                                 eventsRecyclerView.setAdapter(ap);

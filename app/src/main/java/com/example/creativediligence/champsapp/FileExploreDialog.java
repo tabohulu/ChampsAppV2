@@ -1,4 +1,4 @@
-package com.example.creativediligence.champsapp.Common;
+package com.example.creativediligence.champsapp;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,12 +15,6 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.example.creativediligence.champsapp.GroupFragmentAdapterMain;
-import com.example.creativediligence.champsapp.InstitutionsFragmentAdminAdapterMain;
-import com.example.creativediligence.champsapp.MembersArea.Coaches.CoachesFragmentAdapterMain;
-import com.example.creativediligence.champsapp.MembersArea.Teams.TeamsFragmentAdapterMain;
-import com.example.creativediligence.champsapp.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -60,7 +54,7 @@ public class FileExploreDialog {
     private TextView infoTv;
     private Context mContext;
 
-    public void OpenDialog(final Context context,String currentFragment,RecyclerView mRV,TextView mTv) {
+    public void OpenDialog(final Context context, String currentFragment, RecyclerView mRV, TextView mTv) {
         mCurrentFragment=currentFragment;
         mContext=context;
         rv=mRV;

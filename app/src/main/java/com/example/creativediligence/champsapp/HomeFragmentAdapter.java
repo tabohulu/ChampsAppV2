@@ -13,8 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 public class HomeFragmentAdapter extends RecyclerView.Adapter<HomeFragmentAdapter.MyViewHolder> {
     String[] mData={"Person1", "Person2", "Person3", "Person4", "Person5", "Person6", "Person7", "Person8"};
     Context mContext;
@@ -30,7 +28,7 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<HomeFragmentAdapte
     }
 
     @Override
-    public HomeFragmentAdapter.MyViewHolder onCreateViewHolder( ViewGroup parent, int i) {
+    public HomeFragmentAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int i) {
 
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(mId, parent, false);

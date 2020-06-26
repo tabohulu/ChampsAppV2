@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
@@ -23,6 +24,7 @@ public class Activity_Coaches extends AppCompatActivity {
     ArrayList<Helper_AthleteCoachModel> athletes;
     Toolbar toolbar;
     boolean isHomepage;
+    Button newProfileButton;
 
     @Override
     public void onResume() {
@@ -35,12 +37,14 @@ public class Activity_Coaches extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.athletes_coaches_activity);
-isHomepage=getIntent().getBooleanExtra("isHomepage",false);
+        isHomepage = getIntent().getBooleanExtra("isHomepage", false);
+        newProfileButton = findViewById(R.id.new_profile_button);
+        newProfileButton.setVisibility(View.GONE);
 
         toolbar = findViewById(R.id.atletes_toolbar);
-        if(isHomepage){
+        if (isHomepage) {
             toolbar.setTitle("Coaches");
-        }else {
+        } else {
             toolbar.setTitle("Track & Field Coaches");
         }
         setSupportActionBar(toolbar);
@@ -79,8 +83,8 @@ isHomepage=getIntent().getBooleanExtra("isHomepage",false);
                             mAthleteNames.add(name);
                         }
 
-                        Adapter_AthleteCoachInfo adapter=new Adapter_AthleteCoachInfo(Activity_Coaches.this, R.layout.hr_resource_card_layout,mAthlete,2);
-                        RecyclerView rv=findViewById(R.id.athletes_rv);
+                        Adapter_AthleteCoachInfo adapter = new Adapter_AthleteCoachInfo(Activity_Coaches.this, R.layout.hr_resource_card_layout, mAthlete, 2);
+                        RecyclerView rv = findViewById(R.id.athletes_rv);
                         rv.hasFixedSize();
                         rv.setAdapter(adapter);
                         LinearLayoutManager llm = new LinearLayoutManager(Activity_Coaches.this);

@@ -1,27 +1,9 @@
 package com.example.creativediligence.champsapp;
 
-import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Toast;
-
-import com.parse.FindCallback;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 public class GroupFragmentGroupContentActivity extends AppCompatActivity {
     RecyclerView rv;
@@ -55,7 +37,7 @@ public class GroupFragmentGroupContentActivity extends AppCompatActivity {
 
     public void CreateNewComment(View view) {
         //Open a dialog
-        new DialogCreator().NewPostDialog(this, groupName, rv);
+        new Helper_DialogCreator().NewPostDialog(this, groupName, rv);
 
 
     }

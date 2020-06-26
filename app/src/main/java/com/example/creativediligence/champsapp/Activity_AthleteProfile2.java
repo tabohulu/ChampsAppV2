@@ -106,12 +106,15 @@ public class Activity_AthleteProfile2 extends AppCompatActivity {
                     editprofileState -= 1;
                     profileEditState = false;
                 }
-                Fragment frag = adapter.fragments[tabPos];
-                Toast.makeText(Activity_AthleteProfile2.this, ""+(frag instanceof Fragment_BasicInfo), Toast.LENGTH_LONG).show();
+                for (int ii = 0; ii < tabLayout.getTabCount(); ii++){
+                    Fragment frag = adapter.fragments[ii];
+                //Toast.makeText(Activity_AthleteProfile2.this, "" + (frag instanceof Fragment_BasicInfo), Toast.LENGTH_LONG).show();
                 if (frag instanceof Fragment_BasicInfo) {
-                    ((Fragment_BasicInfo)frag).Change(editprofileState,profileEditState);
-                }else if(frag instanceof Fragment_Stats){
-                    ((Fragment_Stats)frag).InnerFrag(editprofileState,profileEditState);
+                    ((Fragment_BasicInfo) frag).Change(editprofileState, profileEditState);
+                } else if (frag instanceof Fragment_Stats) {
+                    ((Fragment_Stats) frag).InnerFrag(editprofileState, profileEditState);
+                    //((Fragment_Stats) frag).UpdateEventsData();
+
 
                 }
                 /*Log.d("fragment_act",profileEditState+"");
@@ -120,6 +123,7 @@ public class Activity_AthleteProfile2 extends AppCompatActivity {
                         editprofileState,profileEditState);
                 viewPager.setAdapter(adapter);*/
                 viewPager.getAdapter().notifyDataSetChanged();
+            }
 
 
 
@@ -127,6 +131,15 @@ public class Activity_AthleteProfile2 extends AppCompatActivity {
         });
 
 
+    }
+    public void UpdatePage2(){
+        Fragment frag = adapter.fragments[1];
+        if (frag instanceof Fragment_Stats) {
+            //((Fragment_Stats) frag).InnerFrag(editprofileState, profileEditState);
+            ((Fragment_Stats) frag).UpdateEventsData();
+
+
+        }
     }
 
     public void SwitchPage(int pageNumber,boolean smoothScrool,int childPageNumber){

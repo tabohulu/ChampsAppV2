@@ -1,4 +1,4 @@
-package com.example.creativediligence.champsapp.Common;
+package com.example.creativediligence.champsapp;
 
 
 import android.content.Context;
@@ -13,7 +13,6 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.creativediligence.champsapp.DialogCreator;
-import com.example.creativediligence.champsapp.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -33,7 +32,7 @@ public class CalendarUtils {
     public ProgressBar mProgressBar;
     public CaldroidFragment mCaldroidFragment;
 
-    public CalendarUtils(Context context, ProgressBar progressBar,CaldroidFragment caldroidFragment){
+    public CalendarUtils(Context context, ProgressBar progressBar, CaldroidFragment caldroidFragment){
         mContext=context;
         mProgressBar=progressBar;
         mCaldroidFragment=caldroidFragment;

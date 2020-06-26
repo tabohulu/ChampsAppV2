@@ -1,15 +1,135 @@
 <resources>
     <string name="app_name">Niche Sports</string>
-
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Niche Sports</string>
+    <string name="nav_header_subtitle">user@achampsapp.com</string>
+    <string name="nav_header_desc">Navigation header</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 
     <!--Members Area Strings-->
+    <string name="GroupClassName">GroupPosts</string>
+    <string name="GroupClassElem_postContent">postContent</string>
+    <string name="GroupClassElem_postDateTime">postDateTime</string>
+    <string name="GroupClassElem_groupName">groupName</string>
+    <string name="GroupClassElem_postCreator">postCreator</string>
 
+    <string name="UserProfilesClassName">UserProfiles</string>
+    <string name="UserProfilesInstitutionsClassName">InstitutionProfiles</string>
+    <string name="memberProfileImage">memberProfileImage</string>
+    <string name="members_homepage">Home</string>
+    <string name="members_profile">Profile</string>
+    <string name="members_messages">Messages</string>
+    <string name="members_groups">Groups</string>
+    <string name="members_teams">Teams</string>
+    <string name="members_coaches">Coaches</string>
+    <string name="institute_events">Events</string>
+    <string name="institute_athletes">Athletes</string>
+    <string name="action_settings">Logout</string>
+    <string name="settings">Settings</string>
 
     <!--profile layout for institutuons-->
     <string name="create_new_athlete">Create New Athlete Profile</string>
     <string name="add_new_event">Add New Event</string>
+    <string name="TotalGamesPlayed">Total Games Played</string>
+    <string name="BestTeam">Best Team(s)</string>
+    <string name="TotalTeams">Total Teams</string>
+    <string name="UpcomingEvent">Upcoming Event</string>
+    <string name="NoData">No Data Available</string>
+
+    <string-array name="member_level">
+
+        <item>Admin</item>
+        <item>InstituteManager</item>
+        <item>Coach</item>
+        <item>Athlete</item>
+
+    </string-array>
+
+    <string-array name="institute_teams">
+
+        <item>Football</item>
+        <item>Boxing</item>
+        <item>Long Jump</item>
+        <item>High Jump</item>
+        <item>Tennis</item>
+
+    </string-array>
+
+    <string-array name="group_settings">
+
+        <item>Open</item>
+        <item>Secret</item>
+
+    </string-array>
+
+    <string-array name="affiliate_institute">
+
+        <item>Independent</item>
+        <item>Institute A</item>
+        <item>Institute B</item>
+        <item>Institute C</item>
+        <item>Institute D</item>
+        <item>Institute E</item>
 
 
+    </string-array>
+
+    <string-array name="institution_athlete_keys">
+
+        <item>Name</item>
+        <item>Age</item>
+        <item>DOB</item>
+        <item>Biography</item>
+        <item>Event</item>
+        <item>Institution</item>
+        <item>Personal_Best</item>
+        <item>Position</item>
+        <item>Seasons_Best</item>
+        <item>Stats</item>
+        <item>Team</item>
+        <item>Trophies</item>
+
+
+    </string-array>
+
+    <string-array name="institution_coach_keys">
+
+        <item>Name</item>
+        <item>Age</item>
+        <item>DOB</item>
+        <item>Biography</item>
+        <item>Institution</item>
+        <item>Team</item>
+        <item>Trophies</item>
+
+
+    </string-array>
+
+    <string-array name="institution_institution_keys">
+
+        <item>Name</item>
+        <item>Founded</item>
+        <item>History</item>
+        <item>League</item>
+        <item>Teams</item>
+        <item>Trophies</item>
+        <item>Type</item>
+        <item>Coaches</item>
+
+    </string-array>
+
+    <string-array name="institution_team_keys">
+
+        <item>Name</item>
+        <item>Founded</item>
+        <item>History</item>
+        <item>Institution</item>
+        <item>League</item>
+        <item>Trophies</item>
+        <item>Type</item>
+        <item>Coach</item>
+
+    </string-array>
 </resources>

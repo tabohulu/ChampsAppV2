@@ -12,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class GroupContentAdapter extends RecyclerView.Adapter<GroupContentAdapter.MyViewHolder> {
     ArrayList<String> mName;
@@ -21,7 +20,7 @@ public class GroupContentAdapter extends RecyclerView.Adapter<GroupContentAdapte
     Context mContext;
     int mResourceId;
 
-    public GroupContentAdapter(Context context, int id, ArrayList<String> names,ArrayList<String> dates,ArrayList<String> poster){
+    public GroupContentAdapter(Context context, int id, ArrayList<String> names, ArrayList<String> dates, ArrayList<String> poster){
         mContext=context;
         mResourceId=id;
         mName=names;

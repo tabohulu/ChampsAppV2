@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
@@ -23,42 +22,38 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class Adapter_GraphData extends RecyclerView.Adapter<Adapter_GraphData.MyViewHolder> {
-    Context mContext;
-    String[] mData;
-    boolean mIsClickable;
-    int times = 5;
-
-
-    int editprofileState = 0;
-    boolean profileEditState = false;
-    DataPoint[] dataPoints= new DataPoint[10];
+    private Context mContext;
+    private int times = 5;
+    private int editprofileState;
+    private boolean profileEditState;
+    private DataPoint[] dataPoints = new DataPoint[10];
+    private TextView mPBTextView;
     private MyViewHolder viewHolder;
     private EditText[] dateEdit1;
     private EditText[] dateEdit2;
     private EditText[] timeEdit1;
     private EditText[] timeEdit2;
-    private ArrayList<String> mAthleteNames;
-
-    public Adapter_GraphData(Context context, String[] data, boolean isClikable) {
-
-        mContext = context;
-        mData = data;//events
-        mIsClickable = isClikable;
+    private ArrayList<String> mEditTextInputs;
+    private ArrayList<String> mEditTextDateInputs;
 
 
-    }
 
-    public Adapter_GraphData(Context context) {
+    public Adapter_GraphData(Context context, ArrayList<String> editTextInputs, int eps, boolean cps, TextView tv,ArrayList<String> editTextDateInputs) {
 
         mContext = context;
         dateEdit1 = new EditText[times];
         dateEdit2 = new EditText[times];
         timeEdit1 = new EditText[times];
         timeEdit2 = new EditText[times];
-
-        for(int i=0;i<10;i++){
-            dataPoints[i]=new DataPoint(i,1);
+        mEditTextInputs = editTextInputs;
+        mEditTextDateInputs=editTextDateInputs;
+        for (int i = 0; i < 10; i++) {
+            dataPoints[i] = new DataPoint(i, Double.parseDouble(mEditTextInputs.get(i)));
         }
+        editprofileState = eps;
+        profileEditState = cps;
+        mPBTextView = tv;
+        SetPersonalBest();
 
     }
 
@@ -70,8 +65,7 @@ public class Adapter_GraphData extends RecyclerView.Adapter<Adapter_GraphData.My
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.textview_edittext_layout, parent, false);
         // set the view's size, margins, paddings and layout parameters
-        MyViewHolder vh = new MyViewHolder(v);
-        return vh;
+        return new MyViewHolder(v);
     }
 
     @Override
@@ -82,9 +76,16 @@ public class Adapter_GraphData extends RecyclerView.Adapter<Adapter_GraphData.My
         timeEdit1[position] = holder.mTimeInput;
         timeEdit2[position] = holder.mTimeInput2;
 
+        holder.mTimeInput.setText(mEditTextInputs.get(2 * position));
+        holder.mTimeInput2.setText(mEditTextInputs.get(2 * position + 1));
 
-        holder.mTextLabel.setText((2 * position + 1) + "");
-        holder.mTextLabel2.setText((2 * position + 2) + "");
+        if(mEditTextDateInputs!=null) {
+            holder.mDateInput.setText(mEditTextDateInputs.get(2 * position));
+            holder.mDateInput2.setText(mEditTextDateInputs.get(2 * position + 1));
+        }
+
+        holder.mTextLabel.setText((position +1) + "");
+        holder.mTextLabel2.setText((position + 6) + "");
 
         final Calendar myCalendar = Calendar.getInstance();
         final int currYear = myCalendar.get(Calendar.YEAR);
@@ -96,14 +97,14 @@ public class Adapter_GraphData extends RecyclerView.Adapter<Adapter_GraphData.My
         holder.mDateInput.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditTextDatePicker date = new EditTextDatePicker(myCalendar, age[0], currYear, curDay, curMonth, holder.mDateInput);
+                EditTextDatePicker date = new EditTextDatePicker(myCalendar, position, currYear, curDay, curMonth, holder.mDateInput);
                 String etString = holder.mDateInput.getText().toString();
                 String dobText = etString.trim();
                 if (editprofileState == 1) {
                     Toast.makeText(mContext, "DateEdit" + (position + 1) + " pressed :/" + profileEditState, Toast.LENGTH_SHORT).show();
 
-                    if (!dobText.equals("") && !dobText.equals("()")) {
-                        String[] inputText = etString.substring(0, etString.indexOf("(")).split("/");
+                    if (!dobText.equals("") ) {
+                        String[] inputText = etString.split("/");
                         new DatePickerDialog(mContext, date, Integer.parseInt(inputText[0]), Integer.parseInt(inputText[1]) - 1,
                                 Integer.parseInt(inputText[2].trim())).show();
                     } else {
@@ -119,14 +120,14 @@ public class Adapter_GraphData extends RecyclerView.Adapter<Adapter_GraphData.My
             @Override
             public void onClick(View view) {
                 //DOBEditClickInput(holder.mDateInput2);
-                EditTextDatePicker date = new EditTextDatePicker(myCalendar, age[0], currYear, curDay, curMonth, holder.mDateInput2);
+                EditTextDatePicker date = new EditTextDatePicker(myCalendar, position+5, currYear, curDay, curMonth, holder.mDateInput2);
                 String etString = holder.mDateInput2.getText().toString().trim();
                 String dobText = etString.trim();
                 if (editprofileState == 1) {
                     Toast.makeText(mContext, "DateEdit" + (position + 1) + " pressed :/" + profileEditState, Toast.LENGTH_SHORT).show();
 
-                    if (!dobText.equals("") && !dobText.equals("()")) {
-                        String[] inputText = etString.substring(0, etString.indexOf("(")).split("/");
+                    if (!dobText.equals("")) {
+                        String[] inputText = etString.split("/");
                         new DatePickerDialog(mContext, date, Integer.parseInt(inputText[0]), Integer.parseInt(inputText[1]) - 1,
                                 Integer.parseInt(inputText[2].trim())).show();
                     } else {
@@ -146,45 +147,46 @@ public class Adapter_GraphData extends RecyclerView.Adapter<Adapter_GraphData.My
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (!charSequence.toString().isEmpty()) {
+                    dataPoints[position] = new DataPoint(position, Double.parseDouble(charSequence.toString()));
+                    mEditTextInputs.set(position, charSequence.toString());
+                    if (mContext instanceof Activity_AthleteProfile2) {
+                        ((Activity_AthleteProfile2) mContext).EditGraph();
+                        SetPersonalBest();
 
+                    }
+                }
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(!editable.toString().isEmpty()) {
-                    dataPoints[2 * position] = new DataPoint(2 * position, Double.parseDouble(editable.toString()));
-                    if (mContext instanceof Activity_AthleteProfile2) {
-                        ((Activity_AthleteProfile2) mContext).EditGraph();
-                    }
-                }
+
             }
         });
 
-holder.mTimeInput2.addTextChangedListener(new TextWatcher() {
-    @Override
-    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        holder.mTimeInput2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-    }
-
-    @Override
-    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-    }
-
-    @Override
-    public void afterTextChanged(Editable editable) {
-        if(!editable.toString().isEmpty()) {
-            dataPoints[2 * position +1] = new DataPoint(2 * position+1, Double.parseDouble(editable.toString()));
-            if (mContext instanceof Activity_AthleteProfile2) {
-                ((Activity_AthleteProfile2) mContext).EditGraph();
             }
-        }
-    }
-});
-        //holder.mDataTitle.setText(mData[position]);2
-       /*holder.mDataInput.setClickable(mIsClickable);
-        holder.mDataInput.setFocusable(mIsClickable);
-        holder.mDataInput.setFocusableInTouchMode(mIsClickable);*/
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (!charSequence.toString().isEmpty()) {
+                    dataPoints[position + 5] = new DataPoint(position + 5, Double.parseDouble(charSequence.toString()));
+                    mEditTextInputs.set(position + 5, charSequence.toString());
+                    if (mContext instanceof Activity_AthleteProfile2) {
+                        ((Activity_AthleteProfile2) mContext).EditGraph();
+                        SetPersonalBest();
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
 
     }
@@ -207,9 +209,44 @@ holder.mTimeInput2.addTextChangedListener(new TextWatcher() {
 
     }
 
-    public LineGraphSeries<DataPoint> GetDataPoints(){
+    public LineGraphSeries<DataPoint> GetDataPoints() {
 
         return new LineGraphSeries<>(dataPoints);
+    }
+
+    public void SetPersonalBest() {
+        double tempMin = 100;
+        for (int ii = 0; ii < mEditTextInputs.size(); ii++) {
+            tempMin = (Math.min(Double.parseDouble(mEditTextInputs.get(ii)), tempMin));
+        }
+
+        mPBTextView.setText("PB: " + tempMin);
+    }
+
+    public String GetEditTextInputs(){
+        StringBuilder sb=new StringBuilder();
+        for(int i=0;i<mEditTextInputs.size();i++){
+            sb.append(mEditTextInputs.get(i));
+            if(i!=mEditTextInputs.size()-1) {
+                sb.append(",");
+            }
+        }
+        return sb.toString();
+    }
+
+    public String GetEditTextDateInputs(){
+        StringBuilder sb=new StringBuilder();
+        if(mEditTextDateInputs!=null) {
+            for (int i = 0; i < mEditTextDateInputs.size(); i++) {
+                sb.append(mEditTextDateInputs.get(i));
+                if (i != mEditTextDateInputs.size() - 1) {
+                    sb.append(",");
+                }
+            }
+            return sb.toString();
+        }else{
+            return "";
+        }
     }
 
     // Provide a reference to the views for each data item
@@ -313,11 +350,13 @@ holder.mTimeInput2.addTextChangedListener(new TextWatcher() {
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             String myFormat = "yyyy/MM/dd"; //In which you need put here
             SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
-            age = currYear - year;
+            /*age = currYear - year;
             if (curMonth < monthOfYear && curDay < dayOfMonth) {
                 age = currYear - year + 1;
-            }
-            dateEdit.setText(sdf.format(myCalendar.getTime()) + " (" + age + ")");
+            }*/
+            dateEdit.setText(sdf.format(myCalendar.getTime()));
+            mEditTextDateInputs.set(age,sdf.format(myCalendar.getTime()));
+
 
         }
     }

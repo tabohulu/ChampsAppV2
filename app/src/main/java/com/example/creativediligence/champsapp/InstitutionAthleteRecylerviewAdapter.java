@@ -1,4 +1,4 @@
-package com.example.creativediligence.champsapp.Common;
+package com.example.creativediligence.champsapp;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,8 +6,6 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
-import com.example.creativediligence.champsapp.ToInstitutionDetailsActivity;
 
 import java.util.ArrayList;
 

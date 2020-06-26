@@ -1,4 +1,4 @@
-package com.example.creativediligence.champsapp.MembersArea.Teams;
+package com.example.creativediligence.champsapp;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -17,9 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.creativediligence.champsapp.CalendarEventsDetailsActivity;
-import com.example.creativediligence.champsapp.Common.CalendarEventsItem;
-import com.example.creativediligence.champsapp.Common.CalendarUtils;
-import com.example.creativediligence.champsapp.R;
 import com.parse.DeleteCallback;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -39,7 +36,7 @@ public class CalendarEventsAdapter extends RecyclerView.Adapter<CalendarEventsAd
     ProgressBar mProgressBar;
     CaldroidFragment mCaldroidFragment;
 
-    public CalendarEventsAdapter(Context context, int resourceId,  ArrayList<CalendarEventsItem> eventsItems,ProgressBar progressBar,CaldroidFragment caldroidFragment) {
+    public CalendarEventsAdapter(Context context, int resourceId, ArrayList<CalendarEventsItem> eventsItems, ProgressBar progressBar, CaldroidFragment caldroidFragment) {
 
         mContext = context;
         mId = resourceId;
@@ -95,7 +92,7 @@ public class CalendarEventsAdapter extends RecyclerView.Adapter<CalendarEventsAd
                 LayoutInflater li = LayoutInflater.from(mContext);
                 final View textView = li.inflate(R.layout.delete_confirm_layout,null);
 
-                AlertDialog.Builder deleteConfirmDialog= new AlertDialog.Builder(mContext,R.style.MyDialogTheme);
+                AlertDialog.Builder deleteConfirmDialog= new AlertDialog.Builder(mContext, R.style.MyDialogTheme);
                 deleteConfirmDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

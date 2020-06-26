@@ -54,7 +54,7 @@ public class InstitutionsGroupsFragment extends Fragment {
         newGroupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DialogCreator().NewGroupDialog(getContext());
+                new Helper_DialogCreator().NewGroupDialog(getContext());
                 mData = new ArrayList<>();
                 PopulateRecyclerView(rootView);
             }

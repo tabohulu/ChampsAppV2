@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,7 +18,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,8 +25,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.creativediligence.champsapp.Common.FileExplorerUtilities;
-import com.example.creativediligence.champsapp.Common.ParseServerMethods;
+
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -37,10 +34,8 @@ import com.parse.ParseUser;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import static android.content.Context.MODE_PRIVATE;
 import static com.example.creativediligence.champsapp.SettingsActivity.getDataColumn;
 import static com.example.creativediligence.champsapp.SettingsActivity.isDownloadsDocument;
 import static com.example.creativediligence.champsapp.SettingsActivity.isExternalStorageDocument;

@@ -2,9 +2,9 @@ package com.example.creativediligence.champsapp;
 
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,8 +12,6 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.creativediligence.champsapp.Common.CalendarEventsItem;
-import com.example.creativediligence.champsapp.Common.CalendarUtils;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -91,7 +89,7 @@ public class TeamFragmentTeamContentActivity extends AppCompatActivity {
         RecyclerView rv =findViewById(R.id.squadRecyclerView);
         rv.setHasFixedSize(true);
 
-        SquadCustomAdapter adapter = new SquadCustomAdapter( this,R.layout.squad_custom_layout);
+        SquadCustomAdapter adapter = new SquadCustomAdapter( this, R.layout.squad_custom_layout);
         rv.setAdapter(adapter);
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
@@ -101,7 +99,7 @@ public class TeamFragmentTeamContentActivity extends AppCompatActivity {
         RecyclerView rv1 =findViewById(R.id.resultsRecyclerView);
         rv1.setHasFixedSize(true);
 
-        ResultsCustomAdapter adapter1 = new ResultsCustomAdapter( this,R.layout.results_custom_layout,homeTeams,awayTeams,homeScores,awayScores);
+        ResultsCustomAdapter adapter1 = new ResultsCustomAdapter( this, R.layout.results_custom_layout,homeTeams,awayTeams,homeScores,awayScores);
         rv1.setAdapter(adapter1);
 
         LinearLayoutManager llm1 = new LinearLayoutManager(this);
@@ -199,7 +197,7 @@ public class TeamFragmentTeamContentActivity extends AppCompatActivity {
                 SimpleDateFormat simpleDateformat = new SimpleDateFormat("E");
                 String dayOfWeek=simpleDateformat.format(date);
 
-                new DialogCreator().CalendarDialog(TeamFragmentTeamContentActivity.this,dayOfMonth,dayOfWeek,hm2.get(date),formatter.format(date),pbar,caldroidFragment);
+                new Helper_DialogCreator().CalendarDialog(TeamFragmentTeamContentActivity.this,dayOfMonth,dayOfWeek,hm2.get(date),formatter.format(date),pbar,caldroidFragment);
             }
 
             @Override

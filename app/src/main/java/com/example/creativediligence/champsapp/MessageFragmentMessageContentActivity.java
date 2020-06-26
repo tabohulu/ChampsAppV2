@@ -1,7 +1,7 @@
 package com.example.creativediligence.champsapp;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -17,7 +17,7 @@ RecyclerView rv ;
 
         rv.setHasFixedSize(true);
 
-        MessageFragmentAdapter adapter = new MessageFragmentAdapter( this,R.layout.message_fragment_layout_custom1);
+        MessageFragmentAdapter adapter = new MessageFragmentAdapter( this, R.layout.message_fragment_layout_custom1);
         rv.setAdapter(adapter);
 
         LinearLayoutManager llm = new LinearLayoutManager(this);

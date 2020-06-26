@@ -1,48 +1,28 @@
 package com.example.creativediligence.champsapp;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.creativediligence.champsapp.Common.FileExploreDialog;
-import com.example.creativediligence.champsapp.Common.InstitutionAthleteRecylerviewAdapter;
-import com.example.creativediligence.champsapp.Common.URIPathUtility;
-import com.example.creativediligence.champsapp.MembersArea.Coaches.CoachesFragmentAdapterMain;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
-import jxl.Cell;
-import jxl.Sheet;
 import jxl.Workbook;
-import jxl.read.biff.BiffException;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class InstitutionsAthletesFragment extends Fragment {
     static final int PICKFILE_RESULT_CODE = 1;
@@ -89,7 +69,7 @@ public class InstitutionsAthletesFragment extends Fragment {
         newAthleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DialogCreator().NewAthleteDialog(getContext(), rv, noDataTv, currentFragment);
+                new Helper_DialogCreator().NewAthleteDialog(getContext(), rv, noDataTv, currentFragment);
 
             }
         });

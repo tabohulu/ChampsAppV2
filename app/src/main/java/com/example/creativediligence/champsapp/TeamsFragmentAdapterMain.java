@@ -1,4 +1,4 @@
-package com.example.creativediligence.champsapp.MembersArea.Teams;
+package com.example.creativediligence.champsapp;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,8 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.creativediligence.champsapp.GroupFragmentGroupContentActivity;
-import com.example.creativediligence.champsapp.R;
 import com.example.creativediligence.champsapp.TeamFragmentTeamContentActivity;
 
 import java.util.ArrayList;

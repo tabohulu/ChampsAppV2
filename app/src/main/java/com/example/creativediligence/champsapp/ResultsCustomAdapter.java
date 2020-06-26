@@ -6,13 +6,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class ResultsCustomAdapter extends RecyclerView.Adapter<ResultsCustomAdapter.MyViewHolder> {
 
@@ -24,7 +22,7 @@ public class ResultsCustomAdapter extends RecyclerView.Adapter<ResultsCustomAdap
     int mResourceId;
     Context mContext;
 
-    public ResultsCustomAdapter(Context context, int resourceId,ArrayList<String> homeTeams,ArrayList<String> awayTeams,ArrayList<String> homeScore,ArrayList<String> awayScore) {
+    public ResultsCustomAdapter(Context context, int resourceId, ArrayList<String> homeTeams, ArrayList<String> awayTeams, ArrayList<String> homeScore, ArrayList<String> awayScore) {
         mContext = context;
         mResourceId = resourceId;
         mHomeTeams=homeTeams;

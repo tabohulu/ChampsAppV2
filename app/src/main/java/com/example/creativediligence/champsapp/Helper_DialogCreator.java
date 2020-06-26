@@ -2,12 +2,21 @@ package com.example.creativediligence.champsapp;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 
@@ -17,8 +26,14 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
+import com.roomorama.caldroid.CaldroidFragment;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class Helper_DialogCreator {
@@ -30,7 +45,7 @@ public class Helper_DialogCreator {
     int thingsAdded;
 
 
-    /*public void NewEventDialog(final Context mContext, final RecyclerView rv, final TextView infoTv) {
+    public void NewEventDialog(final Context mContext, final RecyclerView rv, final TextView infoTv) {
         final ParseUser currentuser = ParseUser.getCurrentUser();
         LayoutInflater myLayout = LayoutInflater.from(mContext);
         final View dialogView = myLayout.inflate(R.layout.new_event_dialog_layout, null);
@@ -114,9 +129,9 @@ public class Helper_DialogCreator {
 
         final AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
-    }*/
+    }
 
-    /*public void NewInstitutionDialog(final Context mContext, final RecyclerView rv, final TextView infoTv,final String currentFragment) {
+    public void NewInstitutionDialog(final Context mContext, final RecyclerView rv, final TextView infoTv, final String currentFragment) {
 
         LayoutInflater myLayout = LayoutInflater.from(mContext);
         final View dialogView = myLayout.inflate(R.layout.new_institution_admin_dialog_layout, null);
@@ -144,9 +159,9 @@ public class Helper_DialogCreator {
             }
         });
         alertDialog.show();
-    }*/
+    }
 
-    /*public void NewAthleteDialog(final Context mContext, final RecyclerView rv, final TextView infoTv,final String currentFragment) {
+    public void NewAthleteDialog(final Context mContext, final RecyclerView rv, final TextView infoTv,final String currentFragment) {
 
         LayoutInflater myLayout = LayoutInflater.from(mContext);
         final View dialogView = myLayout.inflate(R.layout.new_athlete_dialog_layout, null);
@@ -210,11 +225,11 @@ public class Helper_DialogCreator {
             }
         });
         alertDialog.show();
-    }*/
+    }
 
 
 
-    /*public void NewTeamDialog(final Context mContext, final RecyclerView rv, final TextView infoTv,final String currentFragment) {
+    public void NewTeamDialog(final Context mContext, final RecyclerView rv, final TextView infoTv,final String currentFragment) {
         LayoutInflater myLayout = LayoutInflater.from(mContext);
         final View dialogView = myLayout.inflate(R.layout.new_team_dialog_layout, null);
         final EditText newCoachName = dialogView.findViewById(R.id.new_team_name);
@@ -278,9 +293,9 @@ public class Helper_DialogCreator {
             }
         });
         alertDialog.show();
-    }*/
+    }
 
- /*   public void NewCoachDialog(final Context mContext, final RecyclerView rv, final TextView infoTv, final String currentFragment) {
+    public void NewCoachDialog(final Context mContext, final RecyclerView rv, final TextView infoTv, final String currentFragment) {
         LayoutInflater myLayout = LayoutInflater.from(mContext);
         final View dialogView = myLayout.inflate(R.layout.new_coach_dialog_layout, null);
         final EditText newCoachName = dialogView.findViewById(R.id.new_coach_name);
@@ -343,9 +358,9 @@ public class Helper_DialogCreator {
             }
         });
         alertDialog.show();
-    }*/
+    }
 
-    /*public void PopulateRecyclerViewEvent(final RecyclerView rv,final TextView infoTv,final Context mContext) {
+    public void PopulateRecyclerViewEvent(final RecyclerView rv,final TextView infoTv,final Context mContext) {
         final ArrayList<String> mData=new ArrayList<>();
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("InstitutionEvent");
         query.whereEqualTo("createdBy", ParseUser.getCurrentUser().getUsername());
@@ -378,9 +393,9 @@ public class Helper_DialogCreator {
                 }
             }
         });
-    }*/
+    }
 
-    /*public void PopulateRecyclerViewAthlete(final RecyclerView rv, final TextView infoTv, final Context mContext, final String currentFragment) {
+    public void PopulateRecyclerViewAthlete(final RecyclerView rv, final TextView infoTv, final Context mContext, final String currentFragment) {
         final ArrayList<String> mData=new ArrayList<>();
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("InstitutionAthlete");
         query.whereEqualTo("Institution", ParseUser.getCurrentUser().getUsername());
@@ -412,10 +427,10 @@ public class Helper_DialogCreator {
                 }
             }
         });
-    }*/
+    }
 
 
-   /* public void PopulateRecyclerViewTeam(final RecyclerView rv, final TextView infoTv, final Context mContext, final String currentFragment) {
+   public void PopulateRecyclerViewTeam(final RecyclerView rv, final TextView infoTv, final Context mContext, final String currentFragment) {
         final ArrayList<String> mData=new ArrayList<>();
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("InstitutionTeam");
         query.whereEqualTo("affiliateInstitute", ParseUser.getCurrentUser().getUsername());
@@ -450,9 +465,9 @@ public class Helper_DialogCreator {
 
 
 
-    }*/
+    }
 
-    /*public void PopulateRecyclerViewCoach(final RecyclerView rv, final TextView infoTv, final Context mContext, final String currentFragment) {
+    public void PopulateRecyclerViewCoach(final RecyclerView rv, final TextView infoTv, final Context mContext, final String currentFragment) {
 final ArrayList<String> mData=new ArrayList<>();
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("InstitutionCoach");
         query.whereEqualTo("Institution", ParseUser.getCurrentUser().getUsername());
@@ -487,9 +502,9 @@ final ArrayList<String> mData=new ArrayList<>();
 
 
 
-    }*/
+    }
 
-    /*public void NewGroupDialog(final Context mContext) {
+    public void NewGroupDialog(final Context mContext) {
         ArrayList<String> friends = new ArrayList<>(Arrays.asList("Friend1", "Friend2"));
         LayoutInflater myLayout = LayoutInflater.from(mContext);
         final View dialogView = myLayout.inflate(R.layout.new_group_dialog_layout, null);
@@ -536,9 +551,9 @@ final ArrayList<String> mData=new ArrayList<>();
 
         final AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
-    }*/
+    }
 
-    /*public void NewPostDialog(final Context mContext, final String groupName, final RecyclerView rv) {
+    public void NewPostDialog(final Context mContext, final String groupName, final RecyclerView rv) {
 
         LayoutInflater myLayout = LayoutInflater.from(mContext);
         final View dialogView = myLayout.inflate(R.layout.new_post_custom_layout, null);
@@ -587,12 +602,12 @@ final ArrayList<String> mData=new ArrayList<>();
 
         final AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
-    }*/
+    }
 
 
 
-    /*public void CalendarDialog(final Context mContext, String dayOfMonth, String dayOfWeek,
-                               final ArrayList<CalendarEventsItem> eventsItems, final String eventDate,ProgressBar pbar,CaldroidFragment cf) {
+    public void CalendarDialog(final Context mContext, String dayOfMonth, String dayOfWeek,
+                               final ArrayList<CalendarEventsItem> eventsItems, final String eventDate, ProgressBar pbar, CaldroidFragment cf) {
         LayoutInflater myLayout = LayoutInflater.from(mContext);
         final View dialogView = myLayout.inflate(R.layout.calendar_custom_layout, null);
         Button createNewEvent =dialogView.findViewById(R.id.new_event_button);
@@ -637,7 +652,7 @@ final ArrayList<String> mData=new ArrayList<>();
 
         alertDialog.show();
 
-    }*/
+    }
 
     /*public void DialogCreatorAthletes(final Context mContext, final AthleteModel mAthlete) {
         LayoutInflater myLayout = LayoutInflater.from(mContext);
@@ -890,7 +905,7 @@ final ArrayList<String> mData=new ArrayList<>();
         });
     }
 
-    /*public void PopulateRecyclerView(View rootview, Context mContext, ArrayList<String> mData) {
+    public void PopulateRecyclerView(View rootview, Context mContext, ArrayList<String> mData) {
 
         RecyclerView rv = (RecyclerView) rootview.findViewById(R.id.friends_rv);
         rv.setHasFixedSize(true);
@@ -902,7 +917,7 @@ final ArrayList<String> mData=new ArrayList<>();
         rv.setAdapter(adapter);
 
 
-    }*/
+    }
 
 
 }

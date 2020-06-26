@@ -1,9 +1,4 @@
-package com.example.creativediligence.champsapp.Common;
-
-import java.io.File;
-import java.io.FilenameFilter;
-import java.util.ArrayList;
-import java.util.HashMap;
+package com.example.creativediligence.champsapp;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -20,8 +15,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.creativediligence.champsapp.R;
 import com.parse.ParseUser;
+
+import java.io.File;
+import java.io.FilenameFilter;
+import java.util.ArrayList;
 
 public class FileExplorerUtilities {
     Context mContext;
@@ -42,7 +40,7 @@ public class FileExplorerUtilities {
 
 
 
-    public void UplodFile(Context context, String filetype, RecyclerView rv,String currentFragment){
+    public void UplodFile(Context context, String filetype, RecyclerView rv, String currentFragment){
         mContext = context;
         mFileType=filetype;
         mRV=rv;

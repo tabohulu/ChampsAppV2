@@ -1,14 +1,11 @@
-package com.example.creativediligence.champsapp.Common;
+package com.example.creativediligence.champsapp;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-import com.example.creativediligence.champsapp.R;
 import com.example.creativediligence.champsapp.VideoDataRecyclerViewAdapter;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -59,7 +56,7 @@ public class ParseServerMethods {
     public void UploadVideo(final String serverClass, final File videoFile, final String userName, final RecyclerView vidsRv, final String currentFragment) {
 
 
-        final ProgressDialog progressDialog = new ProgressDialog(mContext,R.style.MySpinnerTheme);
+        final ProgressDialog progressDialog = new ProgressDialog(mContext, R.style.MySpinnerTheme);
         progressDialog.setMax(100);
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Adding Video....");

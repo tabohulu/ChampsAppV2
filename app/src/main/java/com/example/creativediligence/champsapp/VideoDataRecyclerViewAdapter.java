@@ -3,18 +3,14 @@ package com.example.creativediligence.champsapp;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
 import android.widget.MediaController;
 import android.widget.Toast;
 import android.widget.VideoView;
 
-import com.example.creativediligence.champsapp.Common.GeneralRecyclerViewAdapter;
 import com.parse.DeleteCallback;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -46,7 +42,7 @@ public class VideoDataRecyclerViewAdapter extends GeneralRecyclerViewAdapter {
                 final View videoViewLayout = li.inflate(R.layout.video_popup_layout,null);
 
 
-                AlertDialog.Builder videoPopupDialog= new AlertDialog.Builder(mContext,R.style.MyDialogTheme);
+                AlertDialog.Builder videoPopupDialog= new AlertDialog.Builder(mContext, R.style.MyDialogTheme);
                 videoPopupDialog.setNegativeButton("cancel",null)
                         .setTitle(mData.get(position));
                 videoPopupDialog.setView(videoViewLayout);
@@ -77,7 +73,7 @@ public class VideoDataRecyclerViewAdapter extends GeneralRecyclerViewAdapter {
                 LayoutInflater li = LayoutInflater.from(mContext);
                 final View textView = li.inflate(R.layout.delete_confirm_layout,null);
 
-                AlertDialog.Builder deleteConfirmDialog= new AlertDialog.Builder(mContext,R.style.MyDialogTheme);
+                AlertDialog.Builder deleteConfirmDialog= new AlertDialog.Builder(mContext, R.style.MyDialogTheme);
                 deleteConfirmDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

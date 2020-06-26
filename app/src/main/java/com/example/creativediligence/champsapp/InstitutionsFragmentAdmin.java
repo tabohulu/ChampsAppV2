@@ -15,7 +15,6 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +62,7 @@ public class InstitutionsFragmentAdmin extends Fragment {
         newInstitutionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DialogCreator().NewInstitutionDialog(getContext(),rv,noDataTv,currentFragment);
+                new Helper_DialogCreator().NewInstitutionDialog(getContext(),rv,noDataTv,currentFragment);
 
             }
         });

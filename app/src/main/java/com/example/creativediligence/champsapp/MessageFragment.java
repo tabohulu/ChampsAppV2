@@ -33,7 +33,7 @@ public class MessageFragment extends Fragment {
         RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.message_fragment_rv);
         rv.setHasFixedSize(true);
 
-        HomeFragmentAdapter adapter = new HomeFragmentAdapter( getContext(),R.layout.home_fragment_layout_custom);
+        HomeFragmentAdapter adapter = new HomeFragmentAdapter( getContext(), R.layout.home_fragment_layout_custom);
         rv.setAdapter(adapter);
 
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
