@@ -41,7 +41,7 @@ public class Fragment_EventStats extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.athlete_profile_page2_custom_layout,container,false);
 
-        mGraph = (GraphView)view.findViewById(R.id.graph);
+        mGraph = view.findViewById(R.id.graph);
         mGraph.getViewport().setMinX(0);
         mGraph.getViewport().setMaxX(9);
         mGraph.getViewport().setXAxisBoundsManual(true);

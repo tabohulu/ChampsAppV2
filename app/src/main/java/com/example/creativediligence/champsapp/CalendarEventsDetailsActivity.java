@@ -58,7 +58,7 @@ public class CalendarEventsDetailsActivity extends AppCompatActivity {
         eventDate = getIntent().getStringExtra("eventDate");
 
         //Initialize Toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

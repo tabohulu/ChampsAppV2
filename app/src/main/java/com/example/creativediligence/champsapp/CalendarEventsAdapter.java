@@ -60,13 +60,14 @@ public class CalendarEventsAdapter extends RecyclerView.Adapter<CalendarEventsAd
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CalendarEventsAdapter.MyViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final CalendarEventsAdapter.MyViewHolder holder, int position) {
         holder.mEventName.setText(mEventsItems.get(position).getEventName());
         holder.mEventPeriod.setText(mEventsItems.get(position).getEventPeriod());
 
         holder.mLayoutWrapper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int position=holder.getAdapterPosition();
                 Toast.makeText(mContext, "Event "+ mEventsItems.get(position).getEventName()+" Clicked", Toast.LENGTH_SHORT).show();
                 String pp=mEventsItems.get(position).getEventPeriod();
                 int dash_pos=pp.indexOf("-");
@@ -87,6 +88,7 @@ public class CalendarEventsAdapter extends RecyclerView.Adapter<CalendarEventsAd
         holder.mDeleteIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int position=holder.getAdapterPosition();
                 final String currentValue = mEventsItems.get(position).getEventName();
                 //Toast.makeText(mContext, currentValue+ " delete icon clicked", Toast.LENGTH_SHORT).show();
                 LayoutInflater li = LayoutInflater.from(mContext);
@@ -111,12 +113,13 @@ public class CalendarEventsAdapter extends RecyclerView.Adapter<CalendarEventsAd
                         deleteQuery.findInBackground(new FindCallback<ParseObject>() {
                             @Override
                             public void done(List<ParseObject> objects, ParseException e) {
+
                                 if(e==null && objects.size()>0){
                                     for(ParseObject ob :objects){
                                         ob.deleteInBackground(new DeleteCallback() {
                                             @Override
                                             public void done(ParseException e) {
-                                                mEventsItems.remove(position);
+                                                mEventsItems.remove(holder.getAdapterPosition());
                                                 notifyDataSetChanged();
                                                 Toast.makeText(mContext, "Delete Complete", Toast.LENGTH_SHORT).show();
                                                 CalendarUtils cu=new CalendarUtils(mContext,mProgressBar,mCaldroidFragment);

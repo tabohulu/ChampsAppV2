@@ -51,7 +51,7 @@ Button createTeamButton;
         final View rootView = inflater.inflate(R.layout.institutions_teams_fragment_main_layout, container, false);
 
 infoTv=rootView.findViewById(R.id.no_data_info_tv);
-        rv = (RecyclerView) rootView.findViewById(R.id.teams_fragment_rv);
+        rv = rootView.findViewById(R.id.teams_fragment_rv);
 PopulateRecyclerView();
         createTeamButton=rootView.findViewById(R.id.create_team_button);
         createTeamButton.setOnClickListener(new View.OnClickListener() {

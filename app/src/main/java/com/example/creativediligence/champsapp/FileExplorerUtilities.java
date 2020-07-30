@@ -60,7 +60,7 @@ public class FileExplorerUtilities {
     }
 
     private void LoadFileList() {
-        Item temp[] = null;
+        Item[] temp = null;
         currentDirtv.setText(path.getAbsolutePath());
         try {
             path.mkdirs();

@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GeneralRecyclerViewAdapter extends RecyclerView.Adapter<GeneralRecyclerViewAdapter.MyViewHolder> {
-    public ArrayList<String> mData ;
+    public ArrayList<String> mData;
     public ArrayList<String> mURLData;
 
     public Context mContext;
@@ -37,16 +37,17 @@ public class GeneralRecyclerViewAdapter extends RecyclerView.Adapter<GeneralRecy
         mData = data;
         mContext = context;
         mId = resourceId;
-        mCurrentFragment=currentFragment;
+        mCurrentFragment = currentFragment;
 
 
     }
+
     public GeneralRecyclerViewAdapter(Context context, int resourceId, ArrayList<String> data, String currentFragment, ArrayList<String> data2) {
         mData = data;
         mContext = context;
         mId = resourceId;
-        mCurrentFragment=currentFragment;
-        mURLData=data2;
+        mCurrentFragment = currentFragment;
+        mURLData = data2;
 
 
     }
@@ -63,21 +64,21 @@ public class GeneralRecyclerViewAdapter extends RecyclerView.Adapter<GeneralRecy
     }
 
     @Override
-    public void onBindViewHolder(@NonNull GeneralRecyclerViewAdapter.MyViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final GeneralRecyclerViewAdapter.MyViewHolder holder, int position) {
         holder.mTextView.setText(mData.get(position));
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                int position = holder.getAdapterPosition();
                 String currentValue = mData.get(position);
                 Log.d("CardView", "CardView Clicked: " + currentValue);
                 Toast.makeText(mContext, "CardView Clicked: " + currentValue, Toast.LENGTH_SHORT).show();
 
-                if(mCurrentFragment.equals("Institutions")) {
+                if (mCurrentFragment.equals("Institutions")) {
                     Intent intent = new Intent(mContext, ToInstitutionDetailsActivity.class);
                     intent.putExtra("institutionName", mData.get(position));
                     mContext.startActivity(intent);
-                }else if(mCurrentFragment.equals("Institution Managers")){
+                } else if (mCurrentFragment.equals("Institution Managers")) {
                     Toast.makeText(mContext, "Nothing Done Yet", Toast.LENGTH_SHORT).show();
                 }
 
@@ -96,43 +97,44 @@ public class GeneralRecyclerViewAdapter extends RecyclerView.Adapter<GeneralRecy
         holder.deleteIconView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int position = holder.getAdapterPosition();
                 final String currentValue = mData.get(position);
                 //Toast.makeText(mContext, currentValue+ " delete icon clicked", Toast.LENGTH_SHORT).show();
                 LayoutInflater li = LayoutInflater.from(mContext);
-                final View textView = li.inflate(R.layout.delete_confirm_layout,null);
+                final View textView = li.inflate(R.layout.delete_confirm_layout, null);
 
-                AlertDialog.Builder deleteConfirmDialog= new AlertDialog.Builder(mContext, R.style.MyDialogTheme);
+                AlertDialog.Builder deleteConfirmDialog = new AlertDialog.Builder(mContext, R.style.MyDialogTheme);
                 deleteConfirmDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        String serverClass="";
-                        String key="";
-                        if(mCurrentFragment.equals("Institutions")){
-                            serverClass="Institution";
-                            key="Name";
-                        }else if(mCurrentFragment.equals("Institution Managers")){
-                            serverClass="InstitutionManager";
-                            key="Name";
+                        String serverClass = "";
+                        String key = "";
+                        if (mCurrentFragment.equals("Institutions")) {
+                            serverClass = "Institution";
+                            key = "Name";
+                        } else if (mCurrentFragment.equals("Institution Managers")) {
+                            serverClass = "InstitutionManager";
+                            key = "Name";
                         }
                         ParseQuery<ParseObject> deleteQuery = new ParseQuery<ParseObject>(serverClass);
-                        deleteQuery.whereEqualTo(key,currentValue);
+                        deleteQuery.whereEqualTo(key, currentValue);
                         deleteQuery.setLimit(1);
                         deleteQuery.findInBackground(new FindCallback<ParseObject>() {
                             @Override
                             public void done(List<ParseObject> objects, ParseException e) {
-                                if(e==null && objects.size()>0){
-                                    for(ParseObject ob :objects){
+                                if (e == null && objects.size() > 0) {
+                                    for (ParseObject ob : objects) {
                                         ob.deleteInBackground(new DeleteCallback() {
                                             @Override
                                             public void done(ParseException e) {
-                                                mData.remove(position);
+                                                mData.remove(holder.getAdapterPosition());
                                                 notifyDataSetChanged();
                                                 Toast.makeText(mContext, "Delete Complete", Toast.LENGTH_SHORT).show();
                                             }
                                         });
                                     }
 
-                                }else{
+                                } else {
                                     if (e != null) {
                                         Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_SHORT).show();
                                     } else {
@@ -146,10 +148,10 @@ public class GeneralRecyclerViewAdapter extends RecyclerView.Adapter<GeneralRecy
 
                     }
                 })
-                        .setNegativeButton("No",null)
-                .setTitle("Delete Item/"+currentValue);
+                        .setNegativeButton("No", null)
+                        .setTitle("Delete Item/" + currentValue);
                 deleteConfirmDialog.setView(textView);
-                AlertDialog alertDialog=deleteConfirmDialog.create();
+                AlertDialog alertDialog = deleteConfirmDialog.create();
                 alertDialog.show();
             }
         });

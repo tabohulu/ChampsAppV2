@@ -36,7 +36,7 @@ public class TeamsFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.teams_fragment_main_layout, container, false);
 
 
-        RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.teams_fragment_rv);
+        RecyclerView rv = rootView.findViewById(R.id.teams_fragment_rv);
         rv.setHasFixedSize(true);
 
         TeamsFragmentAdapter adapter = new TeamsFragmentAdapter(getContext(), R.layout.home_fragment_layout_custom, mData);
@@ -46,7 +46,7 @@ public class TeamsFragment extends Fragment {
         rv.setLayoutManager(llm);
 
 //---------------------------------------------------------//
-        RecyclerView rv2 = (RecyclerView) rootView.findViewById(R.id.teams_fragment_rv2);
+        RecyclerView rv2 = rootView.findViewById(R.id.teams_fragment_rv2);
         rv2.setHasFixedSize(true);
 
         TeamsFragmentAdapter adapter2 = new TeamsFragmentAdapter(getContext(), R.layout.home_fragment_layout_custom, mData2);

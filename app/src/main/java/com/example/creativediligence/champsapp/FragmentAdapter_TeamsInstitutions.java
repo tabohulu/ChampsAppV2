@@ -18,7 +18,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 
 import java.util.ArrayList;
 
-public class FragmentAdapter_TeamsInstitutions extends RecyclerView.Adapter<FragmentAdapter_TeamsInstitutions.MyViewHolder>{
+public class FragmentAdapter_TeamsInstitutions extends RecyclerView.Adapter<FragmentAdapter_TeamsInstitutions.MyViewHolder> {
     Context mContext;
     String[] mData;
     String mTabtitle;
@@ -27,7 +27,7 @@ public class FragmentAdapter_TeamsInstitutions extends RecyclerView.Adapter<Frag
 
         mContext = context;
         mData = data;//events
-        mTabtitle=tabtitle;
+        mTabtitle = tabtitle;
     }
 
     @NonNull
@@ -41,21 +41,21 @@ public class FragmentAdapter_TeamsInstitutions extends RecyclerView.Adapter<Frag
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
         Glide.with(mContext)
                 .load(R.drawable.ic_thumb)
-                .transform(new CenterCrop(),new RoundedCorners(30))
+                .transform(new CenterCrop(), new RoundedCorners(30))
                 .into(holder.iconView);
         holder.mTextView.setText(mData[position]);
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                int position = holder.getAdapterPosition();
                 String currentValue = mData[position];
                 Log.d("CardView", "CardView Clicked: " + currentValue);
                 Toast.makeText(mContext, "CardView Clicked: " + currentValue, Toast.LENGTH_SHORT).show();
                 /*Intent intent =new Intent(mContext, TeamsInstitutionsDetailsActivity.class);
-                *//*intent.putExtra("eventname",currentValue);*//*
+                 *//*intent.putExtra("eventname",currentValue);*//*
                 intent.putExtra("schoolname",currentValue);
                 mContext.startActivity(intent);*/
 

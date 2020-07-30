@@ -49,7 +49,7 @@ public class InstitutionsCoachesFragment extends Fragment {
         currentFragment = getArguments().getString("fragmentName");
         userRole = getArguments().getString("userRole");
         final View rootView = inflater.inflate(R.layout.institutions_coach_fragment_main_layout, container, false);
-        rv = (RecyclerView) rootView.findViewById(R.id.instu_coach_fragment_rv);
+        rv = rootView.findViewById(R.id.instu_coach_fragment_rv);
         infoTv = rootView.findViewById(R.id.coach_data_info_tv);
         PopulateRecyclerView();
 

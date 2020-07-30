@@ -907,7 +907,7 @@ final ArrayList<String> mData=new ArrayList<>();
 
     public void PopulateRecyclerView(View rootview, Context mContext, ArrayList<String> mData) {
 
-        RecyclerView rv = (RecyclerView) rootview.findViewById(R.id.friends_rv);
+        RecyclerView rv = rootview.findViewById(R.id.friends_rv);
         rv.setHasFixedSize(true);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mContext);

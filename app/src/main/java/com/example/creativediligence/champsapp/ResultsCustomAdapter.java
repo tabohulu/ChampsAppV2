@@ -43,7 +43,7 @@ public class ResultsCustomAdapter extends RecyclerView.Adapter<ResultsCustomAdap
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, final int i) {
+    public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, int i) {
 
        myViewHolder.mTeam1Name.setText(mHomeTeams.get(i));
 
@@ -56,7 +56,8 @@ public class ResultsCustomAdapter extends RecyclerView.Adapter<ResultsCustomAdap
         myViewHolder.ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext, "Results "+(i+1)+" presssed", Toast.LENGTH_SHORT).show();
+                int position = myViewHolder.getAdapterPosition();
+                Toast.makeText(mContext, "Results "+(position+1)+" presssed", Toast.LENGTH_SHORT).show();
             }
         });
 

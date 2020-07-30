@@ -43,12 +43,12 @@ public class TeamsFragmentAdapterMain extends RecyclerView.Adapter<TeamsFragment
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TeamsFragmentAdapterMain.MyViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final TeamsFragmentAdapterMain.MyViewHolder holder, int position) {
         holder.mTextView.setText(mData.get(position));
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                int position = holder.getAdapterPosition();
                 String currentValue = mData.get(position);
                 Log.d("CardView", "CardView Clicked: " + currentValue);
                 Toast.makeText(mContext, "CardView Clicked: " + currentValue, Toast.LENGTH_SHORT).show();

@@ -27,13 +27,13 @@ public class VideoDataRecyclerViewAdapter extends GeneralRecyclerViewAdapter {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
         holder.mTextView.setText(mData.get(position));
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                int position = holder.getAdapterPosition();
                 String currentValue = mURLData.get(position);
                 /*Log.d("CardView", "CardView Clicked: " + currentValue);
                 Toast.makeText(mContext, "CardView Clicked: " + currentValue, Toast.LENGTH_SHORT).show();*/
@@ -68,6 +68,7 @@ public class VideoDataRecyclerViewAdapter extends GeneralRecyclerViewAdapter {
         holder.deleteIconView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int position = holder.getAdapterPosition();
                 final String currentValue = mData.get(position);
                 //Toast.makeText(mContext, currentValue+ " delete icon clicked", Toast.LENGTH_SHORT).show();
                 LayoutInflater li = LayoutInflater.from(mContext);
@@ -91,7 +92,7 @@ public class VideoDataRecyclerViewAdapter extends GeneralRecyclerViewAdapter {
                                         ob.deleteInBackground(new DeleteCallback() {
                                             @Override
                                             public void done(ParseException e) {
-                                                mData.remove(position);
+                                                mData.remove(holder.getAdapterPosition());
                                                 notifyDataSetChanged();
                                                 Toast.makeText(mContext, "Delete Complete", Toast.LENGTH_SHORT).show();
                                             }

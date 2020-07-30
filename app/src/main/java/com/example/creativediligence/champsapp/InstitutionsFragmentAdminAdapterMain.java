@@ -52,12 +52,12 @@ public class InstitutionsFragmentAdminAdapterMain extends RecyclerView.Adapter<I
     }
 
     @Override
-    public void onBindViewHolder(@NonNull InstitutionsFragmentAdminAdapterMain.MyViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final InstitutionsFragmentAdminAdapterMain.MyViewHolder holder, int position) {
         holder.mTextView.setText(mData.get(position));
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                int position = holder.getAdapterPosition();
                 String currentValue = mData.get(position);
                 Log.d("CardView", "CardView Clicked: " + currentValue);
                 Toast.makeText(mContext, "CardView Clicked: " + currentValue, Toast.LENGTH_SHORT).show();
@@ -85,6 +85,7 @@ public class InstitutionsFragmentAdminAdapterMain extends RecyclerView.Adapter<I
         holder.deleteIconView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int position = holder.getAdapterPosition();
                 final String currentValue = mData.get(position);
                 //Toast.makeText(mContext, currentValue+ " delete icon clicked", Toast.LENGTH_SHORT).show();
                 LayoutInflater li = LayoutInflater.from(mContext);
@@ -114,7 +115,7 @@ public class InstitutionsFragmentAdminAdapterMain extends RecyclerView.Adapter<I
                                         ob.deleteInBackground(new DeleteCallback() {
                                             @Override
                                             public void done(ParseException e) {
-                                                mData.remove(position);
+                                                mData.remove(holder.getAdapterPosition());
                                                 notifyDataSetChanged();
                                                 Toast.makeText(mContext, "Delete Complete", Toast.LENGTH_SHORT).show();
                                             }

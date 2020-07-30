@@ -132,4 +132,15 @@
         <item>Coach</item>
 
     </string-array>
+
+    <string-array name="settings_spinner_items">
+        <item>Select ----</item>
+        <item>Sky Blue</item>
+        <item>White</item>
+        <item>Gray</item>
+    </string-array>
+
+    <string name="settings_colortitle">Select Color</string>
+    <string name="settings_buttontitle">Select Button Image</string>
+    <string name="settings_button_image_select">Click to select image</string>
 </resources>

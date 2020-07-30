@@ -57,12 +57,13 @@ public class Adapter_ProfileEvents extends RecyclerView.Adapter<Adapter_ProfileE
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, final int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
             holder.mEventName.setText(mDataModel.get(position));
 
             holder.switchImageLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    int position=holder.getAdapterPosition();
                     if(mIsClickable) {
                         //Toast.makeText(mContext, "image touched", Toast.LENGTH_SHORT).show();
                         if (mContext instanceof Activity_AthleteProfile2) {

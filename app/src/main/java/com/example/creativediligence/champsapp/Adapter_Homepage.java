@@ -53,7 +53,7 @@ public class Adapter_Homepage extends RecyclerView.Adapter<Adapter_Homepage.MyVi
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, final int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
         holder.mTextView1.setText(mLData.get(position).getTitle());
         holder.iconView1.setImageResource(mLData.get(position).getImage());
         holder.iconView1.setAdjustViewBounds(true);
@@ -76,11 +76,11 @@ public class Adapter_Homepage extends RecyclerView.Adapter<Adapter_Homepage.MyVi
         holder.mCardView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String currentValue = mLData.get(position).getTitle();
+                String currentValue = mLData.get(holder.getAdapterPosition()).getTitle();
                 Log.d("CardView", "CardView Clicked: " + currentValue);
 
 
-                switch (position) {
+                switch (holder.getAdapterPosition()) {
                     case 0:
 
                         try {
@@ -114,7 +114,7 @@ public class Adapter_Homepage extends RecyclerView.Adapter<Adapter_Homepage.MyVi
         holder.mCardView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switch (position) {
+                switch (holder.getAdapterPosition()) {
 
 
                     case 0:
@@ -132,14 +132,14 @@ public class Adapter_Homepage extends RecyclerView.Adapter<Adapter_Homepage.MyVi
 
 
 
-                        /*try {
-                             Intent teamsIntent = new Intent(mContext, PointsStandingActivity.class);
+                        try {
+                             Intent teamsIntent = new Intent(mContext, Activity_MembersArea.class);
                              //teamsIntent.putExtra("isHomepage",true);
                               mContext.startActivity(teamsIntent);
                             return;
                         } catch (Exception e) {
                             Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }*/
+                        }
 
                     default:
                         Toast.makeText(mContext, "Not Yet Developed", Toast.LENGTH_SHORT).show();
@@ -150,7 +150,7 @@ public class Adapter_Homepage extends RecyclerView.Adapter<Adapter_Homepage.MyVi
         holder.mCardView3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switch (position) {
+                switch (holder.getAdapterPosition()) {
 
 
                     case 0:

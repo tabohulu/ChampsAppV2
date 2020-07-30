@@ -52,7 +52,7 @@ public class InstitutionsEventsFragment extends Fragment {
         mData = new ArrayList<>();
         noDataTextView=rootView.findViewById(R.id.no_data_info_tv);
         noDataTextView.setVisibility(View.INVISIBLE);
-        rv = (RecyclerView) rootView.findViewById(R.id.groups_fragment_rv);
+        rv = rootView.findViewById(R.id.groups_fragment_rv);
         PopulateRecyclerView();
 
 

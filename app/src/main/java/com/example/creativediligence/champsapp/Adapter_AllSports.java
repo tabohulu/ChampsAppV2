@@ -57,7 +57,7 @@ public class Adapter_AllSports extends RecyclerView.Adapter<Adapter_AllSports.My
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, final int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
         holder.mTextView1.setText(mLData.get(position).getTitle());
         holder.iconView1.setImageResource(mLData.get(position).getImage());
         holder.iconView1.setAdjustViewBounds(true);
@@ -80,6 +80,7 @@ public class Adapter_AllSports extends RecyclerView.Adapter<Adapter_AllSports.My
         holder.mCardView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int position = holder.getAdapterPosition();
                 final String currentValue = mLData.get(position).getTitle();
                 Log.d("CardView", "CardView Clicked: " + currentValue);
                 //Toast.makeText(mContext, currentValue+" Selected", Toast.LENGTH_LONG).show();
@@ -121,6 +122,7 @@ public class Adapter_AllSports extends RecyclerView.Adapter<Adapter_AllSports.My
         holder.mCardView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int position = holder.getAdapterPosition();
                 String currentValue = mMData.get(position).getTitle();
                 QuickCheck(currentValue);
                 //Toast.makeText(mContext, currentValue, Toast.LENGTH_SHORT).show();
@@ -158,6 +160,7 @@ public class Adapter_AllSports extends RecyclerView.Adapter<Adapter_AllSports.My
         holder.mCardView3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int position = holder.getAdapterPosition();
                 String currentValue = mRData.get(position).getTitle();
                 QuickCheck(currentValue);
                 //Toast.makeText(mContext, position+"", Toast.LENGTH_SHORT).show();

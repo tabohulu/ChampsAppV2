@@ -37,12 +37,12 @@ public class MessageFragmentAdapter extends RecyclerView.Adapter<MessageFragment
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MessageFragmentAdapter.MyViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final MessageFragmentAdapter.MyViewHolder holder, int position) {
         holder.TextViewLeft.setText(mData[position]);
         holder.mCardViewLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                int position = holder.getAdapterPosition();
                 String currentValue = mData[position];
                 Log.d("CardView", "CardView Clicked: " + currentValue);
                 Toast.makeText(mContext, "CardView Clicked: " + currentValue, Toast.LENGTH_SHORT).show();

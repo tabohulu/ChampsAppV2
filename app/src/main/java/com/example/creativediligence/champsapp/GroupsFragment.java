@@ -74,7 +74,7 @@ public class GroupsFragment extends Fragment {
                     for (ParseObject ob : objects) {
                         mData.add(ob.getString("groupName"));
                     }
-                    rv = (RecyclerView) rootview.findViewById(R.id.groups_fragment_rv);
+                    rv = rootview.findViewById(R.id.groups_fragment_rv);
                     rv.setHasFixedSize(true);
 
                     GroupFragmentAdapterMain adapter = new GroupFragmentAdapterMain(getContext(), R.layout.home_fragment_layout_custom, mData);

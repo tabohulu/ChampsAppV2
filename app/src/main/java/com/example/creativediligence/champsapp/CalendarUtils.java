@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.creativediligence.champsapp.DialogCreator;
+import com.example.creativediligence.champsapp.Helper_DialogCreator;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -131,7 +131,7 @@ public class CalendarUtils {
                 SimpleDateFormat simpleDateformat = new SimpleDateFormat("E");
                 String dayOfWeek=simpleDateformat.format(date);
 
-                new DialogCreator().CalendarDialog(mContext,dayOfMonth,dayOfWeek,hm2.get(date),formatter.format(date),mProgressBar,mCaldroidFragment);
+                new Helper_DialogCreator().CalendarDialog(mContext,dayOfMonth,dayOfWeek,hm2.get(date),formatter.format(date),mProgressBar,mCaldroidFragment);
             }
 
             @Override

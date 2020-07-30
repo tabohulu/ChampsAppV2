@@ -69,7 +69,7 @@ public class Adapter_GraphData extends RecyclerView.Adapter<Adapter_GraphData.My
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, final int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
         viewHolder = holder;
         dateEdit1[position] = holder.mDateInput;
         dateEdit2[position] = holder.mDateInput2;
@@ -97,6 +97,7 @@ public class Adapter_GraphData extends RecyclerView.Adapter<Adapter_GraphData.My
         holder.mDateInput.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int position =holder.getAdapterPosition();
                 EditTextDatePicker date = new EditTextDatePicker(myCalendar, position, currYear, curDay, curMonth, holder.mDateInput);
                 String etString = holder.mDateInput.getText().toString();
                 String dobText = etString.trim();
@@ -119,6 +120,7 @@ public class Adapter_GraphData extends RecyclerView.Adapter<Adapter_GraphData.My
         holder.mDateInput2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int position =holder.getAdapterPosition();
                 //DOBEditClickInput(holder.mDateInput2);
                 EditTextDatePicker date = new EditTextDatePicker(myCalendar, position+5, currYear, curDay, curMonth, holder.mDateInput2);
                 String etString = holder.mDateInput2.getText().toString().trim();
@@ -140,6 +142,7 @@ public class Adapter_GraphData extends RecyclerView.Adapter<Adapter_GraphData.My
         });
 
         holder.mTimeInput.addTextChangedListener(new TextWatcher() {
+            int position =holder.getAdapterPosition();
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -165,6 +168,7 @@ public class Adapter_GraphData extends RecyclerView.Adapter<Adapter_GraphData.My
         });
 
         holder.mTimeInput2.addTextChangedListener(new TextWatcher() {
+            int position =holder.getAdapterPosition();
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 

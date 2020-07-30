@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-
 import java.util.ArrayList;
 
 public class FragmentAdapter_PagerViewContents extends RecyclerView.Adapter<FragmentAdapter_PagerViewContents.MyViewHolder> {
@@ -28,7 +27,7 @@ public class FragmentAdapter_PagerViewContents extends RecyclerView.Adapter<Frag
         mContext = context;
         mAthleteNames = arrayList;
         mData = data;//events
-        mTabtitle=tabtitle;
+        mTabtitle = tabtitle;
     }
 
     // Create new views (invoked by the layout manager)
@@ -44,19 +43,19 @@ public class FragmentAdapter_PagerViewContents extends RecyclerView.Adapter<Frag
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, final int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
 
         holder.mTextView.setText(mData[position]);
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                int position = holder.getAdapterPosition();
                 String currentValue = mData[position];
                 Log.d("CardView", "CardView Clicked: " + currentValue);
                 Toast.makeText(mContext, "CardView Clicked: " + currentValue, Toast.LENGTH_SHORT).show();
-                Intent intent =new Intent(mContext, Activity_SubEvents.class);
-                intent.putExtra("eventname",currentValue);
-                intent.putExtra("generalevents",mTabtitle);
+                Intent intent = new Intent(mContext, Activity_SubEvents.class);
+                intent.putExtra("eventname", currentValue);
+                intent.putExtra("generalevents", mTabtitle);
                 mContext.startActivity(intent);
 
                 //new DialogCreator().DialogCreatorEventAthletes2(mContext, mAthleteNames, currentValue);

@@ -19,17 +19,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventsFragmentAdapterMain extends RecyclerView.Adapter<EventsFragmentAdapterMain.MyViewHolder> {
-    ArrayList<String> mData ;
+    ArrayList<String> mData;
 
     Context mContext;
     int mId;
-    List<ParseObject>mStoredData;
+    List<ParseObject> mStoredData;
 
     public EventsFragmentAdapterMain(Context context, int resourceId, ArrayList<String> data, List<ParseObject> storedData) {
         mData = data;
         mContext = context;
         mId = resourceId;
-        mStoredData=storedData;
+        mStoredData = storedData;
 
 
     }
@@ -46,16 +46,16 @@ public class EventsFragmentAdapterMain extends RecyclerView.Adapter<EventsFragme
     }
 
     @Override
-    public void onBindViewHolder(@NonNull EventsFragmentAdapterMain.MyViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final EventsFragmentAdapterMain.MyViewHolder holder, int position) {
         holder.mTextView.setText(mData.get(position));
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                int position = holder.getAdapterPosition();
                 String currentValue = mData.get(position);
-                ParseObject individualEventData=mStoredData.get(position);
+                ParseObject individualEventData = mStoredData.get(position);
 
-                String[] items={individualEventData.getString("eventName"),
+                String[] items = {individualEventData.getString("eventName"),
                         individualEventData.getString("eventSport"),
                         individualEventData.getString("eventDate"),
                         individualEventData.getString("eventTime")};
@@ -64,7 +64,7 @@ public class EventsFragmentAdapterMain extends RecyclerView.Adapter<EventsFragme
                 Toast.makeText(mContext, "CardView Clicked: " + currentValue, Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(mContext, CreatedEventActivity.class);
-                intent.putExtra("createdEventData",items);
+                intent.putExtra("createdEventData", items);
                 mContext.startActivity(intent);
 
 

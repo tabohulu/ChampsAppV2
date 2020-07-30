@@ -58,7 +58,7 @@ public class InstitutionsAthletesFragment extends Fragment {
         currentFragment = getArguments().getString("fragmentName");
         userRole = getArguments().getString("userRole");
 
-        rv = (RecyclerView) rootView.findViewById(R.id.athletes_fragment_rv);
+        rv = rootView.findViewById(R.id.athletes_fragment_rv);
         workbook = null;
         PopulateRecyclerView();
 

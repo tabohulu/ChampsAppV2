@@ -44,11 +44,12 @@ public class FriendListAdapterMain extends RecyclerView.Adapter<FriendListAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final FriendListAdapterMain.MyViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final FriendListAdapterMain.MyViewHolder holder, int position) {
         holder.mTextView.setText(mData.get(position));
         holder.ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int position =holder.getAdapterPosition();
                 Toast.makeText(mContext, mData.get(position)+" selected", Toast.LENGTH_SHORT).show();
                 if(selectedFriends.get(position)==false){
                     holder.ll.setBackgroundColor(mContext.getResources().getColor(R.color.sky_blue));

@@ -43,12 +43,12 @@ public class Adapter_SubEvents extends RecyclerView.Adapter<Adapter_SubEvents.My
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
         holder.mTextView.setText(mAthleteNames.get(position));
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                int position=holder.getAdapterPosition();
                 String currentValue = mAthleteNames.get(position);
                 Log.d("CardView", "CardView Clicked: " + currentValue);
                 Toast.makeText(mContext, "CardView Clicked: " + currentValue, Toast.LENGTH_SHORT).show();
