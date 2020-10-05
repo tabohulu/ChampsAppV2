@@ -38,6 +38,7 @@ public class Activity_MembersArea extends AppCompatActivity
     ParseUser currentUser;
     int accesLevel=-2;
     Bundle bundle;
+    NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,40 +51,13 @@ public class Activity_MembersArea extends AppCompatActivity
         bundle = new Bundle();
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        final NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         Log.d("currentUser",currentUser.getUsername());
-       /* if (currentUser.getUsername().equals("blakedevon93@gmail.com") || currentUser.getUsername().equals("testuser")) {
-            currentUser.put("userRole", "instManager");
-            currentUser.put("memAreaAuth", "1234");
-            currentUser.saveInBackground(new SaveCallback() {
-                @Override
-                public void done(ParseException e) {
-                    if (e == null) {
-                        //Toast.makeText(getApplicationContext(), currentUser.get("userRole").toString(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-        }*/
-        /*ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("MembersAreaUsers");
-        query.whereEqualTo("name",currentUser.getUsername());
-        if(currentUser.get("userRole").toString().equals("user")){
-            Menu nav_Menu = navigationView.getMenu();
-            nav_Menu.findItem(R.id.coaches).setVisible(false);
-            nav_Menu.findItem(R.id.events).setVisible(false);
-            nav_Menu.findItem(R.id.athletes).setVisible(false);
-            accesLevel=-1;
-        }else if(currentUser.get("userRole").toString().equals("instManager")){
-            Menu nav_Menu = navigationView.getMenu();
-            nav_Menu.findItem(R.id.messages).setVisible(false);
-        }*/
-        //MemAreaAuth(getApplicationContext(), navigationView.getMenu());
-
-
         navigationView.setNavigationItemSelectedListener(this);
 
         //set default home fragnent
@@ -99,8 +73,10 @@ public class Activity_MembersArea extends AppCompatActivity
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.mainLinLay, fragment).commit();
-        MemAreaAuth(this, navigationView.getMenu());
-        //new DialogCreator().MemAreaAuth(this);
+
+        //check authorization to determine what to show
+        MemAreaAuth();
+
     }
 
     @Override
@@ -303,7 +279,8 @@ public class Activity_MembersArea extends AppCompatActivity
         // Toast.makeText(this, "here", Toast.LENGTH_LONG).show();
     }
 
-    public void MemAreaAuth(final Context mContext, final Menu nav_Menu ){
+    public void MemAreaAuth(){
+        final Context mContext=Activity_MembersArea.this;
         LayoutInflater myLayout=LayoutInflater.from(mContext);
         final View dialogView =myLayout.inflate(R.layout.mem_area_auth_layout,null);
         final EditText authCodeInput=dialogView.findViewById(R.id.auth_code_edit);
@@ -354,41 +331,7 @@ public class Activity_MembersArea extends AppCompatActivity
                                 Toast.makeText(mContext,"empty string or wrong code entered",Toast.LENGTH_SHORT).show();
                                 return;
                             }
-                            if(!userRole.isEmpty()|| userRole!=null) {
-                                bundle.putString("userRole", userRole);
-                            }
-                            if(userRole.equals("Athlete")){
-                                //nav_Menu = navigationView.getMenu();
-                                nav_Menu.findItem(R.id.coaches).setVisible(false);
-                                nav_Menu.findItem(R.id.events).setVisible(false);
-                                nav_Menu.findItem(R.id.athletes).setVisible(false);
-                                nav_Menu.findItem(R.id.institutions).setVisible(false);
-                                nav_Menu.findItem(R.id.institution_managers).setVisible(false);
-                                accesLevel=-1;
-                            }else if(userRole.equals("InstituteManager") ){
-                                // Menu nav_Menu = navigationView.getMenu();
-                                nav_Menu.findItem(R.id.messages).setVisible(false);
-                                nav_Menu.findItem(R.id.institutions).setVisible(false);
-                                nav_Menu.findItem(R.id.institution_managers).setVisible(false);
-                                accesLevel=-2;
-                            }else if( userRole.equals("Admin")){
-                                // Menu nav_Menu = navigationView.getMenu();
-                                nav_Menu.findItem(R.id.profile).setVisible(false);
-                                nav_Menu.findItem(R.id.events).setVisible(false);
-                                nav_Menu.findItem(R.id.messages).setVisible(false);
-                                nav_Menu.findItem(R.id.groups).setVisible(false);
-                                nav_Menu.findItem(R.id.athletes).setVisible(false);
-                                nav_Menu.findItem(R.id.teams).setVisible(false);
-                                accesLevel=0;
-                            }
-                            else if(userRole.equals("Coach")){
-                                // Menu nav_Menu = navigationView.getMenu();
-                                nav_Menu.findItem(R.id.messages).setVisible(false);
-                                nav_Menu.findItem(R.id.coaches).setVisible(false);
-                                nav_Menu.findItem(R.id.institutions).setVisible(false);
-                                nav_Menu.findItem(R.id.institution_managers).setVisible(false);
-                                accesLevel=-2;
-                            }
+                            SetupViews(userRole);
                             Toast.makeText(mContext,"Authentication Succesful",Toast.LENGTH_SHORT).show();
                             alertDialog.dismiss();
                         }else{
@@ -403,6 +346,45 @@ public class Activity_MembersArea extends AppCompatActivity
 
             }
         });
+    }
+
+    public  void SetupViews(String userRole){
+        Menu nav_Menu=navigationView.getMenu();
+        if(!userRole.isEmpty()|| userRole!=null) {
+            bundle.putString("userRole", userRole);
+        }
+        if(userRole.equals("Athlete")){
+            //nav_Menu = navigationView.getMenu();
+            nav_Menu.findItem(R.id.coaches).setVisible(false);
+            nav_Menu.findItem(R.id.events).setVisible(false);
+            nav_Menu.findItem(R.id.athletes).setVisible(false);
+            nav_Menu.findItem(R.id.institutions).setVisible(false);
+            nav_Menu.findItem(R.id.institution_managers).setVisible(false);
+            accesLevel=-1;
+        }else if(userRole.equals("InstituteManager") ){
+            // Menu nav_Menu = navigationView.getMenu();
+            nav_Menu.findItem(R.id.messages).setVisible(false);
+            nav_Menu.findItem(R.id.institutions).setVisible(false);
+            nav_Menu.findItem(R.id.institution_managers).setVisible(false);
+            accesLevel=-2;
+        }else if( userRole.equals("Admin")){
+            // Menu nav_Menu = navigationView.getMenu();
+            nav_Menu.findItem(R.id.profile).setVisible(false);
+            nav_Menu.findItem(R.id.events).setVisible(false);
+            nav_Menu.findItem(R.id.messages).setVisible(false);
+            nav_Menu.findItem(R.id.groups).setVisible(false);
+            nav_Menu.findItem(R.id.athletes).setVisible(false);
+            nav_Menu.findItem(R.id.teams).setVisible(false);
+            accesLevel=0;
+        }
+        else if(userRole.equals("Coach")){
+            // Menu nav_Menu = navigationView.getMenu();
+            nav_Menu.findItem(R.id.messages).setVisible(false);
+            nav_Menu.findItem(R.id.coaches).setVisible(false);
+            nav_Menu.findItem(R.id.institutions).setVisible(false);
+            nav_Menu.findItem(R.id.institution_managers).setVisible(false);
+            accesLevel=-2;
+        }
     }
 
 }

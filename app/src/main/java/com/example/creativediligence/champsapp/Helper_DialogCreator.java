@@ -378,7 +378,7 @@ public class Helper_DialogCreator {
                     //rv = (RecyclerView) rootview.findViewById(R.id.instu_coach_fragment_rv);
                     rv.setHasFixedSize(true);
 
-                    EventsFragmentAdapterMain adapter = new EventsFragmentAdapterMain(mContext, R.layout.home_fragment_layout_custom, mData,storedData);
+                    EventsFragmentAdapterMain adapter = new EventsFragmentAdapterMain(mContext, R.layout.home_fragment_layout_custom, mData);
                     rv.setAdapter(adapter);
 
                     LinearLayoutManager llm = new LinearLayoutManager(mContext);

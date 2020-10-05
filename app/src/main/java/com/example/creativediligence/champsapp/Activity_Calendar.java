@@ -12,7 +12,10 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,6 +36,8 @@ public class Activity_Calendar extends AppCompatActivity {
     int swipeCount;
     ViewPager viewPager;
     Toolbar toolbar;
+    TextView toolbar_title;
+    Spinner toolbar_spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +45,21 @@ public class Activity_Calendar extends AppCompatActivity {
         setContentView(R.layout.activity_test);
 
         toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Calendar");
+        toolbar_title = toolbar.findViewById(R.id.toolbar_title);
+        toolbar_spinner = toolbar.findViewById(R.id.toolbar_spinner);
+        toolbar_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                TabReset(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        toolbar_title.setText("Calendar");
         //new PreferenceMethods().setColorChosen(toolbar, EventsOverviewActivity.this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -63,8 +82,13 @@ public class Activity_Calendar extends AppCompatActivity {
 
 
         viewPager = findViewById(R.id.viewpager);
-        viewPager.setOffscreenPageLimit(tabTitles.size());
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        Calendar cal = Calendar.getInstance();
+        Date c = cal.getTime();
+        cal.setTime(c);
+        int day = cal.get(Calendar.DAY_OF_MONTH) - 1;
+        //viewPager.setCurrentItem(day);
+        //viewPager.setOffscreenPageLimit(tabTitles.size());
+        /*viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float v, int i1) {
 
@@ -116,14 +140,15 @@ public class Activity_Calendar extends AppCompatActivity {
                     }
                 }
             }
-        });
+        });*/
         PagerAdapter pagerAdapter =
-                new PagerAdapter(getSupportFragmentManager(), Activity_Calendar.this, tabTitles, firstDate, lastDate,parsedDates);
+                new PagerAdapter(getSupportFragmentManager(), Activity_Calendar.this, tabTitles, firstDate, lastDate, parsedDates);
         viewPager.setAdapter(pagerAdapter);
 
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
+
         //new PreferenceMethods().setColorChosen(tabLayout, TestActivity.this);
 
         // Iterate over all tabs and set the custom view
@@ -131,6 +156,7 @@ public class Activity_Calendar extends AppCompatActivity {
             TabLayout.Tab tab = tabLayout.getTabAt(i);
             tab.setCustomView(pagerAdapter.getTabView(i));
         }
+        tabLayout.getTabAt(day).select();
     }
 
     public Date ParseDate(String date_str) {
@@ -144,9 +170,12 @@ public class Activity_Calendar extends AppCompatActivity {
         return dateStr;
     }
 
-    public void TabReset(Calendar cal) {
-        Date date = cal.getTime();
-        tabTitles = SetupTabTitles(date);
+    public void TabReset(int month) {
+        tabTitles = SetupTabTitles(month);
+        Calendar cal = Calendar.getInstance();
+        Date c = cal.getTime();
+        cal.setTime(c);
+        int day = cal.get(Calendar.DAY_OF_MONTH) - 1;
         nextPosition = 0;
         prevPosition = -1;
         tempPp = -1;
@@ -155,7 +184,7 @@ public class Activity_Calendar extends AppCompatActivity {
 
 
         PagerAdapter pagerAdapter =
-                new PagerAdapter(getSupportFragmentManager(), Activity_Calendar.this, tabTitles, firstDate, lastDate,parsedDates);
+                new PagerAdapter(getSupportFragmentManager(), Activity_Calendar.this, tabTitles, firstDate, lastDate, parsedDates);
         viewPager.setAdapter(pagerAdapter);
 
         // Give the TabLayout the ViewPager
@@ -167,31 +196,41 @@ public class Activity_Calendar extends AppCompatActivity {
             TabLayout.Tab tab = tabLayout.getTabAt(i);
             tab.setCustomView(pagerAdapter.getTabView(i));
         }
+        if(cal.get(Calendar.MONTH)==month){
+            tabLayout.getTabAt(day).select();
+        }
     }
 
     public ArrayList<DateItems> SetupTabTitles() {
         Calendar cal = Calendar.getInstance();
         Date c = cal.getTime();
+        int month = cal.get(Calendar.MONTH);
+        toolbar_spinner.setSelection(month);
         final SimpleDateFormat formatter = new SimpleDateFormat("MM dd yyyy");
 
 
         ArrayList<DateItems> tabTitles = new ArrayList<>();
         parsedDates = new ArrayList<>();
-
-        for (int i = 0; i < 6; i++) {
+        firstDate = c;
+        for (int i = 0; i < 31; i++) {
 
             cal.setTime(c);
+            cal.set(Calendar.DATE, 1);
             cal.add(Calendar.DATE, i);
             Date date = cal.getTime();
+            if (cal.get(Calendar.MONTH) != month) {
+                break;
+            }
             parsedDates.add(formatter.format(date));
             if (i == 0) {
-                firstDate = date;
+
             } else if (i == 5) {
                 lastDate = date;
             }
             SimpleDateFormat simpleDateformat = new SimpleDateFormat("E");
             String dayOfWeek = simpleDateformat.format(date);
             String monthOfYear = cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH);
+
             String dayOfMonth = String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
             String year = String.valueOf(cal.get(Calendar.YEAR));
             tabTitles.add(new DateItems(year, monthOfYear.substring(0, 3), dayOfMonth, dayOfWeek));
@@ -204,27 +243,35 @@ public class Activity_Calendar extends AppCompatActivity {
         return tabTitles;
     }
 
-    public ArrayList<DateItems> SetupTabTitles(Date pageEndDate) {
+    public ArrayList<DateItems> SetupTabTitles(int month) {
         Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.MONTH, month);
+        Date c = cal.getTime();
         final SimpleDateFormat formatter = new SimpleDateFormat("MM dd yyyy");
 
 
         ArrayList<DateItems> tabTitles = new ArrayList<>();
         parsedDates = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
+        firstDate = c;
+        for (int i = 0; i < 31; i++) {
 
-            cal.setTime(pageEndDate);
+            cal.setTime(c);
+            cal.set(Calendar.DATE, 1);
             cal.add(Calendar.DATE, i);
             Date date = cal.getTime();
+            if (cal.get(Calendar.MONTH) != month) {
+                break;
+            }
             parsedDates.add(formatter.format(date));
             if (i == 0) {
-                firstDate = date;
+
             } else if (i == 5) {
                 lastDate = date;
             }
             SimpleDateFormat simpleDateformat = new SimpleDateFormat("E");
             String dayOfWeek = simpleDateformat.format(date);
             String monthOfYear = cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH);
+
             String dayOfMonth = String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
             String year = String.valueOf(cal.get(Calendar.YEAR));
             tabTitles.add(new DateItems(year, monthOfYear.substring(0, 3), dayOfMonth, dayOfWeek));
@@ -282,13 +329,13 @@ public class Activity_Calendar extends AppCompatActivity {
         Date mLAstDate;
 
 
-        public PagerAdapter(FragmentManager fm, Context context, ArrayList<DateItems> mTabTitles, Date firstDate, Date lastDate,ArrayList<String> parsedDates) {
+        public PagerAdapter(FragmentManager fm, Context context, ArrayList<DateItems> mTabTitles, Date firstDate, Date lastDate, ArrayList<String> parsedDates) {
             super(fm);
             mContext = context;
             tabTitles = mTabTitles;
             mFirstDate = firstDate;
             mLAstDate = lastDate;
-            mParsedDates=parsedDates;
+            mParsedDates = parsedDates;
         }
 
         @Override
@@ -306,7 +353,7 @@ public class Activity_Calendar extends AppCompatActivity {
             args.putString("weekDay", tabTitles.get(position).getWeekDay());
             args.putString("monthDay", tabTitles.get(position).getMonthDay());
             args.putString("year", tabTitles.get(position).getYear());
-            args.putString("searchString",mParsedDates.get(position));
+            args.putString("searchString", mParsedDates.get(position));
 
             bf.setArguments(args);
             return bf;
@@ -322,10 +369,11 @@ public class Activity_Calendar extends AppCompatActivity {
 
         public View getTabView(int position) {
             View tab = LayoutInflater.from(Activity_Calendar.this).inflate(R.layout.custom_tab2, null);
-            TextView tv = tab.findViewById(R.id.month_year);
+            //TextView tv = tab.findViewById(R.id.month_year);
             TextView tv1 = tab.findViewById(R.id.weekDay);
             TextView tv2 = tab.findViewById(R.id.monthDay);
-            tv.setText(tabTitles.get(position).getMonth());
+            //tv.setText(tabTitles.get(position).getMonth());
+            //toolbar_spinner.setSelection(position);
             tv1.setText(tabTitles.get(position).weekDay);
             tv2.setText(tabTitles.get(position).monthDay);
             return tab;

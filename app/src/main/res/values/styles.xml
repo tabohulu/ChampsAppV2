@@ -29,4 +29,10 @@
         <item name="colorPrimary">@color/black</item>
     </style>
 
+    <style name="SpinnerTextViewItem" parent="@android:style/Widget.TextView" >
+        <item name="android:textAppearance" >@style/TextAppearance.AppCompat.Large</item>
+        <item name="fontFamily">@font/quicksand_bold</item>
+        <item name="android:textStyle" >bold</item>
+    </style>
+
 </resources>

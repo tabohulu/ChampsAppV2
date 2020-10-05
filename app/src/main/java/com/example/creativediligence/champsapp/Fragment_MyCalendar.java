@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.parse.FindCallback;
@@ -48,6 +49,7 @@ public class Fragment_MyCalendar extends Fragment {
         final View rootView = inflater.inflate(R.layout.calendar_fragment_blank, container, false);
         final TextView noData = rootView.findViewById(R.id.no_event);
         final ExpandableListView eventsExpandableListView = rootView.findViewById(R.id.expandableList);
+        final LinearLayout emptyLayout=rootView.findViewById(R.id.empty_layout);
         final ArrayList<String> sportsType = new ArrayList<>();
         final HashMap<String, ArrayList<Helper_CalendarEventsItem>> eventDeets = new HashMap<>();
         // CalendarExpandableListAdapter adapter=new CalendarExpandableListAdapter(getContext(),)
@@ -77,16 +79,18 @@ public class Fragment_MyCalendar extends Fragment {
                     }
                     FragmentAdapterExpandable_MyCalendar adapter=new FragmentAdapterExpandable_MyCalendar(getContext(),sportsType,eventDeets);
                     eventsExpandableListView.setAdapter(adapter);
+                    eventsExpandableListView.setVisibility(View.VISIBLE);
 
                     noData.setText(objects.size() + " events on this day");
-                    noData.setVisibility(View.GONE);
+                    emptyLayout.setVisibility(View.GONE);
 
 
                 } else {
                     if (e != null) {
                         Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                     } else {
-                        noData.setText("No Event On This Day");
+                        emptyLayout.setVisibility(View.VISIBLE);
+                        eventsExpandableListView.setVisibility(View.GONE);
                     }
                 }
             }

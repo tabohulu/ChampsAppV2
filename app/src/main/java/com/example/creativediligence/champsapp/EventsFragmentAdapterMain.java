@@ -23,13 +23,13 @@ public class EventsFragmentAdapterMain extends RecyclerView.Adapter<EventsFragme
 
     Context mContext;
     int mId;
-    List<ParseObject> mStoredData;
 
-    public EventsFragmentAdapterMain(Context context, int resourceId, ArrayList<String> data, List<ParseObject> storedData) {
+
+    public EventsFragmentAdapterMain(Context context, int resourceId, ArrayList<String> data) {
         mData = data;
         mContext = context;
         mId = resourceId;
-        mStoredData = storedData;
+
 
 
     }
@@ -47,24 +47,16 @@ public class EventsFragmentAdapterMain extends RecyclerView.Adapter<EventsFragme
 
     @Override
     public void onBindViewHolder(@NonNull final EventsFragmentAdapterMain.MyViewHolder holder, int position) {
-        holder.mTextView.setText(mData.get(position));
+        final String currentValue = mData.get(position);
+        holder.mTextView.setText(currentValue);
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int position = holder.getAdapterPosition();
-                String currentValue = mData.get(position);
-                ParseObject individualEventData = mStoredData.get(position);
-
-                String[] items = {individualEventData.getString("eventName"),
-                        individualEventData.getString("eventSport"),
-                        individualEventData.getString("eventDate"),
-                        individualEventData.getString("eventTime")};
-
                 Log.d("CardView", "CardView Clicked: " + currentValue);
                 Toast.makeText(mContext, "CardView Clicked: " + currentValue, Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(mContext, CreatedEventActivity.class);
-                intent.putExtra("createdEventData", items);
+                intent.putExtra("createdEventData", currentValue);
                 mContext.startActivity(intent);
 
 

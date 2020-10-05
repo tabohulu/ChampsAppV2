@@ -31,6 +31,7 @@ public class CalendarUtils {
     public Context mContext;
     public ProgressBar mProgressBar;
     public CaldroidFragment mCaldroidFragment;
+    public static String TAG=CalendarUtils.class.getSimpleName();
 
     public CalendarUtils(Context context, ProgressBar progressBar, CaldroidFragment caldroidFragment){
         mContext=context;
@@ -54,19 +55,22 @@ public class CalendarUtils {
             public void done(List<ParseObject> objects, ParseException e) {
                 if (e==null && objects.size()>0){
                     for(ParseObject ob:objects){
-                        CalendarEventsItem ci = new CalendarEventsItem(ob.getString("eventDate"),
+                        CalendarEventsItem ci = new CalendarEventsItem(
                                 ob.getString("eventName"),
+                                ob.getString("eventDate"),
                                 ob.getString("eventType"),
                                 ob.getString("eventStart")+" - "+ob.getString("eventEnd"),
                                 new ColorDrawable(mContext.getResources().getColor(R.color.sky_blue)));
 
-                        Log.d("TAG",ci.getEventPeriod());
+                        Log.d(TAG,ci.getEventDate());
 
                         calendarEvents.add(ci);
 
                     }
                     Toast.makeText(mContext, "Complete", Toast.LENGTH_SHORT).show();
-                    SetupCaldroid(calendarEvents,hm,hm2);
+
+                        SetupCaldroid(calendarEvents, hm, hm2);//todo : fix null error here
+
                 }else{
                     if(e!=null){
                         Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -90,6 +94,7 @@ public class CalendarUtils {
         for (CalendarEventsItem ce : calendarEvents) {
             if (!hm.containsKey(ParseDate(ce.getEventDate()))) {
                 hm.put(ParseDate(ce.getEventDate()), ce.getEventColor());
+                //Log.d(TAG,ce.getEventDate()+ce.getEventColor());
             }
         }
         // Put elements to the map for events
