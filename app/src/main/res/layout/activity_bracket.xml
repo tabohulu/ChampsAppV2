@@ -38,13 +38,23 @@
         android:background="@android:color/transparent" />
 
     <ExpandableListView
-        android:id="@+id/brackets_exp_lv"
+        android:id="@+id/brackets_lv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:visibility="gone"
         android:childDivider="@android:color/transparent">
 
     </ExpandableListView>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/brackets_rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+
+        />
 
 </LinearLayout>

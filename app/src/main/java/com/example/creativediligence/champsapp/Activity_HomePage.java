@@ -162,7 +162,7 @@ public class Activity_HomePage extends AppCompatActivity {
                         files.add(videoFile.getUrl());
                     }
                     SetupVideo(files.get(0));
-                } else {
+                } else if(e!=null) {
                     if (e.getCode() == ParseException.INVALID_SESSION_TOKEN) {
                         Toast.makeText(Activity_HomePage.this, "Session expired or User deleted. Please signup", Toast.LENGTH_LONG).show();
                         prefs.edit().putBoolean("signedup", false).apply();
@@ -173,7 +173,9 @@ public class Activity_HomePage extends AppCompatActivity {
                         Activity_HomePage.this.startActivity(intent);
                         finish();
                     }
-                    // Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                     Toast.makeText(Activity_HomePage.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(Activity_HomePage.this, "No Video Files Exists", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -183,12 +185,14 @@ public class Activity_HomePage extends AppCompatActivity {
     }
 
     public void SetupVideo(String url) {
-        Uri uri = Uri.parse(url);
-        VideoView vidView = findViewById(R.id.vid_view);
-        vidView.setVideoURI(uri);
-        MediaController mediaController = new MediaController(this);
-        vidView.setMediaController(mediaController);
-        //vidView.start();
-        Toast.makeText(this, "Vid Success", Toast.LENGTH_LONG).show();
+        if(url!=null && !url.trim().isEmpty()) {
+            Uri uri = Uri.parse(url);
+            VideoView vidView = findViewById(R.id.vid_view);
+            vidView.setVideoURI(uri);
+            MediaController mediaController = new MediaController(this);
+            vidView.setMediaController(mediaController);
+            //vidView.start();
+            Toast.makeText(this, "Vid Success", Toast.LENGTH_LONG).show();
+        }
     }
 }

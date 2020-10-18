@@ -3,6 +3,8 @@ package com.example.creativediligence.champsapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ExpandableListView;
@@ -20,6 +22,7 @@ import java.util.List;
 
 public class Activity_Bracket extends AppCompatActivity {
     ExpandableListView brackets;
+    RecyclerView br_rv;
     List<String> bracketTitle;
     HashMap<String, List<String>> bracketDetail;
     String mSportsTitle;
@@ -37,6 +40,8 @@ public class Activity_Bracket extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bracket);
+        br_rv=findViewById(R.id.brackets_rv);
+        br_rv.hasFixedSize();
 
         isHomepage=getIntent().getBooleanExtra("isHomepage",false);
 
@@ -79,12 +84,14 @@ public class Activity_Bracket extends AppCompatActivity {
     }
 
     public void GetBracketData(){
-        final ExpandableListView brackets=findViewById(R.id.brackets_exp_lv);
+        final ExpandableListView brackets=findViewById(R.id.brackets_lv);
 
 
         final List<String> bracketTitle=new ArrayList<String>();
         final  List<String> positions =new ArrayList<>();
         final HashMap<String, List<String>> bracketDetail=new HashMap<>();
+        final HashMap<String, List<String>> bracketPosition=new HashMap<>();
+        final HashMap<String, List<Helper_BracketModel>> bracketDetail2=new HashMap<>();
         ParseQuery<ParseObject> bracket =new ParseQuery<ParseObject>("Bracket");
         bracket.whereEqualTo("username", ParseUser.getCurrentUser().getUsername());
         bracket.findInBackground(new FindCallback<ParseObject>() {
@@ -96,11 +103,24 @@ public class Activity_Bracket extends AppCompatActivity {
                         String string=ob.getString("bracketname");
                         List<String> str=ob.getList("athlete");
                         List<String> pos =ob.getList("position");
+                        List<Helper_BracketModel> temp=new ArrayList<Helper_BracketModel>();
+                        for (int jj=0;jj<str.size();jj++){
+                            temp.add(new Helper_BracketModel(str.get(jj),pos.get(jj)));
+                        }
                         bracketTitle.add(string);
                         bracketDetail.put(string,str);
+                        bracketPosition.put(string,pos);
+                        bracketDetail2.put(string,temp);
                     }
-                    AdapterExpandable_Bracket expandableListAdapter = new AdapterExpandable_Bracket(Activity_Bracket.this, bracketTitle, bracketDetail);
-                    brackets.setAdapter(expandableListAdapter);
+
+
+                    Adapter_Bracket adapterBracket=new Adapter_Bracket(Activity_Bracket.this,bracketTitle,bracketDetail,bracketPosition);
+                    br_rv.setAdapter(adapterBracket);
+                    LinearLayoutManager ll=new LinearLayoutManager(Activity_Bracket.this);
+                    br_rv.setLayoutManager(ll);
+
+                    //AdapterExpandable_Bracket expandableListAdapter = new AdapterExpandable_Bracket(Activity_Bracket.this, bracketTitle, bracketDetail2);
+                    //brackets.setAdapter(expandableListAdapter);
                 }else{
                     TextView warning =findViewById(R.id.warning_TV);
                     warning.setText("Bracket Data non-existent");

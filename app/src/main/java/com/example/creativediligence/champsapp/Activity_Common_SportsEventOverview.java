@@ -9,7 +9,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -28,14 +27,12 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.parse.ParseRelation;
-
-import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import twitter4j.Query;
 import twitter4j.QueryResult;
@@ -57,15 +54,17 @@ public class Activity_Common_SportsEventOverview extends AppCompatActivity {
     ConfigurationBuilder cb;
     String sportsTitle;
     String activityName;
+    HashMap<String, HashMap<String, ArrayList<AllSubEvents>>> sportEvents2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.common_activity_sports_event_overview);
-        sportsTitle=getIntent().getStringExtra("sportName");
-        activityName=getIntent().getStringExtra("activityName");
+        sportsTitle = getIntent().getStringExtra("sportName");
+        activityName = getIntent().getStringExtra("activityName");
+        sportEvents2 = new HashMap<>();
         toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle(sportsTitle+" "+activityName);
+        toolbar.setTitle(sportsTitle + " " + activityName);
         //new PreferenceMethods().setColorChosen(toolbar, EventsOverviewActivity.this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -77,7 +76,7 @@ public class Activity_Common_SportsEventOverview extends AppCompatActivity {
             }
         });
 
-        tabTitles = new ArrayList<>(Arrays.asList("Field Events", "Track Events"));
+        //tabTitles = new ArrayList<>(Arrays.asList("Field Events", "Track Events"));
         //GetFieldEvents();
         GetAllSportsEvents(sportsTitle);
 
@@ -134,65 +133,81 @@ public class Activity_Common_SportsEventOverview extends AppCompatActivity {
         //GetAllSportsEvents("Track and Field");
     }
 
-    public void GetAllSportsEvents(final String eventName) {
-        eventContents = new ArrayList<>();
-        final HashMap<String, ArrayList<String>> sportEvents = new HashMap<>();
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("AllSports");
-        query.whereContains("sportName", eventName);
-        query.setLimit(1);
-        query.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> objects, ParseException e) {
-                if (e == null && objects.size() > 0) {
+    public void Setuplayout2() {
+        // Get the ViewPager and set it's PagerAdapter so that it can display items
+        ViewPager viewPager = findViewById(R.id.viewpager);
+        viewPager.setOffscreenPageLimit(tabTitles.size());
+        PagerAdapter pagerAdapter =
+                new PagerAdapter(getSupportFragmentManager(), Activity_Common_SportsEventOverview.this, tabTitles, sportEvents2);
+        viewPager.setAdapter(pagerAdapter);
 
-                    for (ParseObject obj : objects) {
-                        final String[] cats = obj.getString("categories").split(",");
-                        tabTitles = new ArrayList<>(Arrays.asList(cats));
-                        ParseRelation<ParseObject> rel = obj.getRelation("allEvents");
-                        rel.getQuery().findInBackground(new FindCallback<ParseObject>() {
-                            @Override
-                            public void done(List<ParseObject> objects, ParseException e) {
-                                if (e == null & objects.size() > 0) {
+        // Give the TabLayout the ViewPager
+        TabLayout tabLayout = findViewById(R.id.tab_layout);
+        tabLayout.setupWithViewPager(viewPager);
+        //new PreferenceMethods().setColorChosen(tabLayout, EventsOverviewActivity.this);
 
-                                    for (ParseObject ob2 : objects) {
-                                        for (int i = 0; i < cats.length; i++) {
+        // Iterate over all tabs and set the custom view
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            TabLayout.Tab tab = tabLayout.getTabAt(i);
+            tab.setCustomView(pagerAdapter.getTabView(i));
+        }
 
-                                            if (ob2.getString("eventCategory").equals(cats[i]) && sportEvents.containsKey(cats[i])) {
-                                                ArrayList<String> temp = sportEvents.get(cats[i]);
-                                                temp.add(ob2.getString("eventName"));
-                                                sportEvents.put(cats[i], temp);
-
-                                                Log.d("SEO", ob2.getString("eventName") + " // " + cats[i]);
-                                            } else if (ob2.getString("eventCategory").equals(cats[i]) && !sportEvents.containsKey(cats[i])) {
-                                                ArrayList<String> temp = new ArrayList<>();
-                                                temp.add(ob2.getString("eventName"));
-                                                sportEvents.put(cats[i], temp);
-
-                                                Log.d("SEO", ob2.getString("eventName") + " // " + cats[i]+"//");
-                                            }
-
-
-                                        }
-                                    }
-                                    for(int i=0;i<cats.length;i++){
-                                        eventContents.add(sportEvents.get(cats[i]).toArray(new String[0]));
-                                    }
-                                    Setuplayout();
-                                }else{
-                                    Toast.makeText(Activity_Common_SportsEventOverview.this, "Nothing to show", Toast.LENGTH_SHORT).show();
-                                    finish();
-                                    Log.e("ParseError", e.getMessage());
-                                }
-                            }
-                        });
-                    }
-
-                }
-            }
-        });
+        //GetAllSportsEvents("Track and Field");
     }
 
-    public void GetTrackEvents() {
+    public void GetAllSportsEvents(final String eventName) {
+        eventContents = new ArrayList<>();
+        tabTitles = new ArrayList<>();
+        final ArrayList<String> oo = new ArrayList<>();
+        final HashMap<String, ArrayList<String>> sportEvents = new HashMap<>();
+        final HashMap<String, ArrayList<AllSubEvents>> subEvents = new HashMap<>();
+        //tabTitles=new ArrayList<>();
+
+        //sportEvents2 = new HashMap<>();
+
+
+        ParseQuery<AllEvents> query = ParseQuery.getQuery(AllEvents.class);
+        Toast.makeText(this, AllEvents.SPORT_NAME, Toast.LENGTH_LONG).show();
+        query.whereContains(AllEvents.SPORT_NAME, eventName);
+        query.findInBackground(new FindCallback<AllEvents>() {
+            @Override
+            public void done(List<AllEvents> objects, ParseException e) {
+                //ArrayList<String> temp=new ArrayList<>();
+                HashMap<String, ArrayList<AllSubEvents>> subEventsTemp = new HashMap<>();
+                if (e == null && objects.size() > 0) {
+
+                    for (AllEvents ob : objects) {
+                        if (sportEvents2.containsKey(ob.getSubCat())) {
+                            subEventsTemp = sportEvents2.get(ob.getSubCat());
+                        } else {
+                            subEventsTemp = new HashMap<>();
+                            tabTitles.add(ob.getSubCat());
+
+                            //tabTitles.add(ob.getSubCat());
+                        }
+
+                        subEventsTemp.put(ob.getEventName(), (ArrayList<AllSubEvents>) ob.getSubEvents());
+                        sportEvents2.put(ob.getSubCat(), subEventsTemp);
+                        Log.d("CommonSportsEvent", String.valueOf(sportEvents2.get(ob.getSubCat())));
+
+                    }
+                    Setuplayout2();
+                } else {
+                    if (e != null) {
+                        Toast.makeText(Activity_Common_SportsEventOverview.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(Activity_Common_SportsEventOverview.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+
+            }
+        });
+
+
+    }
+
+    /*public void GetTrackEvents() {
         //GetFieldEvents();
         ParseQuery<ParseObject> query = ParseQuery.getQuery("TrackEvents");
         query.findInBackground(new FindCallback<ParseObject>() {
@@ -224,9 +239,9 @@ public class Activity_Common_SportsEventOverview extends AppCompatActivity {
                 }
             }
         });
-    }
+    }*/
 
-    public void GetFieldEvents() {
+    /*public void GetFieldEvents() {
         eventContents = new ArrayList<>();
 
         ParseQuery<ParseObject> trackEvents = ParseQuery.getQuery("FieldEvents");
@@ -251,7 +266,7 @@ public class Activity_Common_SportsEventOverview extends AppCompatActivity {
                 }
             }
         });
-    }
+    }*/
 
     @Override
     public void onResume() {
@@ -284,14 +299,53 @@ public class Activity_Common_SportsEventOverview extends AppCompatActivity {
 
 
         ArrayList<String> tabTitles;
-        Context context;
+        Context mContext;
         ArrayList<String[]> mArrayList;
+        ArrayList<String[]> mArrayList2;
+        HashMap<String, HashMap<String, ArrayList<AllSubEvents>>> mTabContents;
 
         public PagerAdapter(FragmentManager fm, Context context, ArrayList<String> mTabTitles, ArrayList<String[]> arrayList) {
             super(fm);
-            this.context = context;
+            mContext = context;
             tabTitles = mTabTitles;
             mArrayList = arrayList;
+        }
+
+        public PagerAdapter(FragmentManager fm, Context context, ArrayList<String> mTabTitles, HashMap<String, HashMap<String, ArrayList<AllSubEvents>>> tabContents) {
+            super(fm);
+            mContext = context;
+            tabTitles = mTabTitles;
+            mTabContents = tabContents;
+            ArrayList<String[]> arrayList = new ArrayList<>();
+            ArrayList<String[]> arrayList2 = new ArrayList<>();
+            for (String tit : tabTitles) {
+                HashMap<String, ArrayList<AllSubEvents>> aa = mTabContents.get(tit);
+                String[] temp = aa.keySet().toArray(new String[0]);
+                String[] temp2 = new String[temp.length];
+
+                arrayList.add(temp);
+
+                for (int i = 0; i < temp.length; i++) {
+                    ArrayList<AllSubEvents> hy = aa.get(temp[i]);
+                    String uu="";
+                    for (int j = 0; j < hy.size(); j++){
+                        if(j>0){
+                            uu+=":"+hy.get(j).getObjectId();
+                        }else {
+                            uu+=hy.get(j).getObjectId();
+                        }
+
+                }
+                    temp2[i] =uu;
+                            Log.d("newStuff", hy.size() + "//" + i + "//" + temp2.length + "//" + temp2[i]);
+                }
+                arrayList2.add(temp2);
+
+            }
+            mArrayList = arrayList;
+            mArrayList2 = arrayList2;
+
+
         }
 
         @Override
@@ -303,9 +357,10 @@ public class Activity_Common_SportsEventOverview extends AppCompatActivity {
         public Fragment getItem(int position) {
             Bundle args = new Bundle();
             Fragment_PagerViewContents bf = new Fragment_PagerViewContents();
+            args.putStringArray("ref", mArrayList2.get(position));
             args.putStringArray("someArray", mArrayList.get(position));
             args.putString("tabtitle", tabTitles.get(position));
-            args.putString("sportName",sportsTitle);
+            args.putString("sportName", sportsTitle);
             bf.setArguments(args);
             return bf;
 

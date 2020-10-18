@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class Fragment_PagerViewContents extends Fragment {
     ArrayList<Helper_BasicDataModel> data;
     String[] events;
+    String[] subEvents;
     String tabtitle;
     String sportTitle;
     ArrayList<String> listContents;
@@ -28,6 +29,7 @@ public class Fragment_PagerViewContents extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         events = getArguments().getStringArray("someArray");
+        subEvents = getArguments().getStringArray("ref");
         tabtitle=getArguments().getString("tabtitle");
         tabtitle.replace("\\s+","");
         sportTitle=getArguments().getString("sportName");
@@ -45,7 +47,7 @@ public class Fragment_PagerViewContents extends Fragment {
                         RecyclerView rv = rootView.findViewById(R.id.rv_recycler_view);
                         rv.setHasFixedSize(true);
 
-                        FragmentAdapter_PagerViewContents adapter = new FragmentAdapter_PagerViewContents(events, getContext(), listContents,sportTitle);
+                        FragmentAdapter_PagerViewContents adapter = new FragmentAdapter_PagerViewContents(events,subEvents, getContext(), listContents,sportTitle);
                         rv.setAdapter(adapter);
 
                         LinearLayoutManager llm = new LinearLayoutManager(getActivity());

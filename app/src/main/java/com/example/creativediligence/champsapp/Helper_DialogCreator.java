@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -802,14 +803,15 @@ final ArrayList<String> mData=new ArrayList<>();
 
     public void QueryAthletes(final Context context, final String eventString, final String generalevenet, final int cards) {
         final String[] bracketString={""};
+        final String key="Name";
         final ArrayList<String> athletes = new ArrayList<>();
-        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Athletes");
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("InstitutionAthlete");
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
                 if (e == null && objects.size() > 0) {
                     for (ParseObject obs : objects) {
-                        athletes.add(obs.getString("name"));
+                        athletes.add(obs.getString(key));
                     }
                     mContext = context;
                     LayoutInflater myLayout = LayoutInflater.from(mContext);
@@ -854,6 +856,7 @@ final ArrayList<String> mData=new ArrayList<>();
                             }
                             Log.d(TAG,thingsAdded+"");
                             if(thingsAdded>0) {
+                                //Toast.makeText(context, "thingsAdded "+thingsAdded, Toast.LENGTH_SHORT).show();
                                 //check if current posts already exist
                                 bracketQuery.whereEqualTo("username", ParseUser.getCurrentUser().getUsername());
                                 bracketQuery.findInBackground(new FindCallback<ParseObject>() {
@@ -871,6 +874,7 @@ final ArrayList<String> mData=new ArrayList<>();
                                                     break;
                                                 }
                                             }
+                                            //Toast.makeText(mContext, "counter "+counter, Toast.LENGTH_SHORT).show();
                                             if (counter < 1 && thingsAdded > 0) {
                                                 SaveBracketInBackGround(bracket, bracketString[0]);
 
@@ -880,7 +884,8 @@ final ArrayList<String> mData=new ArrayList<>();
                                             if(e!=null){
                                                 Toast.makeText(mContext, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                                             }else{
-                                                Toast.makeText(mContext, "No Data Exists", Toast.LENGTH_SHORT).show();
+                                                //Toast.makeText(mContext, "No Data Exists", Toast.LENGTH_SHORT).show();
+                                                SaveBracketInBackGround(bracket, bracketString[0]);
                                             }
                                         }
                                     }
@@ -903,6 +908,232 @@ final ArrayList<String> mData=new ArrayList<>();
                 }
             }
         });
+    }
+
+    public void QueryAthletes2(final Context context, final String eventString, final String generalevenet, final int cards, final List<String> athletesID) {
+        mContext=context;
+        Log.d("EventString",eventString);
+        final String[] bracketString={""};
+        final String key="Name";
+        final ArrayList<String> athletes = new ArrayList<>();
+            ParseQuery<AllAthletes> participants =ParseQuery.getQuery(AllAthletes.class);
+            participants.whereExists("objectId");
+            participants.findInBackground(new FindCallback<AllAthletes>() {
+                @Override
+                public void done(List<AllAthletes> objects, ParseException e) {
+                    if(e==null && objects.size()>0){
+                        for(AllAthletes ath:objects){
+                            if(athletesID.contains(ath.getObjectId())){
+                                athletes.add(ath.getName());
+                            }
+                            if(athletes.size()==athletesID.size()){
+                                break;
+                            }
+                        }
+                        LayoutInflater myLayout = LayoutInflater.from(mContext);
+                        final View dialogView = myLayout.inflate(R.layout.events_athletes_recyclerview, null);
+                        RecyclerView rv = dialogView.findViewById(R.id.events_athletes_rv);
+                        rv.setHasFixedSize(true);
+
+
+                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mContext);
+                        rv.setLayoutManager(layoutManager);
+                        final Adapter_DialogCreatorEventAthletes adapter = new Adapter_DialogCreatorEventAthletes(mContext, athletes, eventString, cards);
+                        //PointsStandingAdapter adapter = new PointsStandingAdapter(pointData, cardPosition);
+                        rv.setAdapter(adapter);
+
+                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                                mContext, R.style.MyDialogTheme);
+                        alertDialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                counter = 0;
+                                ParseQuery<ParseObject> bracketQuery = new ParseQuery<ParseObject>("Bracket");
+                                final ParseObject bracket = new ParseObject("Bracket");
+                                if (generalevenet.equals(eventString)) {
+                                    bracket.put("bracketname", eventString);
+                                    bracketString[0]=eventString;
+                                } else {
+                                    bracket.put("bracketname", generalevenet + " " + eventString);
+                                    bracketString[0]=generalevenet + " " + eventString;
+                                }
+                                bracket.put("username", ParseUser.getCurrentUser().getUsername());
+                                thingsAdded = 0;
+                                for (int ij = 0; ij < athletes.size(); ij++) {
+                                    if (adapter.mData[ij] != "-1") {
+                                        bracket.add("position", adapter.mData[ij]);
+                                        bracket.add("athlete", athletes.get(ij));
+                                        thingsAdded++;
+                                    }
+
+
+
+                                }
+                                Log.d(TAG,thingsAdded+"");
+                                if(thingsAdded>0) {
+                                    //Toast.makeText(context, "thingsAdded "+thingsAdded, Toast.LENGTH_SHORT).show();
+                                    //check if current posts already exist
+                                    bracketQuery.whereEqualTo("username", ParseUser.getCurrentUser().getUsername());
+                                    bracketQuery.findInBackground(new FindCallback<ParseObject>() {
+                                        @Override
+                                        public void done(List<ParseObject> objects, ParseException e) {
+
+                                            if (e == null & objects.size() > 0) {
+                                                Log.d(TAG, thingsAdded + "A");
+                                                for (ParseObject ob : objects) {
+
+
+                                                    if (ob.getString("bracketname").equals(bracketString[0])) {
+                                                        counter++;
+                                                        Toast.makeText(mContext, "bracket already exists for " + bracketString[0], Toast.LENGTH_SHORT).show();
+                                                        break;
+                                                    }
+                                                }
+                                                //Toast.makeText(mContext, "counter "+counter, Toast.LENGTH_SHORT).show();
+                                                if (counter < 1 && thingsAdded > 0) {
+                                                    SaveBracketInBackGround(bracket, bracketString[0]);
+
+                                                }
+
+                                            } else{
+                                                if(e!=null){
+                                                    Toast.makeText(mContext, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                }else{
+                                                    //Toast.makeText(mContext, "No Data Exists", Toast.LENGTH_SHORT).show();
+                                                    SaveBracketInBackGround(bracket, bracketString[0]);
+                                                }
+                                            }
+                                        }
+                                    });
+                                } else {
+                                    Log.d(TAG, thingsAdded + "C");
+                                    Toast.makeText(mContext, "Nothing Selected,Nothing Saved", Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
+                        })
+                                .setNegativeButton("Cancel", null);
+                        alertDialogBuilder.setView(dialogView);
+
+                        AlertDialog alertDialog = alertDialogBuilder.create();
+                        alertDialog.setTitle("Add Athlete to your Bracket(Finals Only)");
+                        alertDialog.show();
+                        //Toast.makeText(mContext, "All Good", Toast.LENGTH_SHORT).show();
+                    }else {
+                        if(e!=null){
+                            Toast.makeText(context, e.getCode()+"=>"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(context, "Something Wrong", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                }
+            });
+
+        /*ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("InstitutionAthlete");
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> objects, ParseException e) {
+                if (e == null && objects.size() > 0) {
+                    for (ParseObject obs : objects) {
+                        athletes.add(obs.getString(key));
+                    }
+                    mContext = context;
+                    LayoutInflater myLayout = LayoutInflater.from(mContext);
+                    final View dialogView = myLayout.inflate(R.layout.events_athletes_recyclerview, null);
+                    RecyclerView rv = dialogView.findViewById(R.id.events_athletes_rv);
+                    rv.setHasFixedSize(true);
+
+
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mContext);
+                    rv.setLayoutManager(layoutManager);
+                    final Adapter_DialogCreatorEventAthletes adapter = new Adapter_DialogCreatorEventAthletes(mContext, athletes, eventString, cards);
+                    //PointsStandingAdapter adapter = new PointsStandingAdapter(pointData, cardPosition);
+                    rv.setAdapter(adapter);
+
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                            mContext, R.style.MyDialogTheme);
+                    alertDialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                            counter = 0;
+                            ParseQuery<ParseObject> bracketQuery = new ParseQuery<ParseObject>("Bracket");
+                            final ParseObject bracket = new ParseObject("Bracket");
+                            if (generalevenet.equals(eventString)) {
+                                bracket.put("bracketname", eventString);
+                                bracketString[0]=eventString;
+                            } else {
+                                bracket.put("bracketname", generalevenet + " " + eventString);
+                                bracketString[0]=generalevenet + " " + eventString;
+                            }
+                            bracket.put("username", ParseUser.getCurrentUser().getUsername());
+                            thingsAdded = 0;
+                            for (int ij = 0; ij < athletes.size(); ij++) {
+                                if (adapter.mData[ij] != "-1") {
+                                    bracket.add("position", adapter.mData[ij]);
+                                    bracket.add("athlete", athletes.get(ij));
+                                    thingsAdded++;
+                                }
+
+
+
+                            }
+                            Log.d(TAG,thingsAdded+"");
+                            if(thingsAdded>0) {
+                                //Toast.makeText(context, "thingsAdded "+thingsAdded, Toast.LENGTH_SHORT).show();
+                                //check if current posts already exist
+                                bracketQuery.whereEqualTo("username", ParseUser.getCurrentUser().getUsername());
+                                bracketQuery.findInBackground(new FindCallback<ParseObject>() {
+                                    @Override
+                                    public void done(List<ParseObject> objects, ParseException e) {
+
+                                        if (e == null & objects.size() > 0) {
+                                            Log.d(TAG, thingsAdded + "A");
+                                            for (ParseObject ob : objects) {
+
+
+                                                if (ob.getString("bracketname").equals(bracketString[0])) {
+                                                    counter++;
+                                                    Toast.makeText(mContext, "bracket already exists for " + bracketString[0], Toast.LENGTH_SHORT).show();
+                                                    break;
+                                                }
+                                            }
+                                            //Toast.makeText(mContext, "counter "+counter, Toast.LENGTH_SHORT).show();
+                                            if (counter < 1 && thingsAdded > 0) {
+                                                SaveBracketInBackGround(bracket, bracketString[0]);
+
+                                            }
+
+                                        } else{
+                                            if(e!=null){
+                                                Toast.makeText(mContext, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                            }else{
+                                                //Toast.makeText(mContext, "No Data Exists", Toast.LENGTH_SHORT).show();
+                                                SaveBracketInBackGround(bracket, bracketString[0]);
+                                            }
+                                        }
+                                    }
+                                });
+                            } else {
+                                Log.d(TAG, thingsAdded + "C");
+                                Toast.makeText(mContext, "Nothing Selected,Nothing Saved", Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+                    })
+                            .setNegativeButton("Cancel", null);
+                    alertDialogBuilder.setView(dialogView);
+
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.setTitle("Add Athlete to your Bracket(Finals Only)");
+                    alertDialog.show();
+                } else {
+                    Log.d(TAG, e.getMessage());
+                }
+            }
+        });*/
     }
 
     public void PopulateRecyclerView(View rootview, Context mContext, ArrayList<String> mData) {

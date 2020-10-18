@@ -17,9 +17,10 @@ import com.parse.ParseACL;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -30,18 +31,38 @@ final static String TAG="Starter";
     super.onCreate();
 
     ParseObject.registerSubclass(Helper_ChatMsg.class);
+    ParseObject.registerSubclass(AllAthletes.class);
+    ParseObject.registerSubclass(AllSubEvents.class);
+    ParseObject.registerSubclass(AllEvents.class);
     // Enable Local Datastore.
     Parse.enableLocalDatastore(this);
 
     // Add your initialization code here
-    Parse.initialize(new Parse.Configuration.Builder(getApplicationContext())
+   /* Parse.initialize(new Parse.Configuration.Builder(getApplicationContext())
             .applicationId("f917188e6ef56273821b797ad09eae91a35d8a97")
             .clientKey("ad0f86b417246751414e2235427c36300f675b97")
             .server("http://52.14.179.101:80/parse/")
             .build()
+    );*/
+
+    Parse.initialize(new Parse.Configuration.Builder(this)
+            .applicationId("3fc7tsUXeTlmvk8gArp63Blsemf0aHkPwQLPCnMZ")
+            .clientKey("uA6wLlP2j2NAOravrRHykPHxP4TJ9thblQYpnP8m")
+            .server("https://parseapi.back4app.com")
+            .build()
     );
 
+
+
     //============================
+    /*List<String> subEvents= Arrays.asList("400m","200m","100m");
+    //List<String> subEvents= Arrays.asList("400m:Heat1","400m:Heat2","400m:Final");
+    for (String subevent:subEvents){
+      //CreateList2(subevent);
+      CreateList(subevent,"Track Events");
+    }*/
+
+
    /*ParseObject object = new ParseObject("InstitutionAthlete");
     object.put("created_by", ParseUser.getCurrentUser().getUsername());
     object.saveInBackground(new SaveCallback() {
@@ -190,6 +211,103 @@ final static String TAG="Starter";
     defaultACL.setPublicReadAccess(true);
     defaultACL.setPublicWriteAccess(true);
     ParseACL.setDefaultACL(defaultACL, true);
+
+  }
+
+
+  public void CreateList(final String event, final String subCat){
+    final List<AllSubEvents> temp = new ArrayList<>();
+    ParseQuery<AllSubEvents> query=ParseQuery.getQuery(AllSubEvents.class);
+    query.whereContains("main",event);
+    query.findInBackground(new FindCallback<AllSubEvents>() {
+      @Override
+      public void done(List<AllSubEvents> objects, ParseException e) {
+        if(e==null && objects.size()>0){
+
+          /*ParseObject events=new ParseObject("AllEvents");
+          events.put("sportName","Track and Field");
+          events.put("subCategory",subCat);
+          events.put("eventName",event);
+          events.put("subEvents", objects);*/
+          AllEvents allEvents=new AllEvents();
+          allEvents.setSportName("Track and Field");allEvents.setEventName(event);
+          allEvents.setSubCat(subCat);
+          allEvents.setEventName(event);
+          allEvents.setSubEvent(objects);
+
+          allEvents.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+              if(e==null){
+                Log.i("ParseResult", "Successful!");
+              }else {
+                Log.i("ParseResult", "Failed" + e.getMessage());
+              }
+
+            }
+          });
+
+        }else {
+          if(e!=null){
+            Log.d("Parse Result",e.getMessage());
+          }else {
+            Log.d("Parse Result","Something went wrong");
+          }
+        }
+
+      }
+    });
+
+  }
+
+  public void CreateList2(final String event){
+    final List<AllAthletes> temp = new ArrayList<AllAthletes>();
+    ParseQuery<AllAthletes> query=ParseQuery.getQuery(AllAthletes.class);
+    query.whereContains("Sport","Track and Field");
+    query.findInBackground(new FindCallback<AllAthletes>() {
+      @Override
+      public void done(List<AllAthletes> objects, ParseException e) {
+        if(e==null && objects.size()>0){
+          for (AllAthletes o:objects){
+            List<String> events=o.getList("Events");
+            Log.d("Parse Result",String.valueOf(events.contains(event)));
+            if(events.contains(event.split(":")[0])){
+              temp.add(o);
+              Log.d("Parse Result",o.getObjectId());
+
+            }
+
+          }
+
+          AllSubEvents subEvents=new AllSubEvents();
+          subEvents.setMainEvent(event.split(":")[0]);
+          subEvents.setName(event);
+          subEvents.setParticipants(temp);
+          subEvents.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+              if(e==null){
+                Log.i("Parse Result", "Successful!");
+              }else {
+                Log.i("Parse Result", "Failed" + e.getMessage());
+              }
+            }
+          });
+
+
+
+
+
+        }else {
+          if(e!=null){
+            Log.d("Parse Result",e.getMessage());
+          }else {
+            Log.d("Parse Result","Something went wrong");
+          }
+        }
+
+      }
+    });
 
   }
 }

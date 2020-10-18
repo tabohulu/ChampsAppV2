@@ -71,8 +71,10 @@ public class Adapter_DialogCreatorEventAthletes extends RecyclerView.Adapter<Ada
         holder.mOptions.setSelection(0);
         Toast.makeText(mContext, "number of cards : "+mCards, Toast.LENGTH_SHORT).show();
         holder.mOptions.setVisibility(View.GONE);
-        if(mEvent.equals("Final") || mCards==1){
+        holder.spinnerText.setVisibility(View.GONE);
+        if(mEvent.contains("Final") || !mEvent.contains(":")){
             holder.mOptions.setVisibility(View.VISIBLE);
+            holder.spinnerText.setVisibility(View.VISIBLE);
         }
         holder.mOptions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -116,6 +118,7 @@ public class Adapter_DialogCreatorEventAthletes extends RecyclerView.Adapter<Ada
         public TextView mTextView;
         public Spinner mOptions;
         public ImageView mPersonIcon;
+        public TextView spinnerText;
 
         public MyViewHolder(View v) {
             super(v);
@@ -124,6 +127,7 @@ public class Adapter_DialogCreatorEventAthletes extends RecyclerView.Adapter<Ada
             mTextView = v.findViewById(R.id.athelete_placeholder);
             mOptions = v.findViewById(R.id.predicted_position_placeholder);
             mPersonIcon=v.findViewById(R.id.athlete_icon);
+            spinnerText=v.findViewById(R.id.tvEvent);
 
 
 
