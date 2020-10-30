@@ -9,16 +9,23 @@
 package com.example.creativediligence.champsapp;
 
 import android.app.Application;
+import android.os.Environment;
 import android.util.Log;
 
 import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -55,6 +62,7 @@ final static String TAG="Starter";
 
 
     //============================
+    //UploadVideo();
     /*List<String> subEvents= Arrays.asList("400m","200m","100m");
     //List<String> subEvents= Arrays.asList("400m:Heat1","400m:Heat2","400m:Final");
     for (String subevent:subEvents){
@@ -213,7 +221,40 @@ final static String TAG="Starter";
     ParseACL.setDefaultACL(defaultACL, true);
 
   }
+  public void UploadVideo(){
+    String myfolder = Environment.getExternalStorageDirectory() + "/NicheSports";
+    File file =new File(myfolder,"add1.mp4");
+    int size = (int) file.length();
+    byte[] bytes = new byte[size];
+    try {
+      BufferedInputStream buf = new BufferedInputStream(new FileInputStream(file));
+      buf.read(bytes, 0, bytes.length);
+      buf.close();
+      ParseFile parseFile= new ParseFile("add1.mp4",bytes);
+      ParseObject object= new ParseObject("Videos");
+      object.put("videofile",parseFile);
+      object.saveInBackground(new SaveCallback() {
+        @Override
+        public void done(ParseException e) {
+          if(e==null){
+            Log.d(TAG,"All Good");
 
+          }else{
+            Log.d(TAG,e.getMessage());
+          }
+        }
+      });
+    } catch (FileNotFoundException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+
+    ParseObject vids=new ParseObject("Videos");
+
+  }
 
   public void CreateList(final String event, final String subCat){
     final List<AllSubEvents> temp = new ArrayList<>();

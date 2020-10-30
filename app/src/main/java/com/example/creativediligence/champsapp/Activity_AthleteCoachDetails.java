@@ -74,13 +74,13 @@ public class Activity_AthleteCoachDetails extends AppCompatActivity {
         final ExpandableListView brackets = findViewById(R.id.athlete_details_exp_lv);
 
         if (activityNumber == 1) {
-            hrInfoGroup = new ArrayList<String>(Arrays.asList("Biography", "Stats", "Event","Position"));
-            className = "InstitutionAthlete";
+            hrInfoGroup = new ArrayList<String>(Arrays.asList("Biography", "Stats", "Events","Position"));
+            className = "AllAthletes";
             queryKey="Name";
             personMoreInfoTV.setText(className.substring(0,className.length()-1));
         } else if (activityNumber == 2) {
             hrInfoGroup = new ArrayList<String>(Arrays.asList("Biography", "History", "Events Coaching", "Events Won"));
-            className = "Coaches";
+            className = "AllCoaches";
             queryKey="name";
             personMoreInfoTV.setText(className.substring(0,className.length()-2));
         }
@@ -105,8 +105,8 @@ public class Activity_AthleteCoachDetails extends AppCompatActivity {
                         }else{
                             hrResourceDetails.put(hrInfoGroup.get(0), new ArrayList<String>(Arrays.asList(ob.getString(hrInfoGroup.get(0)))));
                             hrResourceDetails.put(hrInfoGroup.get(1), new ArrayList<String>(Arrays.asList(ob.getString(hrInfoGroup.get(1)))));
-                            String[] temp=ob.getString(hrInfoGroup.get(2)).split(",");
-                            hrResourceDetails.put(hrInfoGroup.get(2), new ArrayList<String>(Arrays.asList(temp)));
+                            List<String> temp= ob.getList(hrInfoGroup.get(2));
+                            hrResourceDetails.put(hrInfoGroup.get(2), (ArrayList<String>)temp);
                             hrResourceDetails.put(hrInfoGroup.get(3), new ArrayList<String>(Arrays.asList(ob.getString(hrInfoGroup.get(3)))));
                             personAgeContent.setText(ob.getString("Age"));
                         }

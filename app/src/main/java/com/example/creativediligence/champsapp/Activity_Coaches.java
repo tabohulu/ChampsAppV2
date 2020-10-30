@@ -57,7 +57,7 @@ public class Activity_Coaches extends AppCompatActivity {
             }
         });
 
-        GetAthleteData("Coaches", "name", "age", "wins");
+        GetAthleteData("AllCoaches", "name", "age", "wins");
     }
 
     public ArrayList<Helper_AthleteCoachModel> GetAthleteData(String className, final String nameKey, final String ageKey, final String pBKey) {

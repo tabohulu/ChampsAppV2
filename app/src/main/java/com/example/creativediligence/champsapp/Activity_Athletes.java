@@ -39,7 +39,7 @@ public class Activity_Athletes extends AppCompatActivity {
        /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(getResources().getColor(R.color.black));
         }*/
-        GetAthleteData("InstitutionAthlete","Name","Age","Personal_Best");
+        GetAthleteData("AllAthletes","Name","Age","Personal_Best");
 
         super.onResume();
     }
@@ -76,7 +76,7 @@ public class Activity_Athletes extends AppCompatActivity {
         });
         SetupOnclickListeners();
 
-GetAthleteData("InstitutionAthlete","Name","Age","Personal_Best");
+GetAthleteData("AllAthletes","Name","Age","Personal_Best");
     }
 
     public void GetAthleteData(String className, final String nameKey, final String ageKey, final String pBKey) {
@@ -101,7 +101,8 @@ GetAthleteData("InstitutionAthlete","Name","Age","Personal_Best");
                                 temp="0";
                             }
                             int age =Integer.parseInt(temp);
-                            Double pb = object.getDouble(pBKey);
+                            //Double pb = object.getDouble(pBKey);
+                            Double pb=10.5;
                             Log.i(TAG,name+"/"+age+"/"+pb);
                             mAthlete.add(new Helper_AthleteCoachModel(name, age, pb));
                             mAthleteNames.add(name);
@@ -132,8 +133,9 @@ GetAthleteData("InstitutionAthlete","Name","Age","Personal_Best");
             @Override
             public void onClick(View view) {
                 //Toast.makeText(Activity_Athletes.this, "Button Clicked", Toast.LENGTH_SHORT).show();
-                Intent athleteProfileIntent=new Intent(Activity_Athletes.this,Activity_AthleteProfile2.class);
-                Activity_Athletes.this.startActivity(athleteProfileIntent);
+                //Intent athleteProfileIntent=new Intent(Activity_Athletes.this,Activity_AthleteProfile2.class);
+                //Activity_Athletes.this.startActivity(athleteProfileIntent);
+                Toast.makeText(Activity_Athletes.this, "Pending Dev", Toast.LENGTH_SHORT).show();
             }
         });
     }
